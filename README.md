@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Práctica final programación II: gestión de clínica veterinaria 🐕
 
     ¡Bienvenidos a vuestra práctica de Programación II!
@@ -82,3 +83,5 @@
     los commit y los participantes involucrados en ese ejercicio.
     
 A por ello! 💪💪💪
+=======
+>>>>>>> a2ec6ab3585575deb882c09c9eaa94a55ae873ab

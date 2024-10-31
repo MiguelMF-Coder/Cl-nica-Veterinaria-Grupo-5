@@ -1,7 +1,7 @@
 # models/citas.py
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
-from .database import Base
+from clinica.database import Base
 
 class Cita(Base):
     __tablename__ = "citas"
@@ -9,10 +9,10 @@ class Cita(Base):
     id = Column(Integer, primary_key=True, index=True)
     fecha = Column(DateTime)  
     descripcion = Column(String)  
-    mascota_id = Column(Integer, ForeignKey("id.mascotas")) 
-    cliente_id = Column(Integer, ForeignKey("id.cliente"))  
+    mascota_id = Column(Integer, ForeignKey("mascota.id_mascota")) 
+    cliente_id = Column(Integer, ForeignKey("cliente.id_cliente"))  
 
     # Relaciones:
-    mascota = relationship("Mascota", back_populates="citas")
-    cliente = relationship("Cliente", back_populates="citas")
+    mascota = relationship("mascota", back_populates="citas")
+    cliente = relationship("cliente", back_populates="citas")
 

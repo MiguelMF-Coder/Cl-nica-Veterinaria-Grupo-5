@@ -1,6 +1,7 @@
 # models/tratamientos.py
 from sqlalchemy import Column, Integer, String, ForeignKey
-from .database import Base
+from sqlalchemy.orm import relationship
+from clinica.database import Base
 
 class tratamientos(Base):
     __tablename__ = "tratamientos"
@@ -9,7 +10,7 @@ class tratamientos(Base):
     nombre_tratamiento = Column(String, index=True)
     descripcion = Column(String)
     precio = Column(Integer)
-    cliente_id = Column(Integer, ForeignKey("id.cliente"))
+    cliente_id = Column(Integer, ForeignKey("cliente.id_cliente"))
 
     #Relación:
-    cliente = relationship("Cliente", back_populates="tratamientos")
+    cliente = relationship("cliente", back_populates="tratamientos")

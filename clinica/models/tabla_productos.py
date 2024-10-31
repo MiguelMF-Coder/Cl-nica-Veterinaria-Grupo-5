@@ -1,6 +1,7 @@
 # models/productos.py
 from sqlalchemy import Column, Integer, String, ForeignKey
-from .database import Base
+from sqlalchemy.orm import relationship
+from clinica.database import Base
 
 class productos(Base):
     __tablename__ = "productos"
@@ -10,8 +11,8 @@ class productos(Base):
     tipo_producto = Column(String)
     descripcion_producto = Column(String)
     precio_producto = Column(Integer)
-    cliente_id = Column(Integer, ForeignKey("id.cliente"))
+    cliente_id = Column(Integer, ForeignKey("cliente.id_cliente"))
 
     #Relaciones:
-    cliente = relationship("Cliente", back_populates="productos")
+    cliente = relationship("cliente", back_populates="productos")
 

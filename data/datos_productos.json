@@ -1,0 +1,12 @@
+[
+    {"nombre_producto": "Comida para perros", "tipo_producto": "Alimento", "descripcion_producto": "Bolsa de 5kg de croquetas premium", "precio_producto": 25, "cliente_id": 1},
+    {"nombre_producto": "Juguete de goma", "tipo_producto": "Accesorio", "descripcion_producto": "Juguete para morder", "precio_producto": 10, "cliente_id": 2},
+    {"nombre_producto": "Cama para perro", "tipo_producto": "Accesorio", "descripcion_producto": "Cama tamaño mediano", "precio_producto": 30, "cliente_id": 3},
+    {"nombre_producto": "Champú hipoalergénico", "tipo_producto": "Higiene", "descripcion_producto": "Champú especial para piel sensible", "precio_producto": 15, "cliente_id": 4},
+    {"nombre_producto": "Collar antipulgas", "tipo_producto": "Higiene", "descripcion_producto": "Collar de 3 meses de duración", "precio_producto": 20, "cliente_id": 5},
+    {"nombre_producto": "Ropa para perro", "tipo_producto": "Accesorio", "descripcion_producto": "Suéter para perros pequeños", "precio_producto": 18, "cliente_id": 6},
+    {"nombre_producto": "Correa extensible", "tipo_producto": "Accesorio", "descripcion_producto": "Correa de 5 metros", "precio_producto": 12, "cliente_id": 7},
+    {"nombre_producto": "Comida húmeda", "tipo_producto": "Alimento", "descripcion_producto": "Lata de 400g de comida húmeda", "precio_producto": 3, "cliente_id": 8},
+    {"nombre_producto": "Cepillo para perros", "tipo_producto": "Higiene", "descripcion_producto": "Cepillo de cerdas suaves", "precio_producto": 8, "cliente_id": 9},
+    {"nombre_producto": "Snacks dentales", "tipo_producto": "Alimento", "descripcion_producto": "Paquete de 10 snacks", "precio_producto": 5, "cliente_id": 10}
+]

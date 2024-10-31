@@ -1,0 +1,12 @@
+[
+    {"fecha": "2024-11-01T09:30:00", "descripcion": "Consulta general", "mascota_id": 1, "cliente_id": 1},
+    {"fecha": "2024-11-02T11:00:00", "descripcion": "Vacunación", "mascota_id": 2, "cliente_id": 2},
+    {"fecha": "2024-11-03T14:00:00", "descripcion": "Revisión de alergias", "mascota_id": 3, "cliente_id": 3},
+    {"fecha": "2024-11-04T16:00:00", "descripcion": "Consulta por problemas respiratorios", "mascota_id": 4, "cliente_id": 4},
+    {"fecha": "2024-11-05T10:30:00", "descripcion": "Chequeo anual", "mascota_id": 5, "cliente_id": 5},
+    {"fecha": "2024-11-06T12:00:00", "descripcion": "Control de peso", "mascota_id": 6, "cliente_id": 6},
+    {"fecha": "2024-11-07T13:15:00", "descripcion": "Limpieza de oídos", "mascota_id": 7, "cliente_id": 7},
+    {"fecha": "2024-11-08T08:45:00", "descripcion": "Revisión dental", "mascota_id": 8, "cliente_id": 8},
+    {"fecha": "2024-11-09T15:00:00", "descripcion": "Chequeo de cadera", "mascota_id": 9, "cliente_id": 9},
+    {"fecha": "2024-11-10T10:00:00", "descripcion": "Consulta general", "mascota_id": 10, "cliente_id": 10}
+]

@@ -36,16 +36,10 @@ services:
       - DATABASE_URL=sqlite:///./clinica.db
     command: ["python3", "clinica/main.py"]
 
-  db:
-    image: sqlite
-    container_name: clinica_db
-    volumes:
-      - db_data:/data/db
-
 networks:
   deploy_network:
     driver: bridge
 
 volumes:
   mis_datos:
-  db_data:
+

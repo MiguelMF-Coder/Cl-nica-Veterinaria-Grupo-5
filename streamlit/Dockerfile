@@ -1,15 +1,18 @@
 FROM python:3.11-slim
 
-RUN mkdir /streamlit
+# Crear directorio de trabajo
+WORKDIR /app
 
-COPY requirements.txt /streamlit
+# Copiar los archivos desde la raíz del proyecto al contenedor
+COPY . /app
 
-WORKDIR /streamlit
+# Instalar dependencias
+RUN pip install --no-cache-dir -r requirements.txt
 
-RUN pip install -r requirements.txt
+RUN python init_db.py
 
-COPY . /streamlit
-
+# Exponer el puerto de Streamlit
 EXPOSE 8501
 
-CMD ["streamlit", "run", "Analisis_de_transacciones.py"]
+# Ejecutar Streamlit
+CMD ["streamlit", "run", "main.py"]

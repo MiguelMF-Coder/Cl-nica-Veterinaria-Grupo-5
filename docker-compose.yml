@@ -1,27 +1,28 @@
-version: '3.8'
-
 services:
   fastapi:
-    build: fastapi/
+    build: ./fastapi
     ports:
       - "8000:8000"
     networks:
       - deploy_network
     container_name: fastapi
     volumes:
-      - mis_datos:/var/lib/docker/volumes/aa-streamlit-fastapi_mis_datos/_data
+      - .:/app
 
   streamlit:
-    build: streamlit/
-    depends_on:
-      - fastapi
+    build:
+      context: .
+      dockerfile: streamlit/Dockerfile  
     ports:
       - "8501:8501"
     networks:
       - deploy_network
     container_name: streamlit
     volumes:
-      - mis_datos:/var/lib/docker/volumes/aa-streamlit-fastapi_mis_datos/_data
+      - .:/app
+    command: >
+      /bin/sh -c "python init_db.py && streamlit run main.py"
+
 
   web:
     build:
@@ -29,7 +30,7 @@ services:
       dockerfile: Dockerfile
     container_name: clinica_web
     ports:
-      - "8000:8000"
+      - "8001:8001"
     volumes:
       - .:/app
     environment:
@@ -39,7 +40,3 @@ services:
 networks:
   deploy_network:
     driver: bridge
-
-volumes:
-  mis_datos:
-

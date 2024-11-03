@@ -1,4 +1,4 @@
-# cliente.py
+import re  # Librería de expresiones regulares para validaciones
 
 class Mascota:
     def __init__(self, nombre, raza, edad):
@@ -82,7 +82,7 @@ class GestionClientes:
         else:
             print("Cliente no encontrado.")
 
-    def marcar_mascota_como_fallecida(self, cliente, nombre_mascota):
+    def marcar_mascota_como_fallecido(self, cliente, nombre_mascota):
         """Marca una mascota como fallecida para un cliente específico."""
         mascota = cliente.buscar_mascota(nombre_mascota)
         if mascota:
@@ -114,10 +114,16 @@ while True:
         # Buscar cliente por DNI o teléfono
         criterio = input("Buscar por (1) DNI o (2) Teléfono: ")
         if criterio == '1':
-            dni = input("Ingrese el DNI del cliente: ")
+            dni = input("Ingrese el DNI del cliente: ").strip()
+            if not re.match(r"^\d{8}[A-Za-z]$", dni):
+                print("Error: DNI debe tener 8 números seguidos de una letra.")
+                continue
             cliente = gestion.buscar_cliente(dni=dni)
         elif criterio == '2':
-            telefono = input("Ingrese el teléfono del cliente: ")
+            telefono = input("Ingrese el teléfono del cliente: ").strip()
+            if not re.match(r"^\d{9}$", telefono):
+                print("Error: El teléfono debe tener exactamente 9 dígitos.")
+                continue
             cliente = gestion.buscar_cliente(telefono=telefono)
         else:
             print("Opción no válida.")
@@ -126,39 +132,85 @@ while True:
 
     elif opcion == '2':
         # Registrar nuevo cliente y mascota
-        nombre_cliente = input("Ingrese el nombre del cliente: ")
-        dni = input("Ingrese el DNI del cliente: ")
-        telefono = input("Ingrese el teléfono del cliente: ")
-        direccion = input("Ingrese la dirección del cliente: ")
-        cliente = Cliente(nombre_cliente, dni, telefono, direccion)
+        try:
+            # Validar nombre del cliente
+            nombre_cliente = input("Ingrese el nombre del cliente: ").strip()
+            if not nombre_cliente or not re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$", nombre_cliente):
+                raise ValueError("El nombre del cliente solo puede contener letras y espacios.")
 
-        nombre_mascota = input("Ingrese el nombre de la mascota: ")
-        raza = input("Ingrese la raza de la mascota: ")
-        edad = input("Ingrese la edad de la mascota: ")
-        mascota = Mascota(nombre_mascota, raza, int(edad))
+            # Validar DNI
+            dni = input("Ingrese el DNI del cliente: ").strip()
+            if not re.match(r"^\d{8}[A-Za-z]$", dni):
+                raise ValueError("DNI debe tener 8 números seguidos de una letra.")
 
-        cliente.agregar_mascota(mascota)
-        gestion.registrar_cliente(cliente)
+            # Validar Teléfono
+            telefono = input("Ingrese el teléfono del cliente: ").strip()
+            if not re.match(r"^\d{9}$", telefono):
+                raise ValueError("El teléfono debe tener exactamente 9 dígitos.")
+
+            # Validar Dirección
+            direccion = input("Ingrese la dirección del cliente: ").strip()
+            if not direccion:
+                raise ValueError("La dirección no puede estar vacía.")
+            cliente = Cliente(nombre_cliente, dni, telefono, direccion)
+
+            # Validar nombre, raza y edad de la mascota
+            nombre_mascota = input("Ingrese el nombre de la mascota: ").strip()
+            if not nombre_mascota or not re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$", nombre_mascota):
+                raise ValueError("El nombre de la mascota solo puede contener letras y espacios.")
+
+            raza = input("Ingrese la raza de la mascota: ").strip()
+            if not raza or not re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$", raza):
+                raise ValueError("La raza de la mascota solo puede contener letras y espacios.")
+
+            edad = input("Ingrese la edad de la mascota: ").strip()
+            if not edad.isdigit() or int(edad) <= 0:
+                raise ValueError("La edad debe ser un número positivo.")
+            edad = int(edad)
+            mascota = Mascota(nombre_mascota, raza, edad)
+
+            cliente.agregar_mascota(mascota)
+            gestion.registrar_cliente(cliente)
+        except ValueError as e:
+            print(f"Error: {e}")
 
     elif opcion == '3':
         # Registrar mascota para cliente existente
-        dni = input("Ingrese el DNI del cliente: ")
+        dni = input("Ingrese el DNI del cliente: ").strip()
+        if not re.match(r"^\d{8}[A-Za-z]$", dni):
+            print("Error: DNI debe tener 8 números seguidos de una letra.")
+            continue
         cliente = gestion.buscar_cliente(dni=dni)
         if cliente:
-            nombre_mascota = input("Ingrese el nombre de la nueva mascota: ")
-            raza = input("Ingrese la raza de la mascota: ")
-            edad = input("Ingrese la edad de la mascota: ")
-            mascota = Mascota(nombre_mascota, raza, int(edad))
-            gestion.registrar_mascota(cliente, mascota)
+            try:
+                nombre_mascota = input("Ingrese el nombre de la nueva mascota: ").strip()
+                if not nombre_mascota or not re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$", nombre_mascota):
+                    raise ValueError("El nombre de la mascota solo puede contener letras y espacios.")
+
+                raza = input("Ingrese la raza de la mascota: ").strip()
+                if not raza or not re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$", raza):
+                    raise ValueError("La raza de la mascota solo puede contener letras y espacios.")
+
+                edad = input("Ingrese la edad de la mascota: ").strip()
+                if not edad.isdigit() or int(edad) <= 0:
+                    raise ValueError("La edad debe ser un número positivo.")
+                edad = int(edad)
+                mascota = Mascota(nombre_mascota, raza, edad)
+                gestion.registrar_mascota(cliente, mascota)
+            except ValueError as e:
+                print(f"Error: {e}")
         else:
             print("Cliente no encontrado.")
 
     elif opcion == '4':
         # Marcar mascota como fallecida
-        dni = input("Ingrese el DNI del cliente: ")
+        dni = input("Ingrese el DNI del cliente: ").strip()
+        if not re.match(r"^\d{8}[A-Za-z]$", dni):
+            print("Error: DNI debe tener 8 números seguidos de una letra.")
+            continue
         cliente = gestion.buscar_cliente(dni=dni)
         if cliente:
-            nombre_mascota = input("Ingrese el nombre de la mascota a marcar como fallecida: ")
+            nombre_mascota = input("Ingrese el nombre de la mascota a marcar como fallecida: ").strip()
             gestion.marcar_mascota_como_fallecida(cliente, nombre_mascota)
         else:
             print("Cliente no encontrado.")
@@ -169,4 +221,3 @@ while True:
 
     else:
         print("Opción no válida. Por favor, seleccione una opción entre 1 y 5.")
-

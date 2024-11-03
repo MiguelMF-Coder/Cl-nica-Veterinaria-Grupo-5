@@ -1,4 +1,4 @@
-# tratamiento.py
+import re  # Importamos la librería de expresiones regulares para validar entradas
 
 class Tratamiento:
     def __init__(self, nombre, descripcion, precio):
@@ -74,19 +74,23 @@ while True:
 
     elif opcion == '2':
         try:
+            # Validar que el nombre no contenga números, caracteres especiales ni esté vacío
             nombre = input("Ingrese el nombre del tratamiento: ").strip()
-            if not nombre:
-                raise ValueError("El nombre del tratamiento no puede estar vacío.")
+            if not nombre or not re.match("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$", nombre):
+                raise ValueError("El nombre del tratamiento no puede estar vacío y debe contener solo letras y espacios.")
 
+            # Validar que la descripción no esté vacía y contenga solo texto razonable
             descripcion = input("Ingrese la descripción del tratamiento: ").strip()
-            if not descripcion:
-                raise ValueError("La descripción del tratamiento no puede estar vacía.")
+            if not descripcion or not re.match("^[A-Za-zÁÉÍÓÚáéíóúÑñ0-9,. ]+$", descripcion):
+                raise ValueError("La descripción del tratamiento no puede estar vacía y debe contener texto válido.")
 
+            # Validar que el precio sea un número positivo mayor que cero
             precio = input("Ingrese el precio del tratamiento: ").strip()
-            if not precio.replace('.', '', 1).isdigit():
-                raise ValueError("El precio debe ser un número válido.")
+            if not re.match("^[0-9]+(\.[0-9]{1,2})?$", precio) or float(precio) <= 0:
+                raise ValueError("El precio debe ser un número positivo mayor que cero, con hasta dos decimales.")
             precio = float(precio)
 
+            # Crear y registrar el nuevo tratamiento
             nuevo_tratamiento = Tratamiento(nombre, descripcion, precio)
             gestion.dar_alta_tratamiento(nuevo_tratamiento)
         except ValueError as e:
@@ -94,9 +98,10 @@ while True:
 
     elif opcion == '3':
         try:
+            # Validar que el nombre no contenga números, caracteres especiales ni esté vacío
             nombre = input("Ingrese el nombre del tratamiento a dar de baja: ").strip()
-            if not nombre:
-                raise ValueError("El nombre del tratamiento no puede estar vacío.")
+            if not nombre or not re.match("^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$", nombre):
+                raise ValueError("El nombre del tratamiento no puede estar vacío y debe contener solo letras y espacios.")
             gestion.dar_baja_tratamiento(nombre)
         except ValueError as e:
             print(f"Error: {e}")

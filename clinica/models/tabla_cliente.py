@@ -15,7 +15,7 @@ class cliente(Base):
     id_mascota = Column(Integer, ForeignKey("mascota.id_mascota"))
 
     #Relaciones:
-    mascotas = relationship("mascota", back_populates="cliente")
-    citas = relationship("cita", back_populates="cliente")
-    tratamientos = relationship("tratamiento", back_populates="cliente")
+    mascotas = relationship("Mascota", back_populates="cliente")
+    citas = relationship("Cita", back_populates="cliente")
+    tratamientos = relationship("tratamientos", back_populates="cliente")
     productos = relationship("producto", back_populates="cliente")

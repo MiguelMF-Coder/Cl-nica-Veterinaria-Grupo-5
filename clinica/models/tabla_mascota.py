@@ -16,4 +16,4 @@ class Mascota(Base):
 
     #Relaciones:
     cliente = relationship("cliente", back_populates="mascotas")
-    citas = relationship("cita", back_populates="mascota")
+    citas = relationship("Cita", back_populates="mascotas")

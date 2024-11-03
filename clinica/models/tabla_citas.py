@@ -13,6 +13,6 @@ class Cita(Base):
     cliente_id = Column(Integer, ForeignKey("cliente.id_cliente"))  
 
     # Relaciones:
-    mascota = relationship("mascota", back_populates="citas")
+    mascota = relationship("Mascota", back_populates="citas")
     cliente = relationship("cliente", back_populates="citas")
 

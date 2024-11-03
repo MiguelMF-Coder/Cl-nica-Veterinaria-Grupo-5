@@ -1,223 +1,133 @@
-import re  # Librería de expresiones regulares para validaciones
+import logging
+from sqlalchemy.orm import Session
+from sqlalchemy.exc import IntegrityError, SQLAlchemyError
+from clinica.models.tabla_cliente import cliente as ClienteModel
+from clinica.models.tabla_mascota import Mascota as MascotaModel
 
-class Mascota:
-    def __init__(self, nombre, raza, edad):
-        self.nombre = nombre
-        self.raza = raza
-        self.edad = edad
-        self.historial_clinico = []
-        self.estado = "Vivo"  # Estado inicial de la mascota
-
-    def agregar_historial(self, entrada):
-        """Agrega una entrada al historial clínico de la mascota."""
-        self.historial_clinico.append(entrada)
-
-    def marcar_como_fallecido(self):
-        """Marca a la mascota como fallecida."""
-        self.estado = "Fallecido"
-
-    def __str__(self):
-        return f"{self.nombre} - Raza: {self.raza}, Edad: {self.edad} años, Estado: {self.estado}"
-
-
-class Cliente:
-    def __init__(self, nombre, dni, telefono, direccion):
-        self.nombre = nombre
-        self.dni = dni
-        self.telefono = telefono
-        self.direccion = direccion
-        self.mascotas = []
-
-    def agregar_mascota(self, mascota):
-        """Agrega una mascota a la lista de mascotas del cliente."""
-        self.mascotas.append(mascota)
-
-    def buscar_mascota(self, nombre):
-        """Busca una mascota por su nombre en la lista de mascotas del cliente."""
-        for mascota in self.mascotas:
-            if mascota.nombre == nombre:
-                return mascota
-        return None
-
-    def __str__(self):
-        mascotas_info = ", ".join([mascota.nombre for mascota in self.mascotas])
-        return f"{self.nombre} - DNI: {self.dni}, Teléfono: {self.telefono}, Dirección: {self.direccion}, Mascotas: {mascotas_info}"
-
+# Configurar logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
 class GestionClientes:
-    def __init__(self):
-        self.clientes = []
+    def __init__(self, db_session: Session):
+        self.db_session = db_session
 
-    def registrar_cliente(self, cliente):
-        """Registra un nuevo cliente en la lista de clientes."""
-        if any(c.dni == cliente.dni or c.telefono == cliente.telefono for c in self.clientes):
-            print(f"El cliente con DNI '{cliente.dni}' o Teléfono '{cliente.telefono}' ya está registrado.")
-        else:
-            self.clientes.append(cliente)
-            print(f"Cliente '{cliente.nombre}' registrado con éxito.")
+    def registrar_cliente(self, cliente_data):
+        """Registra un nuevo cliente en la base de datos."""
+        try:
+            # Verificar si el cliente ya existe en la base de datos por DNI o teléfono
+            cliente_existente = self.db_session.query(ClienteModel).filter(
+                (ClienteModel.dni == cliente_data['dni']) |
+                (ClienteModel.telefono == cliente_data['telefono'])
+            ).first()
+
+            if cliente_existente:
+                logging.warning(f"El cliente con DNI '{cliente_data['dni']}' o Teléfono '{cliente_data['telefono']}' ya está registrado.")
+                return f"El cliente con DNI '{cliente_data['dni']}' o Teléfono '{cliente_data['telefono']}' ya está registrado."
+
+            nuevo_cliente = ClienteModel(**cliente_data)
+            self.db_session.add(nuevo_cliente)
+            self.db_session.commit()
+            logging.info(f"Cliente '{cliente_data['nombre_cliente']}' registrado con éxito.")
+            return f"Cliente '{cliente_data['nombre_cliente']}' registrado con éxito."
+
+        except IntegrityError as ie:
+            self.db_session.rollback()
+            logging.error("Error de integridad al registrar el cliente: %s", ie)
+            return "Error: No se pudo registrar el cliente debido a un problema de integridad."
+
+        except SQLAlchemyError as sae:
+            self.db_session.rollback()
+            logging.error("Error de SQLAlchemy al registrar el cliente: %s", sae)
+            return f"Error: Ocurrió un problema con la base de datos: {sae}"
+
+        except Exception as e:
+            self.db_session.rollback()
+            logging.critical("Error inesperado al registrar el cliente: %s", e)
+            return f"Ocurrió un error inesperado al registrar el cliente: {e}"
 
     def buscar_cliente(self, dni=None, telefono=None):
         """Busca un cliente por DNI o teléfono y devuelve el cliente encontrado."""
-        for cliente in self.clientes:
-            if (dni and cliente.dni == dni) or (telefono and cliente.telefono == telefono):
+        try:
+            cliente = self.db_session.query(ClienteModel).filter(
+                (ClienteModel.dni == dni) | (ClienteModel.telefono == telefono)
+            ).first()
+
+            if cliente:
+                logging.info(f"Cliente encontrado: {cliente.nombre_cliente}")
                 return cliente
-        return None
+            else:
+                logging.warning("Cliente no encontrado.")
+                return "Cliente no encontrado."
+
+        except SQLAlchemyError as sae:
+            logging.error("Error de SQLAlchemy al buscar el cliente: %s", sae)
+            return f"Error al buscar el cliente: {sae}"
+
+        except Exception as e:
+            logging.critical("Error inesperado al buscar el cliente: %s", e)
+            return f"Ocurrió un error inesperado al buscar el cliente: {e}"
 
     def mostrar_cliente(self, cliente):
         """Muestra la información del cliente y sus mascotas."""
         if cliente:
-            print(cliente)
-            for mascota in cliente.mascotas:
-                print(f"  {mascota}")
-                for entrada in mascota.historial_clinico:
-                    print(f"    Historial: {entrada}")
+            cliente_info = str(cliente)
+            mascotas_info = [str(mascota) for mascota in cliente.mascotas]
+            logging.info(f"Cliente y sus mascotas mostrados: {cliente.nombre_cliente}")
+            return cliente_info, mascotas_info
         else:
-            print("Cliente no encontrado.")
+            logging.warning("Cliente no encontrado.")
+            return "Cliente no encontrado."
 
-    def registrar_mascota(self, cliente, mascota):
+    def registrar_mascota(self, cliente_id, mascota_data):
         """Registra una nueva mascota para un cliente existente."""
-        if cliente:
-            cliente.agregar_mascota(mascota)
-            print(f"Mascota '{mascota.nombre}' registrada para el cliente '{cliente.nombre}'.")
-        else:
-            print("Cliente no encontrado.")
-
-    def marcar_mascota_como_fallecido(self, cliente, nombre_mascota):
-        """Marca una mascota como fallecida para un cliente específico."""
-        mascota = cliente.buscar_mascota(nombre_mascota)
-        if mascota:
-            mascota.marcar_como_fallecido()
-            print(f"La mascota '{mascota.nombre}' ha sido marcada como fallecida.")
-        else:
-            print(f"No se encontró la mascota '{nombre_mascota}' para el cliente '{cliente.nombre}'.")
-
-
-# Función para mostrar el menú y realizar operaciones
-def mostrar_menu():
-    print("\n--- Menú de Gestión de Clientes ---")
-    print("1. Buscar cliente por DNI o teléfono")
-    print("2. Registrar nuevo cliente y mascota")
-    print("3. Registrar mascota para cliente existente")
-    print("4. Marcar mascota como fallecida")
-    print("5. Salir")
-    return input("Seleccione una opción (1-5): ")
-
-
-# Código principal (sin if __name__ == "__main__")
-gestion = GestionClientes()
-
-# Bucle del menú
-while True:
-    opcion = mostrar_menu()
-
-    if opcion == '1':
-        # Buscar cliente por DNI o teléfono
-        criterio = input("Buscar por (1) DNI o (2) Teléfono: ")
-        if criterio == '1':
-            dni = input("Ingrese el DNI del cliente: ").strip()
-            if not re.match(r"^\d{8}[A-Za-z]$", dni):
-                print("Error: DNI debe tener 8 números seguidos de una letra.")
-                continue
-            cliente = gestion.buscar_cliente(dni=dni)
-        elif criterio == '2':
-            telefono = input("Ingrese el teléfono del cliente: ").strip()
-            if not re.match(r"^\d{9}$", telefono):
-                print("Error: El teléfono debe tener exactamente 9 dígitos.")
-                continue
-            cliente = gestion.buscar_cliente(telefono=telefono)
-        else:
-            print("Opción no válida.")
-            continue
-        gestion.mostrar_cliente(cliente)
-
-    elif opcion == '2':
-        # Registrar nuevo cliente y mascota
         try:
-            # Validar nombre del cliente
-            nombre_cliente = input("Ingrese el nombre del cliente: ").strip()
-            if not nombre_cliente or not re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$", nombre_cliente):
-                raise ValueError("El nombre del cliente solo puede contener letras y espacios.")
+            cliente = self.db_session.query(ClienteModel).filter_by(id_cliente=cliente_id).first()
 
-            # Validar DNI
-            dni = input("Ingrese el DNI del cliente: ").strip()
-            if not re.match(r"^\d{8}[A-Za-z]$", dni):
-                raise ValueError("DNI debe tener 8 números seguidos de una letra.")
+            if cliente:
+                nueva_mascota = MascotaModel(**mascota_data, cliente_id=cliente_id)
+                self.db_session.add(nueva_mascota)
+                self.db_session.commit()
+                logging.info(f"Mascota '{mascota_data['nombre_mascota']}' registrada para el cliente '{cliente.nombre_cliente}'.")
+                return f"Mascota '{mascota_data['nombre_mascota']}' registrada para el cliente '{cliente.nombre_cliente}'."
+            else:
+                logging.warning("Cliente no encontrado.")
+                return "Cliente no encontrado."
 
-            # Validar Teléfono
-            telefono = input("Ingrese el teléfono del cliente: ").strip()
-            if not re.match(r"^\d{9}$", telefono):
-                raise ValueError("El teléfono debe tener exactamente 9 dígitos.")
+        except IntegrityError as ie:
+            self.db_session.rollback()
+            logging.error("Error de integridad al registrar la mascota: %s", ie)
+            return "Error: No se pudo registrar la mascota debido a un problema de integridad."
 
-            # Validar Dirección
-            direccion = input("Ingrese la dirección del cliente: ").strip()
-            if not direccion:
-                raise ValueError("La dirección no puede estar vacía.")
-            cliente = Cliente(nombre_cliente, dni, telefono, direccion)
+        except SQLAlchemyError as sae:
+            self.db_session.rollback()
+            logging.error("Error de SQLAlchemy al registrar la mascota: %s", sae)
+            return f"Error: Ocurrió un problema con la base de datos: {sae}"
 
-            # Validar nombre, raza y edad de la mascota
-            nombre_mascota = input("Ingrese el nombre de la mascota: ").strip()
-            if not nombre_mascota or not re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$", nombre_mascota):
-                raise ValueError("El nombre de la mascota solo puede contener letras y espacios.")
+        except Exception as e:
+            self.db_session.rollback()
+            logging.critical("Error inesperado al registrar la mascota: %s", e)
+            return f"Ocurrió un error inesperado al registrar la mascota: {e}"
 
-            raza = input("Ingrese la raza de la mascota: ").strip()
-            if not raza or not re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$", raza):
-                raise ValueError("La raza de la mascota solo puede contener letras y espacios.")
+    def marcar_mascota_como_fallecido(self, cliente_id, nombre_mascota):
+        """Marca una mascota como fallecida para un cliente específico."""
+        try:
+            mascota = self.db_session.query(MascotaModel).filter_by(cliente_id=cliente_id, nombre_mascota=nombre_mascota).first()
 
-            edad = input("Ingrese la edad de la mascota: ").strip()
-            if not edad.isdigit() or int(edad) <= 0:
-                raise ValueError("La edad debe ser un número positivo.")
-            edad = int(edad)
-            mascota = Mascota(nombre_mascota, raza, edad)
+            if mascota:
+                mascota.Estado = "Fallecido"
+                self.db_session.commit()
+                logging.info(f"La mascota '{mascota.nombre_mascota}' ha sido marcada como fallecida.")
+                return f"La mascota '{mascota.nombre_mascota}' ha sido marcada como fallecida."
+            else:
+                logging.warning(f"No se encontró la mascota '{nombre_mascota}' para el cliente con ID '{cliente_id}'.")
+                return f"No se encontró la mascota '{nombre_mascota}' para el cliente con ID '{cliente_id}'."
 
-            cliente.agregar_mascota(mascota)
-            gestion.registrar_cliente(cliente)
-        except ValueError as e:
-            print(f"Error: {e}")
+        except SQLAlchemyError as sae:
+            self.db_session.rollback()
+            logging.error("Error de SQLAlchemy al marcar la mascota como fallecida: %s", sae)
+            return f"Error al marcar la mascota como fallecida: {sae}"
 
-    elif opcion == '3':
-        # Registrar mascota para cliente existente
-        dni = input("Ingrese el DNI del cliente: ").strip()
-        if not re.match(r"^\d{8}[A-Za-z]$", dni):
-            print("Error: DNI debe tener 8 números seguidos de una letra.")
-            continue
-        cliente = gestion.buscar_cliente(dni=dni)
-        if cliente:
-            try:
-                nombre_mascota = input("Ingrese el nombre de la nueva mascota: ").strip()
-                if not nombre_mascota or not re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$", nombre_mascota):
-                    raise ValueError("El nombre de la mascota solo puede contener letras y espacios.")
-
-                raza = input("Ingrese la raza de la mascota: ").strip()
-                if not raza or not re.match(r"^[A-Za-zÁÉÍÓÚáéíóúÑñ ]+$", raza):
-                    raise ValueError("La raza de la mascota solo puede contener letras y espacios.")
-
-                edad = input("Ingrese la edad de la mascota: ").strip()
-                if not edad.isdigit() or int(edad) <= 0:
-                    raise ValueError("La edad debe ser un número positivo.")
-                edad = int(edad)
-                mascota = Mascota(nombre_mascota, raza, edad)
-                gestion.registrar_mascota(cliente, mascota)
-            except ValueError as e:
-                print(f"Error: {e}")
-        else:
-            print("Cliente no encontrado.")
-
-    elif opcion == '4':
-        # Marcar mascota como fallecida
-        dni = input("Ingrese el DNI del cliente: ").strip()
-        if not re.match(r"^\d{8}[A-Za-z]$", dni):
-            print("Error: DNI debe tener 8 números seguidos de una letra.")
-            continue
-        cliente = gestion.buscar_cliente(dni=dni)
-        if cliente:
-            nombre_mascota = input("Ingrese el nombre de la mascota a marcar como fallecida: ").strip()
-            gestion.marcar_mascota_como_fallecida(cliente, nombre_mascota)
-        else:
-            print("Cliente no encontrado.")
-
-    elif opcion == '5':
-        print("Saliendo del sistema de gestión de clientes.")
-        break
-
-    else:
-        print("Opción no válida. Por favor, seleccione una opción entre 1 y 5.")
+        except Exception as e:
+            self.db_session.rollback()
+            logging.critical("Error inesperado al marcar la mascota como fallecida: %s", e)
+            return f"Ocurrió un error inesperado al marcar la mascota como fallecida: {e}"

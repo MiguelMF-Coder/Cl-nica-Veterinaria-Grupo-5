@@ -1,8 +1,21 @@
+# test_gestioncitas.py
+
+import sys
+import os
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+
+# Verificar si la ruta se ha añadido correctamente
+print("Rutas en sys.path:")
+for path in sys.path:
+    print(path)
+
 import unittest
 from unittest.mock import MagicMock
 from sqlalchemy.orm import Session
 from clinica.models.tabla_citas import Cita
 from clinica.services.gestion_de_citas import GestionCitas
+from clinica.dbconfig import Base  
+from datetime import datetime
 
 class TestGestionCitas(unittest.TestCase):
 
@@ -12,13 +25,12 @@ class TestGestionCitas(unittest.TestCase):
         self.gestion_citas = GestionCitas(db_session=self.db_session)
 
     def test_registrar_cita_exito(self):
-        # Datos de prueba
+        # Datos de prueba con campos válidos
         cita_data = {
-            'nombre_animal': 'Fido',
-            'nombre_dueno': 'Juan',
-            'fecha_hora': '2024-11-10 10:00:00',
-            'descripcion': 'Consulta general',
-            'tratamiento_id': 1
+        'fecha': datetime.strptime('2024-11-10 10:00:00', '%Y-%m-%d %H:%M:%S'),
+        'descripcion': 'Consulta general',
+        'id_mascota': 1,
+        'id_cliente': 1
         }
 
         # Simular que la cita no existe en la base de datos
@@ -30,20 +42,24 @@ class TestGestionCitas(unittest.TestCase):
         # Verificar que la cita fue añadida y se hizo commit
         self.db_session.add.assert_called_once()
         self.db_session.commit.assert_called_once()
-        self.assertIn("Cita registrada para", resultado)
+        resultado = self.gestion_citas.registrar_cita(cita_data)
+        print("Resultado de la función:", resultado)
+        self.assertIn("Cita registrada con éxito para el cliente ID", resultado)
+
 
     def test_registrar_cita_duplicada(self):
-        # Datos de prueba
+        # Datos de prueba con campos válidos
         cita_data = {
-            'nombre_animal': 'Fido',
-            'nombre_dueno': 'Juan',
-            'fecha_hora': '2024-11-10 10:00:00',
+            'fecha': '2024-11-10 10:00:00',
             'descripcion': 'Consulta general',
-            'tratamiento_id': 1
+            'id_mascota': 1,
+            'id_cliente': 1
         }
 
         # Simular que la cita ya existe en la base de datos
-        self.db_session.query().filter_by().first.return_value = Cita()
+        self.db_session.query().filter_by().first.return_value = Cita(
+            id_cita=1, fecha='2024-11-10 10:00:00', descripcion='Consulta general', id_mascota=1, id_cliente=1
+        )
 
         # Llamar a la función de prueba y verificar que se lanzó un error de duplicación
         with self.assertRaises(ValueError) as context:
@@ -54,8 +70,10 @@ class TestGestionCitas(unittest.TestCase):
         self.db_session.commit.assert_not_called()
 
     def test_buscar_cita_exito(self):
-        # Configurar la sesión para devolver una cita simulada
-        cita_mock = Cita(nombre_animal='Fido', nombre_dueno='Juan')
+        # Configurar la sesión para devolver una cita simulada con campos válidos
+        cita_mock = Cita(
+            id_cita=1, fecha='2024-11-10 10:00:00', descripcion='Consulta general', id_mascota=1, id_cliente=1
+        )
         self.db_session.query().filter_by().first.return_value = cita_mock
 
         # Llamar a la función de prueba
@@ -75,8 +93,10 @@ class TestGestionCitas(unittest.TestCase):
         self.assertIsNone(resultado)
 
     def test_cancelar_cita_exito(self):
-        # Configurar la sesión para devolver una cita simulada
-        cita_mock = Cita(id=1, nombre_animal='Fido', nombre_dueno='Juan')
+        # Configurar la sesión para devolver una cita simulada con campos válidos
+        cita_mock = Cita(
+            id_cita=1, fecha='2024-11-10 10:00:00', descripcion='Consulta general', id_mascota=1, id_cliente=1
+        )
         self.db_session.query().filter_by().first.return_value = cita_mock
 
         # Llamar a la función de prueba
@@ -101,3 +121,4 @@ class TestGestionCitas(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+# test_gestioncitas.py

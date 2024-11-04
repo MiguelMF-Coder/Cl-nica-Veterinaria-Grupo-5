@@ -1,6 +1,9 @@
+#Tabla_tratamiento
+
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from dbconfig import Base
+from clinica.dbconfig import Base
+
 
 class Tratamiento(Base):
     __tablename__ = "tratamiento"

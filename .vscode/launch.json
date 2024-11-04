@@ -6,8 +6,7 @@
             "type": "python",
             "request": "launch",
             "program": "${file}",
-            "console": "integratedTerminal",
-            "pythonPath": "/usr/bin/python3"
+            "console": "integratedTerminal"
         }
     ]
 }

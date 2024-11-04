@@ -1,3 +1,5 @@
+# gestion_tratamiento.py
+
 import re  # Importamos la librería de expresiones regulares para validar entradas
 from sqlalchemy.orm import Session
 from clinica.models.tabla_tratamiento import Tratamiento  
@@ -17,30 +19,29 @@ class GestionTratamientos:
             tratamiento_existente = self.db_session.query(Tratamiento).filter_by(nombre_tratamiento=tratamiento_data['nombre_tratamiento']).first()
             if tratamiento_existente:
                 logging.warning(f"El tratamiento '{tratamiento_data['nombre_tratamiento']}' ya está registrado.")
-                print(f"Error: El tratamiento '{tratamiento_data['nombre_tratamiento']}' ya está registrado.")
-                return
+                return f"Error: El tratamiento '{tratamiento_data['nombre_tratamiento']}' ya está registrado."
 
             # Crear una nueva instancia de tratamiento y agregarla a la base de datos
             nuevo_tratamiento = Tratamiento(**tratamiento_data)
             self.db_session.add(nuevo_tratamiento)
             self.db_session.commit()
             logging.info(f"Tratamiento '{tratamiento_data['nombre_tratamiento']}' dado de alta con éxito.")
-            print(f"Tratamiento '{tratamiento_data['nombre_tratamiento']}' dado de alta con éxito.")
+            return f"Tratamiento '{tratamiento_data['nombre_tratamiento']}' dado de alta con éxito."
         
         except IntegrityError as ie:
             self.db_session.rollback()
             logging.error("Error de integridad al registrar el tratamiento: %s", ie)
-            print("Error: No se pudo registrar el tratamiento debido a un problema de integridad.")
+            return "Error: No se pudo registrar el tratamiento debido a un problema de integridad."
         
         except SQLAlchemyError as sae:
             self.db_session.rollback()
             logging.error("Error de SQLAlchemy al registrar el tratamiento: %s", sae)
-            print(f"Error: Ocurrió un problema con la base de datos: {sae}")
+            return f"Error: Ocurrió un problema con la base de datos: {sae}"
         
         except Exception as e:
             self.db_session.rollback()
             logging.critical("Error inesperado al registrar el tratamiento: %s", e)
-            print(f"Ocurrió un error inesperado al dar de alta el tratamiento: {e}")
+            return f"Ocurrió un error inesperado al dar de alta el tratamiento: {e}"
 
     def dar_baja_tratamiento(self, nombre_tratamiento):
         try:
@@ -49,20 +50,20 @@ class GestionTratamientos:
                 self.db_session.delete(tratamiento)
                 self.db_session.commit()
                 logging.info(f"Tratamiento '{nombre_tratamiento}' dado de baja con éxito.")
-                print(f"Tratamiento '{nombre_tratamiento}' dado de baja con éxito.")
+                return f"Tratamiento '{nombre_tratamiento}' dado de baja con éxito."
             else:
                 logging.warning(f"Tratamiento '{nombre_tratamiento}' no encontrado.")
-                print(f"Error: No se encontró el tratamiento '{nombre_tratamiento}'.")
+                return f"Error: No se encontró el tratamiento '{nombre_tratamiento}'."
         
         except SQLAlchemyError as sae:
             self.db_session.rollback()
             logging.error("Error de SQLAlchemy al dar de baja el tratamiento: %s", sae)
-            print(f"Error al dar de baja el tratamiento: {sae}")
+            return f"Error al dar de baja el tratamiento: {sae}"
         
         except Exception as e:
             self.db_session.rollback()
             logging.critical("Error inesperado al dar de baja el tratamiento: %s", e)
-            print(f"Ocurrió un error inesperado al dar de baja el tratamiento: {e}")
+            return f"Ocurrió un error inesperado al dar de baja el tratamiento: {e}"
 
     def modificar_tratamiento(self, id_tratamiento, nuevos_datos):
         try:
@@ -75,17 +76,17 @@ class GestionTratamientos:
                 
                 self.db_session.commit()
                 logging.info(f"Tratamiento con ID '{id_tratamiento}' modificado con éxito.")
-                print(f"Tratamiento con ID '{id_tratamiento}' modificado con éxito.")
+                return f"Tratamiento con ID '{id_tratamiento}' modificado con éxito."
             else:
                 logging.warning(f"No se encontró el tratamiento con ID '{id_tratamiento}'.")
-                print(f"Error: No se encontró el tratamiento con ID '{id_tratamiento}'.")
+                return f"Error: No se encontró el tratamiento con ID '{id_tratamiento}'."
         
         except SQLAlchemyError as sae:
             self.db_session.rollback()
             logging.error("Error de SQLAlchemy al modificar el tratamiento: %s", sae)
-            print(f"Error al modificar el tratamiento: {sae}")
+            return f"Error al modificar el tratamiento: {sae}"
         
         except Exception as e:
             self.db_session.rollback()
             logging.critical("Error inesperado al modificar el tratamiento: %s", e)
-            print(f"Ocurrió un error inesperado al modificar el tratamiento: {e}")
+            return f"Ocurrió un error inesperado al modificar el tratamiento: {e}"

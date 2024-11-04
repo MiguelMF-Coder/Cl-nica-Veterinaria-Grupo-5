@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from dbconfig import Base
+from clinica.dbconfig import Base
+
 
 class Producto(Base):
     __tablename__ = "producto"

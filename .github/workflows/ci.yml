@@ -27,7 +27,7 @@ jobs:
         pip install pytest
 
     - name: Run tests
-      run: pytest tests/
+      run: pytest clinica/services/tests_services/
 
   build-docker:
     runs-on: ubuntu-latest

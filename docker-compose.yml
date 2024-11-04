@@ -21,7 +21,7 @@ services:
     volumes:
       - .:/app
     command: >
-      /bin/sh -c "python init_db.py && streamlit run main.py"
+      /bin/sh -c "python database.py && streamlit run main.py"
 
 
   web:
@@ -35,7 +35,7 @@ services:
       - .:/app
     environment:
       - DATABASE_URL=sqlite:///./clinica.db
-    command: ["python3", "clinica/main.py"]
+    #command: ["python3", "clinica/main.py"]
 
 networks:
   deploy_network:

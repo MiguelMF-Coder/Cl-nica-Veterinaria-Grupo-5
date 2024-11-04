@@ -1,6 +1,9 @@
+#tabla_citas
+
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
-from dbconfig import Base
+from clinica.dbconfig import Base
+
 
 class Cita(Base):
     __tablename__ = "cita"

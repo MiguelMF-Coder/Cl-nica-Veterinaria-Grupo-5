@@ -1,7 +1,9 @@
+# gestion_clientes.py
+
 import logging
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
-from clinica.models.tabla_cliente import cliente as ClienteModel
+from clinica.models.tabla_cliente import Cliente as ClienteModel
 from clinica.models.tabla_mascota import Mascota as MascotaModel
 
 # Configurar logging
@@ -14,7 +16,6 @@ class GestionClientes:
     def registrar_cliente(self, cliente_data):
         """Registra un nuevo cliente en la base de datos."""
         try:
-            # Verificar si el cliente ya existe en la base de datos por DNI o teléfono
             cliente_existente = self.db_session.query(ClienteModel).filter(
                 (ClienteModel.dni == cliente_data['dni']) |
                 (ClienteModel.telefono == cliente_data['telefono'])
@@ -57,26 +58,15 @@ class GestionClientes:
                 return cliente
             else:
                 logging.warning("Cliente no encontrado.")
-                return "Cliente no encontrado."
+                return None
 
         except SQLAlchemyError as sae:
             logging.error("Error de SQLAlchemy al buscar el cliente: %s", sae)
-            return f"Error al buscar el cliente: {sae}"
+            return None
 
         except Exception as e:
             logging.critical("Error inesperado al buscar el cliente: %s", e)
-            return f"Ocurrió un error inesperado al buscar el cliente: {e}"
-
-    def mostrar_cliente(self, cliente):
-        """Muestra la información del cliente y sus mascotas."""
-        if cliente:
-            cliente_info = str(cliente)
-            mascotas_info = [str(mascota) for mascota in cliente.mascotas]
-            logging.info(f"Cliente y sus mascotas mostrados: {cliente.nombre_cliente}")
-            return cliente_info, mascotas_info
-        else:
-            logging.warning("Cliente no encontrado.")
-            return "Cliente no encontrado."
+            return None
 
     def registrar_mascota(self, cliente_id, mascota_data):
         """Registra una nueva mascota para un cliente existente."""
@@ -84,7 +74,7 @@ class GestionClientes:
             cliente = self.db_session.query(ClienteModel).filter_by(id_cliente=cliente_id).first()
 
             if cliente:
-                nueva_mascota = MascotaModel(**mascota_data, cliente_id=cliente_id)
+                nueva_mascota = MascotaModel(**mascota_data, id_cliente=cliente_id)
                 self.db_session.add(nueva_mascota)
                 self.db_session.commit()
                 logging.info(f"Mascota '{mascota_data['nombre_mascota']}' registrada para el cliente '{cliente.nombre_cliente}'.")
@@ -111,10 +101,10 @@ class GestionClientes:
     def marcar_mascota_como_fallecido(self, cliente_id, nombre_mascota):
         """Marca una mascota como fallecida para un cliente específico."""
         try:
-            mascota = self.db_session.query(MascotaModel).filter_by(cliente_id=cliente_id, nombre_mascota=nombre_mascota).first()
+            mascota = self.db_session.query(MascotaModel).filter_by(id_cliente=cliente_id, nombre_mascota=nombre_mascota).first()
 
             if mascota:
-                mascota.Estado = "Fallecido"
+                mascota.estado = "Fallecido"
                 self.db_session.commit()
                 logging.info(f"La mascota '{mascota.nombre_mascota}' ha sido marcada como fallecida.")
                 return f"La mascota '{mascota.nombre_mascota}' ha sido marcada como fallecida."

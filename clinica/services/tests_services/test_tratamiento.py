@@ -1,8 +1,15 @@
+# test_tratamiento.py
+
+import sys
+import os
+
+# Añadir la ruta de la carpeta raíz del proyecto al PYTHONPATH
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '../../')))
+
 import unittest
 from unittest.mock import MagicMock
 from sqlalchemy.orm import Session
-from sqlalchemy.exc import IntegrityError, SQLAlchemyError
-from clinica.models.tabla_tratamiento import tratamientos
+from clinica.models.tabla_tratamiento import Tratamiento
 from clinica.services.tratamiento import GestionTratamientos
 
 class TestGestionTratamientos(unittest.TestCase):
@@ -17,7 +24,8 @@ class TestGestionTratamientos(unittest.TestCase):
         tratamiento_data = {
             'nombre_tratamiento': 'Vacunación',
             'descripcion': 'Vacunación general',
-            'precio': 50
+            'precio': 50,
+            'id_cliente': 1
         }
 
         # Simular que el tratamiento no existe en la base de datos
@@ -36,11 +44,12 @@ class TestGestionTratamientos(unittest.TestCase):
         tratamiento_data = {
             'nombre_tratamiento': 'Vacunación',
             'descripcion': 'Vacunación general',
-            'precio': 50
+            'precio': 50,
+            'id_cliente': 1
         }
 
         # Simular que el tratamiento ya existe en la base de datos
-        self.db_session.query().filter_by().first.return_value = tratamientos()
+        self.db_session.query().filter_by().first.return_value = Tratamiento()
 
         # Llamar a la función de prueba y verificar el resultado
         resultado = self.gestion_tratamientos.dar_alta_tratamiento(tratamiento_data)
@@ -51,7 +60,7 @@ class TestGestionTratamientos(unittest.TestCase):
 
     def test_dar_baja_tratamiento_exito(self):
         # Simular que el tratamiento existe en la base de datos
-        tratamiento_mock = tratamientos(nombre_tratamiento='Vacunación')
+        tratamiento_mock = Tratamiento(nombre_tratamiento='Vacunación')
         self.db_session.query().filter_by().first.return_value = tratamiento_mock
 
         # Llamar a la función de prueba
@@ -70,13 +79,13 @@ class TestGestionTratamientos(unittest.TestCase):
         resultado = self.gestion_tratamientos.dar_baja_tratamiento('Vacunación')
 
         # Verificar el resultado y que no se intentó eliminar nada
-        self.assertIn("no se encontró", resultado)
+        self.assertIn("Error: No se encontró el tratamiento 'Vacunación'.", resultado)
         self.db_session.delete.assert_not_called()
         self.db_session.commit.assert_not_called()
 
     def test_modificar_tratamiento_exito(self):
         # Simular que el tratamiento existe en la base de datos
-        tratamiento_mock = tratamientos(id_tratamiento=1, nombre_tratamiento='Vacunación')
+        tratamiento_mock = Tratamiento(id_tratamiento=1, nombre_tratamiento='Vacunación')
         self.db_session.query().filter_by().first.return_value = tratamiento_mock
 
         # Datos de modificación
@@ -97,7 +106,7 @@ class TestGestionTratamientos(unittest.TestCase):
         resultado = self.gestion_tratamientos.modificar_tratamiento(1, {'descripcion': 'Vacunación avanzada'})
 
         # Verificar el resultado y que no se hizo commit
-        self.assertIn("no se encontró", resultado)
+        self.assertIn("Error: No se encontró el tratamiento con ID '1'.", resultado)
         self.db_session.commit.assert_not_called()
 
 if __name__ == '__main__':

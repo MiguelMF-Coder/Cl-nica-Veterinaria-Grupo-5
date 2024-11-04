@@ -3,6 +3,8 @@ FROM python:3.10-slim
 
 # Instala dependencias del sistema necesarias para paquetes como Pillow
 RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
     libjpeg-dev \
     zlib1g-dev \
     libfreetype6-dev \
@@ -12,6 +14,10 @@ RUN apt-get update && apt-get install -y \
     libwebp-dev \
     build-essential \
     make \
+    libpng-dev \
+    libxrender1 \
+    libxext6 \
+    libatlas-base-dev \
     && apt-get clean
 
 

@@ -18,14 +18,18 @@ RUN apt-get update && apt-get install -y \
     libxrender1 \
     libxext6 \
     libatlas-base-dev \
+    libssl-dev \
+    libffi-dev \
     && apt-get clean
-
 
 # Establece el directorio de trabajo
 WORKDIR /app
 
-# Copia los archivos y dependencias
+# Copia los archivos del proyecto al contenedor
 COPY . .
+
+# Establece la variable de entorno PYTHONPATH
+ENV PYTHONPATH=/app
 
 # Actualiza pip, setuptools y wheel
 RUN pip install --upgrade pip setuptools wheel

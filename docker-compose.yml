@@ -1,28 +1,32 @@
 services:
   fastapi:
     build: ./fastapi
+    container_name: fastapi
     ports:
       - "8000:8000"
     networks:
       - deploy_network
-    container_name: fastapi
     volumes:
-      - .:/app
+      - ./clinica_db.sqlite:/app/clinica_db.sqlite  # Volumen compartido
+    environment:
+      - PYTHONPATH=/app
+    command: ["python3", "clinica/database.py"]
 
   streamlit:
     build:
       context: .
-      dockerfile: streamlit/Dockerfile  
+      dockerfile: Dockerfile
+    container_name: streamlit
     ports:
       - "8501:8501"
     networks:
       - deploy_network
-    container_name: streamlit
     volumes:
-      - .:/app
+      - ./clinica_db.sqlite:/app/clinica_db.sqlite  # Volumen compartido
+    environment:
+      - PYTHONPATH=/app
     command: >
-      /bin/sh -c "python database.py && streamlit run main.py"
-
+      /bin/sh -c "python clinica/database.py && streamlit run main.py"
 
   web:
     build:
@@ -32,10 +36,10 @@ services:
     ports:
       - "8001:8001"
     volumes:
-      - .:/app
+      - ./clinica_db.sqlite:/app/clinica_db.sqlite  # Volumen compartido
     environment:
-      - DATABASE_URL=sqlite:///./clinica.db
-    #command: ["python3", "clinica/main.py"]
+      - PYTHONPATH=/app
+    command: ["python3", "clinica/database.py"]
 
 networks:
   deploy_network:

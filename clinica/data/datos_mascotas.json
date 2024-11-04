@@ -1,0 +1,47 @@
+[
+    {
+        "id_mascota": 1,
+        "nombre_mascota": "Fido",
+        "raza": "Labrador",
+        "edad": 3,
+        "afeccion": "Sano",
+        "estado": "Activo",
+        "id_cliente": 1
+    },
+    {
+        "id_mascota": 2,
+        "nombre_mascota": "Mimi",
+        "raza": "Siamés",
+        "edad": 2,
+        "afeccion": "Gripe",
+        "estado": "En tratamiento",
+        "id_cliente": 2
+    },
+    {
+        "id_mascota": 3,
+        "nombre_mascota": "Rex",
+        "raza": "Pastor Alemán",
+        "edad": 5,
+        "afeccion": "Artritis",
+        "estado": "En reposo",
+        "id_cliente": 3
+    },
+    {
+        "id_mascota": 4,
+        "nombre_mascota": "Luna",
+        "raza": "Golden Retriever",
+        "edad": 4,
+        "afeccion": "Sano",
+        "estado": "Activo",
+        "id_cliente": 4
+    },
+    {
+        "id_mascota": 5,
+        "nombre_mascota": "Tom",
+        "raza": "Gato Persa",
+        "edad": 1,
+        "afeccion": "Infección ocular",
+        "estado": "En tratamiento",
+        "id_cliente": 5
+    }
+]

@@ -1,18 +1,16 @@
-# models/citas.py
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
-from clinica.database import Base
+from dbconfig import Base
 
 class Cita(Base):
-    __tablename__ = "citas"
+    __tablename__ = "cita"
 
-    id = Column(Integer, primary_key=True, index=True)
-    fecha = Column(DateTime)  
-    descripcion = Column(String)  
-    mascota_id = Column(Integer, ForeignKey("mascota.id_mascota")) 
-    cliente_id = Column(Integer, ForeignKey("cliente.id_cliente"))  
+    id_cita = Column(Integer, primary_key=True, index=True)
+    fecha = Column(DateTime)
+    descripcion = Column(String)
+    id_mascota = Column(Integer, ForeignKey("mascota.id_mascota"))
+    id_cliente = Column(Integer, ForeignKey("cliente.id_cliente"))
 
-    # Relaciones:
+    # Relaciones
     mascota = relationship("Mascota", back_populates="citas")
-    cliente = relationship("cliente", back_populates="citas")
-
+    cliente = relationship("Cliente", back_populates="citas")

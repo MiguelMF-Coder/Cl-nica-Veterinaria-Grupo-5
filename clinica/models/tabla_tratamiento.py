@@ -1,16 +1,15 @@
-# models/tratamientos.py
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from clinica.database import Base
+from dbconfig import Base
 
-class tratamientos(Base):
-    __tablename__ = "tratamientos"
+class Tratamiento(Base):
+    __tablename__ = "tratamiento"
 
     id_tratamiento = Column(Integer, primary_key=True, index=True)
     nombre_tratamiento = Column(String, index=True)
     descripcion = Column(String)
     precio = Column(Integer)
-    cliente_id = Column(Integer, ForeignKey("cliente.id_cliente"))
+    id_cliente = Column(Integer, ForeignKey("cliente.id_cliente"))
 
-    #Relación:
-    cliente = relationship("cliente", back_populates="tratamientos")
+    # Relaciones
+    cliente = relationship("Cliente", back_populates="tratamientos")

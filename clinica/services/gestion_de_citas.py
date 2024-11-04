@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from clinica.models.tabla_citas import Cita
-from clinica.models.tabla_tratamiento import tratamientos  # Asegúrate de que la importación sea correcta
+from clinica.models.tabla_tratamiento import Tratamiento  # Asegúrate de que la importación sea correcta
 
 # Configurar logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')

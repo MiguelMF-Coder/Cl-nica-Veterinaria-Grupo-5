@@ -1,6 +1,6 @@
 import re  # Importamos la librería de expresiones regulares para validar entradas
 from sqlalchemy.orm import Session
-from clinica.models.tabla_tratamiento import tratamientos  
+from clinica.models.tabla_tratamiento import Tratamiento  
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 import logging
 
@@ -14,14 +14,14 @@ class GestionTratamientos:
     def dar_alta_tratamiento(self, tratamiento_data):
         try:
             # Verificar si el tratamiento ya existe en la base de datos
-            tratamiento_existente = self.db_session.query(tratamientos).filter_by(nombre_tratamiento=tratamiento_data['nombre_tratamiento']).first()
+            tratamiento_existente = self.db_session.query(Tratamiento).filter_by(nombre_tratamiento=tratamiento_data['nombre_tratamiento']).first()
             if tratamiento_existente:
                 logging.warning(f"El tratamiento '{tratamiento_data['nombre_tratamiento']}' ya está registrado.")
                 print(f"Error: El tratamiento '{tratamiento_data['nombre_tratamiento']}' ya está registrado.")
                 return
 
             # Crear una nueva instancia de tratamiento y agregarla a la base de datos
-            nuevo_tratamiento = tratamientos(**tratamiento_data)
+            nuevo_tratamiento = Tratamiento(**tratamiento_data)
             self.db_session.add(nuevo_tratamiento)
             self.db_session.commit()
             logging.info(f"Tratamiento '{tratamiento_data['nombre_tratamiento']}' dado de alta con éxito.")
@@ -44,7 +44,7 @@ class GestionTratamientos:
 
     def dar_baja_tratamiento(self, nombre_tratamiento):
         try:
-            tratamiento = self.db_session.query(tratamientos).filter_by(nombre_tratamiento=nombre_tratamiento).first()
+            tratamiento = self.db_session.query(Tratamiento).filter_by(nombre_tratamiento=nombre_tratamiento).first()
             if tratamiento:
                 self.db_session.delete(tratamiento)
                 self.db_session.commit()
@@ -66,7 +66,7 @@ class GestionTratamientos:
 
     def modificar_tratamiento(self, id_tratamiento, nuevos_datos):
         try:
-            tratamiento = self.db_session.query(tratamientos).filter_by(id_tratamiento=id_tratamiento).first()
+            tratamiento = self.db_session.query(Tratamiento).filter_by(id_tratamiento=id_tratamiento).first()
             if tratamiento:
                 # Actualizar los atributos del tratamiento con los nuevos datos
                 for key, value in nuevos_datos.items():

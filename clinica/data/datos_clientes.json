@@ -1,0 +1,42 @@
+[
+    {
+        "id_cliente": 1,
+        "nombre_cliente": "Juan Pérez",
+        "edad": 35,
+        "dni": "12345678A",
+        "direccion": "Calle Mayor, 1",
+        "telefono": 600123456
+    },
+    {
+        "id_cliente": 2,
+        "nombre_cliente": "María López",
+        "edad": 29,
+        "dni": "87654321B",
+        "direccion": "Avenida Central, 10",
+        "telefono": 600987654
+    },
+    {
+        "id_cliente": 3,
+        "nombre_cliente": "Pedro González",
+        "edad": 40,
+        "dni": "45678912C",
+        "direccion": "Plaza Real, 15",
+        "telefono": 612345678
+    },
+    {
+        "id_cliente": 4,
+        "nombre_cliente": "Laura Martínez",
+        "edad": 32,
+        "dni": "32165498D",
+        "direccion": "Calle Nueva, 20",
+        "telefono": 622987321
+    },
+    {
+        "id_cliente": 5,
+        "nombre_cliente": "Carlos Sánchez",
+        "edad": 27,
+        "dni": "14785236E",
+        "direccion": "Avenida Sol, 3",
+        "telefono": 634567890
+    }
+]

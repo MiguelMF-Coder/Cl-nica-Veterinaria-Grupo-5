@@ -1,0 +1,42 @@
+[
+    {
+        "id_producto": 1,
+        "nombre_producto": "Comida para perros",
+        "tipo_producto": "Alimento",
+        "descripcion_producto": "Bolsa de 5 kg de comida para perros",
+        "precio_producto": 20,
+        "id_cliente": 1
+    },
+    {
+        "id_producto": 2,
+        "nombre_producto": "Collar antipulgas",
+        "tipo_producto": "Accesorio",
+        "descripcion_producto": "Collar para prevención de pulgas",
+        "precio_producto": 15,
+        "id_cliente": 2
+    },
+    {
+        "id_producto": 3,
+        "nombre_producto": "Juguete masticable",
+        "tipo_producto": "Juguete",
+        "descripcion_producto": "Juguete para perros resistente a mordidas",
+        "precio_producto": 10,
+        "id_cliente": 3
+    },
+    {
+        "id_producto": 4,
+        "nombre_producto": "Arena para gatos",
+        "tipo_producto": "Higiene",
+        "descripcion_producto": "Arena absorbente para caja de gatos",
+        "precio_producto": 8,
+        "id_cliente": 4
+    },
+    {
+        "id_producto": 5,
+        "nombre_producto": "Champú para mascotas",
+        "tipo_producto": "Higiene",
+        "descripcion_producto": "Champú especial para piel sensible",
+        "precio_producto": 12,
+        "id_cliente": 5
+    }
+]

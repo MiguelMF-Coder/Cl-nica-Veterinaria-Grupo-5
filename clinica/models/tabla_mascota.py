@@ -1,7 +1,6 @@
-# models/mascota.py
 from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
-from clinica.database import Base
+from dbconfig import Base
 
 class Mascota(Base):
     __tablename__ = "mascota"
@@ -11,9 +10,9 @@ class Mascota(Base):
     raza = Column(String)
     edad = Column(Integer)
     afeccion = Column(String)
-    Estado = Column(String)
-    cliente_id = Column(Integer, ForeignKey("cliente.id_cliente"))
+    estado = Column(String)
+    id_cliente = Column(Integer, ForeignKey("cliente.id_cliente"))
 
-    #Relaciones:
-    cliente = relationship("cliente", back_populates="mascotas")
-    citas = relationship("Cita", back_populates="mascotas")
+    # Relaciones
+    cliente = relationship("Cliente", back_populates="mascotas")
+    citas = relationship("Cita", back_populates="mascota")

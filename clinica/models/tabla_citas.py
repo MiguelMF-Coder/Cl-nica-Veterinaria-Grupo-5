@@ -1,9 +1,6 @@
-#tabla_citas
-
 from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from clinica.dbconfig import Base
-
 
 class Cita(Base):
     __tablename__ = "cita"
@@ -17,3 +14,13 @@ class Cita(Base):
     # Relaciones
     mascota = relationship("Mascota", back_populates="citas")
     cliente = relationship("Cliente", back_populates="citas")
+
+    def to_dict(self):
+        """Convierte la instancia de Cita en un diccionario."""
+        return {
+            'id_cita': self.id_cita,
+            'fecha': self.fecha.isoformat() if self.fecha else None,
+            'descripcion': self.descripcion,
+            'id_mascota': self.id_mascota,
+            'id_cliente': self.id_cliente
+        }

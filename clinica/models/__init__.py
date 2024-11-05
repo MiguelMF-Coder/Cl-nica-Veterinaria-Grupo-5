@@ -1,3 +1,4 @@
+# clinica/models/__init__.py
 from .tabla_cliente import Cliente
 from .tabla_mascota import Mascota
 from .tabla_citas import Cita

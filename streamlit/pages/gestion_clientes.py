@@ -24,7 +24,7 @@ def show():
         if submit_button:
             if nombre and dni and direccion and telefono:
                 # Crea un objeto Cliente
-                nuevo_cliente = Cliente(nombre=nombre, edad=edad, dni=dni, direccion=direccion, telefono=telefono)
+                nuevo_cliente = Cliente(nombre=nombre, edad=edad, dni=self.dni_unico, direccion=direccion, telefono=telefono)
                 
                 # Llama a la función de gestión de clientes para registrar
                 gestion_clientes.registrar_cliente(nuevo_cliente)

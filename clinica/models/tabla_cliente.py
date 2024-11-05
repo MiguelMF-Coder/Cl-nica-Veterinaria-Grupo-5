@@ -4,6 +4,7 @@ from clinica.dbconfig import Base
 
 
 
+
 class Cliente(Base):
     __tablename__ = "cliente"
 
@@ -19,3 +20,13 @@ class Cliente(Base):
     citas = relationship("Cita", back_populates="cliente")
     tratamientos = relationship("Tratamiento", back_populates="cliente")
     productos = relationship("Producto", back_populates="cliente")
+
+    def to_dict(self):
+        return {
+            'id_cliente': self.id_cliente,
+            'nombre_cliente': self.nombre_cliente,
+            'edad': self.edad,
+            'dni': self.dni,
+            'direccion': self.direccion,
+            'telefono': self.telefono
+        }

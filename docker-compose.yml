@@ -7,7 +7,8 @@ services:
     networks:
       - deploy_network
     volumes:
-      - ./clinica_db.sqlite:/app/clinica_db.sqlite  # Volumen compartido
+      - ./clinica/clinica_db.sqlite:/app/clinica/clinica_db.sqlite  # Volumen compartido correcto
+      - ./clinica/data:/app/clinica/data
     environment:
       - PYTHONPATH=/app
     command: ["python3", "clinica/database.py"]
@@ -22,7 +23,8 @@ services:
     networks:
       - deploy_network
     volumes:
-      - ./clinica_db.sqlite:/app/clinica_db.sqlite  # Volumen compartido
+      - ./clinica/clinica_db.sqlite:/app/clinica/clinica_db.sqlite  # Volumen compartido correcto
+      - ./clinica/data:/app/clinica/data
     environment:
       - PYTHONPATH=/app
     command: >
@@ -36,7 +38,8 @@ services:
     ports:
       - "8001:8001"
     volumes:
-      - ./clinica_db.sqlite:/app/clinica_db.sqlite  # Volumen compartido
+      - ./clinica/clinica_db.sqlite:/app/clinica/clinica_db.sqlite  # Volumen compartido correcto
+      - ./clinica/data:/app/clinica/data
     environment:
       - PYTHONPATH=/app
     command: ["python3", "clinica/database.py"]

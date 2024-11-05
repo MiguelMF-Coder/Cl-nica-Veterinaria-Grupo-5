@@ -3,6 +3,7 @@ from sqlalchemy.orm import relationship
 from clinica.dbconfig import Base
 
 
+
 class Producto(Base):
     __tablename__ = "producto"
 
@@ -15,3 +16,13 @@ class Producto(Base):
 
     # Relaciones
     cliente = relationship("Cliente", back_populates="productos")
+
+    def to_dict(self):
+        return {
+            'id_producto': self.id_producto,
+            'nombre_producto': self.nombre_producto,
+            'tipo_producto': self.tipo_producto,
+            'descripcion_producto': self.descripcion_producto,
+            'precio_producto': self.precio_producto,
+            'id_cliente': self.id_cliente,
+        }

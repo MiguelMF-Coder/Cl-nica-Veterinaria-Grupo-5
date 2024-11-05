@@ -18,3 +18,13 @@ class Mascota(Base):
     # Relaciones
     cliente = relationship("Cliente", back_populates="mascotas")
     citas = relationship("Cita", back_populates="mascota")
+
+    def to_dict(self):
+        return {
+            'id_mascota': self.id_mascota,
+            'nombre_mascota': self.nombre_mascota,
+            'raza': self.raza,
+            'edad': self.edad,
+            'afeccion': self.afeccion,
+            'estado': self.estado
+        }

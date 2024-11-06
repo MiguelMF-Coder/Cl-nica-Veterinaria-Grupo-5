@@ -11,7 +11,6 @@ services:
       - ./clinica/data:/app/clinica/data
     environment:
       - PYTHONPATH=/app
-    command: ["python3", "clinica/database.py"]
 
   streamlit:
     build:

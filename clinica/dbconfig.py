@@ -1,11 +1,12 @@
-#db.config
-
 import os
 import logging
 import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.exc import OperationalError
+from sqlalchemy.orm import Session
+from typing import Generator
+from sqlalchemy.orm import Session
 
 
 # Configurar logging para SQLAlchemy
@@ -37,3 +38,11 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 
 # Base para definir los modelos de datos
 Base = declarative_base()
+
+# Función get_db para obtener la sesión de la base de datos
+def get_db() -> Generator[Session, None, None]:
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

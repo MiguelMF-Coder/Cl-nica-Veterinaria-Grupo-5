@@ -1,10 +1,10 @@
 [
     {
         "id_cliente": 1,
-        "nombre_cliente": "Marta López",
-        "edad": 30,
-        "dni": "123456785",
-        "direccion": "Calle Prueba 123",
-        "telefono": 679366526
+        "nombre_cliente": "Laura García",
+        "edad": 28,
+        "dni": "123456788",
+        "direccion": "Avenida Nueva 505",
+        "telefono": 641945070
     }
 ]

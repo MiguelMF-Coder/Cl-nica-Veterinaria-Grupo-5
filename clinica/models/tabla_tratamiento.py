@@ -9,17 +9,19 @@ class Tratamiento(Base):
     nombre_tratamiento = Column(String, index=True)
     descripcion = Column(String)
     precio = Column(Integer)
+    estado = Column(String)
     id_cliente = Column(Integer, ForeignKey("cliente.id_cliente"))
 
     # Relaciones
     cliente = relationship("Cliente", back_populates="tratamientos")
+    citas = relationship("Cita", back_populates="tratamiento")
 
     def to_dict(self):
-        """Convierte la instancia de Tratamiento en un diccionario."""
         return {
             'id_tratamiento': self.id_tratamiento,
             'nombre_tratamiento': self.nombre_tratamiento,
             'descripcion': self.descripcion,
             'precio': self.precio,
+            'estado': self.estado,
             'id_cliente': self.id_cliente
         }

@@ -4,6 +4,7 @@
         "nombre_tratamiento": "Desparasitación",
         "descripcion": "Tratamiento antiparasitario",
         "precio": 50,
+        "estado": "Completado",
         "id_cliente": 1
     },
     {
@@ -11,6 +12,7 @@
         "nombre_tratamiento": "Vacuna anual",
         "descripcion": "Vacuna contra la rabia",
         "precio": 75,
+        "estado": "Completado",
         "id_cliente": 2
     },
     {
@@ -18,6 +20,7 @@
         "nombre_tratamiento": "Terapia para artritis",
         "descripcion": "Tratamiento para dolor en articulaciones",
         "precio": 120,
+        "estado": "En proceso",
         "id_cliente": 3
     },
     {
@@ -25,6 +28,7 @@
         "nombre_tratamiento": "Chequeo de rutina",
         "descripcion": "Revisión general de salud",
         "precio": 40,
+        "estado": "Completado",
         "id_cliente": 4
     },
     {
@@ -32,6 +36,7 @@
         "nombre_tratamiento": "Tratamiento ocular",
         "descripcion": "Tratamiento para infección en los ojos",
         "precio": 60,
+        "estado": "En proceso",
         "id_cliente": 5
     }
 ]

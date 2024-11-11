@@ -2,8 +2,6 @@ from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from clinica.dbconfig import Base
 
- 
-
 class Mascota(Base):
     __tablename__ = "mascota"
 
@@ -26,5 +24,6 @@ class Mascota(Base):
             'raza': self.raza,
             'edad': self.edad,
             'afeccion': self.afeccion,
-            'estado': self.estado
+            'estado': self.estado,
+            'id_cliente': self.id_cliente
         }

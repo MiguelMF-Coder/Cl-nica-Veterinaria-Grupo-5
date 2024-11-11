@@ -1,5 +1,5 @@
 import streamlit as st
-from clinica.services.tratamiento import GestionTratamientos, Tratamiento
+from clinica.services.gestion_tratamiento import GestionTratamientos, Tratamiento
 
 def show():
     # Título de la página

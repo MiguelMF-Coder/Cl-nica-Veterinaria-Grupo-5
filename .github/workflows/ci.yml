@@ -28,6 +28,7 @@ jobs:
 
     - name: Run tests
       run: pytest clinica/services/tests_services/
+           pytest fastapi/tests_fastapi/
 
   build-docker:
     runs-on: ubuntu-latest

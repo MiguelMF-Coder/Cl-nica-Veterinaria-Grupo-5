@@ -4,7 +4,7 @@ import json
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from httpx import AsyncClient, ASGITransport
-from clinica_api.server import app 
+from server import app 
 from clinica.dbconfig import Base, get_db
 from clinica_api.schemas import TratamientoCreate, TratamientoUpdate    
 import os
@@ -135,13 +135,13 @@ class TestTratamientos(unittest.IsolatedAsyncioTestCase):
         self.assertIn("cliente", data)
         self.assertIn("mascota", data)
 
-    async def test_validar_tratamiento_completado(self):
+    async def test_validar_tratamiento_Finalizada(self):
         response = await self.client.get(f"/tratamientos/validar/{self.id_tratamiento}")
         if response.status_code != 200:
             raise Exception(f"Error al validar tratamiento: {response.text}")
         
         data = response.json()
-        self.assertIn("completado", data)
+        self.assertIn("Finalizada", data)
 
     async def test_generar_factura(self):
         response = await self.client.get(f"/tratamientos/factura/generar/{self.id_tratamiento}")

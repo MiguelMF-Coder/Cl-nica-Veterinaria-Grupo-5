@@ -1,11 +1,56 @@
 [
     {
         "id_mascota": 1,
-        "nombre_mascota": "Rex",
-        "raza": "Bulldog",
-        "edad": 6,
-        "afeccion": "Ninguna",
-        "estado": "Fallecido",
+        "nombre_mascota": "Luna",
+        "raza": "Golden Retriever",
+        "edad": 4,
+        "afeccion": "Alergia alimentaria",
+        "estado": "Vivo",
         "id_cliente": 1
+    },
+    {
+        "id_mascota": 2,
+        "nombre_mascota": "Max",
+        "raza": "Pastor Alemán",
+        "edad": 6,
+        "afeccion": "Displasia de cadera",
+        "estado": "Vivo",
+        "id_cliente": 2
+    },
+    {
+        "id_mascota": 3,
+        "nombre_mascota": "Mia",
+        "raza": "Siamés",
+        "edad": 3,
+        "afeccion": "Ninguna",
+        "estado": "Vivo",
+        "id_cliente": 3
+    },
+    {
+        "id_mascota": 4,
+        "nombre_mascota": "Rocky",
+        "raza": "Bulldog Francés",
+        "edad": 2,
+        "afeccion": "Problemas respiratorios",
+        "estado": "Vivo",
+        "id_cliente": 1
+    },
+    {
+        "id_mascota": 5,
+        "nombre_mascota": "Nina",
+        "raza": "Yorkshire Terrier",
+        "edad": 8,
+        "afeccion": "Problemas dentales",
+        "estado": "Vivo",
+        "id_cliente": 4
+    },
+    {
+        "id_mascota": 6,
+        "nombre_mascota": "Thor",
+        "raza": "Husky Siberiano",
+        "edad": 5,
+        "afeccion": "Ninguna",
+        "estado": "Vivo",
+        "id_cliente": 5
     }
 ]

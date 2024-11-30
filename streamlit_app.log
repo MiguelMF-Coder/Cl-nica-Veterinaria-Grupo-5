@@ -1,0 +1,874 @@
+2024-11-30 20:00:21,509 - __main__ - ERROR - Error inesperado al cargar la página Citas: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+Traceback (most recent call last):
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/main.py", line 65, in <module>
+    module = importlib.import_module(page_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages/Citas_pag.py", line 2, in <module>
+    import pandas as pd
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/__init__.py", line 22, in <module>
+    from pandas.compat import is_numpy_dev as _is_numpy_dev  # pyright: ignore # noqa:F401
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/compat/__init__.py", line 18, in <module>
+    from pandas.compat.numpy import (
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/compat/numpy/__init__.py", line 4, in <module>
+    from pandas.util.version import Version
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/util/__init__.py", line 2, in <module>
+    from pandas.util._decorators import (  # noqa:F401
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/util/_decorators.py", line 14, in <module>
+    from pandas._libs.properties import cache_readonly
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/_libs/__init__.py", line 13, in <module>
+    from pandas._libs.interval import Interval
+  File "pandas/_libs/interval.pyx", line 1, in init pandas._libs.interval
+ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+2024-11-30 20:00:32,708 - __main__ - ERROR - Error inesperado al cargar la página Citas: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+Traceback (most recent call last):
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/main.py", line 65, in <module>
+    module = importlib.import_module(page_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages/Citas_pag.py", line 2, in <module>
+    import pandas as pd
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/__init__.py", line 22, in <module>
+    from pandas.compat import is_numpy_dev as _is_numpy_dev  # pyright: ignore # noqa:F401
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/compat/__init__.py", line 18, in <module>
+    from pandas.compat.numpy import (
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/compat/numpy/__init__.py", line 4, in <module>
+    from pandas.util.version import Version
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/util/__init__.py", line 2, in <module>
+    from pandas.util._decorators import (  # noqa:F401
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/util/_decorators.py", line 14, in <module>
+    from pandas._libs.properties import cache_readonly
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/_libs/__init__.py", line 13, in <module>
+    from pandas._libs.interval import Interval
+  File "pandas/_libs/interval.pyx", line 1, in init pandas._libs.interval
+ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+2024-11-30 20:05:07,105 - __main__ - ERROR - Error inesperado al cargar la página Citas: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+Traceback (most recent call last):
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/main.py", line 67, in <module>
+    module = importlib.import_module(page_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages/Citas_pag.py", line 2, in <module>
+    import pandas as pd
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/__init__.py", line 22, in <module>
+    from pandas.compat import is_numpy_dev as _is_numpy_dev  # pyright: ignore # noqa:F401
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/compat/__init__.py", line 18, in <module>
+    from pandas.compat.numpy import (
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/compat/numpy/__init__.py", line 4, in <module>
+    from pandas.util.version import Version
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/util/__init__.py", line 2, in <module>
+    from pandas.util._decorators import (  # noqa:F401
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/util/_decorators.py", line 14, in <module>
+    from pandas._libs.properties import cache_readonly
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/_libs/__init__.py", line 13, in <module>
+    from pandas._libs.interval import Interval
+  File "pandas/_libs/interval.pyx", line 1, in init pandas._libs.interval
+ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+2024-11-30 20:06:00,073 - __main__ - ERROR - Error inesperado al cargar la página Citas: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+Traceback (most recent call last):
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/main.py", line 67, in <module>
+    module = importlib.import_module(page_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages/Citas_pag.py", line 2, in <module>
+    import pandas as pd
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/__init__.py", line 22, in <module>
+    from pandas.compat import is_numpy_dev as _is_numpy_dev  # pyright: ignore # noqa:F401
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/compat/__init__.py", line 18, in <module>
+    from pandas.compat.numpy import (
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/compat/numpy/__init__.py", line 4, in <module>
+    from pandas.util.version import Version
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/util/__init__.py", line 2, in <module>
+    from pandas.util._decorators import (  # noqa:F401
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/util/_decorators.py", line 14, in <module>
+    from pandas._libs.properties import cache_readonly
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/pandas/_libs/__init__.py", line 13, in <module>
+    from pandas._libs.interval import Interval
+  File "pandas/_libs/interval.pyx", line 1, in init pandas._libs.interval
+ValueError: numpy.dtype size changed, may indicate binary incompatibility. Expected 96 from C header, got 88 from PyObject
+2024-11-30 20:08:34,053 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:08:34,178 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 20:08:34,179 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 20:08:34,532 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:08:34,556 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 20:08:34,557 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 20:08:36,093 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:08:36,113 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:08:36,468 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:08:36,721 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:08:36,740 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:08:36,740 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:08:48,801 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:08:48,823 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:08:48,823 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:08:50,091 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:08:50,113 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:08:50,114 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:08:51,310 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:08:51,330 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:08:51,331 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:08:52,247 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:08:52,269 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:08:52,269 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:08:54,017 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:08:54,038 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:08:54,039 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:02,198 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:02,219 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 20:09:02,219 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 20:09:06,440 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:06,461 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:06,461 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:06,621 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:06,640 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:06,641 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:07,416 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:07,422 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:07,443 - __main__ - ERROR - Error al cargar el logo: 
+2024-11-30 20:09:07,444 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:07,469 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:09,049 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:09,070 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:09,071 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:10,153 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:10,172 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:10,173 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:10,912 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:10,934 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:10,934 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:18,968 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:18,988 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:18,988 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:20,164 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:20,186 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:20,187 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:25,028 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:25,050 - __main__ - INFO - Intentando cargar la página: Clientes (módulo: Clientes_pag)
+2024-11-30 20:09:25,504 - __main__ - ERROR - Error de importación al cargar la página Clientes: cannot import name 'Cliente' from 'clinica.services.gestion_clientes' (/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/clinica/services/gestion_clientes.py)
+2024-11-30 20:09:26,515 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:26,536 - __main__ - INFO - Intentando cargar la página: Tratamientos (módulo: Tratamientos_pag)
+2024-11-30 20:09:26,543 - __main__ - INFO - Mostrando página: Tratamientos
+2024-11-30 20:09:26,544 - __main__ - ERROR - Error inesperado al cargar la página Tratamientos: GestionTratamientos.__init__() missing 1 required positional argument: 'db_session'
+Traceback (most recent call last):
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/main.py", line 71, in <module>
+    module.show()
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages/Tratamientos_pag.py", line 9, in show
+    gestion_tratamientos = GestionTratamientos()
+TypeError: GestionTratamientos.__init__() missing 1 required positional argument: 'db_session'
+2024-11-30 20:09:27,352 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:27,372 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:27,373 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:27,495 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:27,516 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:27,517 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:28,194 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:28,215 - __main__ - INFO - Intentando cargar la página: Formulario (módulo: Formulario_pag)
+2024-11-30 20:09:28,216 - __main__ - INFO - Mostrando página: Formulario
+2024-11-30 20:09:29,416 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:29,440 - __main__ - INFO - Intentando cargar la página: Dashboard (módulo: Dashboard_pag)
+2024-11-30 20:09:29,515 - __main__ - ERROR - Error inesperado al cargar la página Dashboard: module 'numpy' has no attribute 'bool8'
+Traceback (most recent call last):
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/main.py", line 67, in <module>
+    module = importlib.import_module(page_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages/Dashboard_pag.py", line 4, in <module>
+    import plotly.express as px
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/plotly/express/__init__.py", line 15, in <module>
+    from ._imshow import imshow
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/plotly/express/_imshow.py", line 4, in <module>
+    from .imshow_utils import rescale_intensity, _integer_ranges, _integer_types
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/plotly/express/imshow_utils.py", line 24, in <module>
+    np.bool8: (False, True),
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/env/lib/python3.10/site-packages/numpy/__init__.py", line 414, in __getattr__
+    raise AttributeError("module {!r} has no attribute "
+AttributeError: module 'numpy' has no attribute 'bool8'
+2024-11-30 20:09:29,981 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:30,003 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:30,003 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:30,131 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:30,152 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:30,153 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:32,457 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:32,478 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:32,478 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:34,493 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:34,515 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:34,516 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:34,522 - __main__ - ERROR - Error inesperado al cargar la página Citas: Invalid isoformat string: '2024-11-30T07:30:00.000Z'
+Traceback (most recent call last):
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/main.py", line 71, in <module>
+    module.show()
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages/Citas_pag.py", line 193, in show
+    st.session_state["time_inicial"] = datetime.fromisoformat(state["select"]["start"])
+ValueError: Invalid isoformat string: '2024-11-30T07:30:00.000Z'
+2024-11-30 20:09:39,608 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:39,628 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:39,629 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:40,550 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:40,569 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:40,570 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:44,795 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:44,815 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:44,816 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:46,580 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:46,600 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:46,601 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:48,109 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:48,129 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:48,129 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:49,217 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:49,237 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:49,237 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:53,567 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:53,588 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:53,589 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:09:55,771 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:09:55,793 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:09:55,794 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:11:27,193 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:11:27,214 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:11:27,214 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:11:28,777 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:11:28,798 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:11:28,798 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:12:02,398 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:12:02,420 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:12:02,421 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:27:48,010 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:27:48,010 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:27:48,209 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 20:27:48,453 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 20:27:48,455 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 20:27:48,645 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 20:27:48,749 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:27:48,768 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 20:27:48,769 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 20:27:52,160 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 20:27:52,183 - __main__ - ERROR - Error al exportar los datos: 404
+2024-11-30 20:27:52,184 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 20:27:52,185 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:16:58,663 - main - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:16:58,664 - main - ERROR - Error al configurar la página: module 'streamlit' has no attribute 'set_page_config'
+2024-11-30 22:17:07,065 - main - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:17:07,065 - main - ERROR - Error al configurar la página: module 'streamlit' has no attribute 'set_page_config'
+2024-11-30 22:18:31,029 - main - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:18:31,030 - main - ERROR - Error al configurar la página: module 'streamlit' has no attribute 'set_page_config'
+2024-11-30 22:19:24,018 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:19:24,254 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:19:24,273 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:19:47,106 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:19:47,171 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:19:47,937 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:19:48,361 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:19:48,400 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:19:48,401 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:24:43,297 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:24:43,587 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:24:43,594 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:26:03,864 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:26:03,905 - __main__ - INFO - Intentando cargar la página: Dashboard (módulo: Dashboard_pag)
+2024-11-30 22:26:03,911 - __main__ - ERROR - Error inesperado al cargar la página Dashboard: positional argument follows keyword argument (Dashboard_pag.py, line 93)
+Traceback (most recent call last):
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/main.py", line 80, in <module>
+    module = importlib.import_module(page_module)
+  File "/usr/lib/python3.10/importlib/__init__.py", line 126, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+  File "<frozen importlib._bootstrap>", line 1050, in _gcd_import
+  File "<frozen importlib._bootstrap>", line 1027, in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1006, in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 688, in _load_unlocked
+  File "<frozen importlib._bootstrap_external>", line 879, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 1017, in get_code
+  File "<frozen importlib._bootstrap_external>", line 947, in source_to_code
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages/Dashboard_pag.py", line 93
+    st.plotly_chart(fig1, theme="streamlit", use_container_width)
+                                                                ^
+SyntaxError: positional argument follows keyword argument
+2024-11-30 22:26:04,953 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:26:05,034 - __main__ - INFO - Intentando cargar la página: Formulario (módulo: Formulario_pag)
+2024-11-30 22:26:05,039 - __main__ - INFO - Mostrando página: Formulario
+2024-11-30 22:26:05,987 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:26:06,025 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:26:06,375 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:26:06,807 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:26:06,842 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:26:06,843 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:26:11,515 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:26:11,517 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:26:11,571 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:26:11,571 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:26:22,286 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:26:22,290 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:26:22,352 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:26:22,353 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:26:30,641 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:26:30,677 - __main__ - ERROR - Error al exportar los datos: 500
+2024-11-30 22:26:30,678 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:26:30,679 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:31:00,257 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:31:00,291 - __main__ - ERROR - Error al exportar los datos: 500
+2024-11-30 22:31:00,291 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:31:00,292 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:31:48,466 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:31:48,515 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:31:48,516 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:31:48,517 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:32:39,129 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:32:39,186 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:32:39,194 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:32:48,842 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:32:48,939 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:32:48,949 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:34:17,717 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:34:17,746 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:34:17,749 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:34:18,661 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:34:18,713 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:34:41,219 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:34:41,577 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:34:41,581 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:36:18,201 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:36:18,241 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:36:18,244 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:36:19,554 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:36:19,610 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:36:19,612 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:36:19,614 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:36:21,246 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:36:21,304 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:36:21,305 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:36:21,305 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:36:22,235 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:36:22,310 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:36:22,312 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:36:22,314 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:36:22,887 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:36:22,931 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:36:22,932 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:36:22,933 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:36:28,078 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:36:28,128 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:36:28,129 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:36:28,130 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:37:11,858 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:37:11,899 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:37:11,903 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:37:12,795 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:37:12,853 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:37:12,854 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:37:12,855 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:37:13,730 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:37:13,815 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:37:13,828 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:37:13,829 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:37:14,455 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:37:14,507 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:37:14,509 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:37:14,509 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:37:15,187 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:37:15,283 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:37:15,284 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:37:15,285 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:37:17,237 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:37:17,284 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:37:17,285 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:37:17,286 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:37:18,558 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:37:18,604 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:37:18,605 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:37:19,365 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:37:19,480 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:37:19,487 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:37:19,491 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:37:20,639 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:37:20,747 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:37:20,752 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:37:20,759 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:38:25,552 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:38:25,835 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:38:25,837 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:38:27,747 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:38:27,797 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:38:27,798 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:38:27,799 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:39:26,719 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:39:26,851 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:39:26,852 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:39:27,760 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:39:27,820 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:39:27,821 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:39:27,822 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:39:28,616 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:39:28,666 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:39:28,668 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:39:28,668 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:39:29,622 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:39:29,685 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:39:29,686 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:39:29,687 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:39:30,818 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:39:30,968 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:39:30,970 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:39:30,970 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:39:31,933 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:39:31,980 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:39:31,983 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:39:31,983 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:39:33,138 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:39:33,209 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:39:33,212 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:39:33,213 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:39:34,408 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:39:34,452 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:39:34,453 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:39:34,454 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:39:35,818 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:39:35,869 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:39:35,871 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:39:35,872 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:40:48,129 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:40:48,168 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:40:48,170 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:40:49,853 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:40:49,983 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:40:50,001 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:40:50,008 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:40:51,005 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:40:51,063 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:40:51,064 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:40:51,065 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:40:52,460 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:40:52,491 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:40:52,981 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:40:53,304 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:40:53,343 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:40:53,344 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:40:53,480 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:40:53,529 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:40:53,530 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:40:53,531 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:40:53,984 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:40:54,067 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:40:54,074 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:40:54,513 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:40:54,563 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:40:54,564 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:40:54,565 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:40:55,212 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:40:55,271 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:40:55,272 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:40:55,273 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:40:55,856 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:40:55,904 - __main__ - INFO - Datos exportados con éxito a JSON.
+2024-11-30 22:40:55,905 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:40:55,906 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:41:26,371 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:41:26,407 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 22:41:26,409 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 22:41:30,308 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:41:30,351 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:41:30,356 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 22:41:30,594 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 22:41:30,625 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 22:41:30,627 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:02:11,834 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:02:11,869 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 23:02:11,871 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 23:02:13,900 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:02:13,934 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:02:13,940 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:02:14,419 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:02:14,501 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:02:14,505 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:02:28,100 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:02:28,135 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:02:28,136 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:02:31,912 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:02:31,984 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:02:31,990 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:02:34,319 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:02:34,351 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:02:34,353 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:02:36,608 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:02:36,644 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:02:36,644 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:02:39,340 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:02:39,375 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:02:39,376 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:02:40,740 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:02:40,781 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:02:40,782 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:02:42,024 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:02:42,055 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:02:42,056 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:02:42,552 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:02:42,583 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:02:42,584 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:02:43,240 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:02:43,271 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:02:43,273 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:02:48,224 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:02:48,292 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:02:48,316 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:03:01,943 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:03:02,033 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:03:02,034 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:03:02,081 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:03:02,161 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:03:02,162 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:03:11,654 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:03:11,683 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:03:11,684 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:03:14,759 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:03:14,791 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:03:14,792 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:03:16,796 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:03:16,843 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:03:16,849 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:03:18,444 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:03:18,477 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:03:18,477 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:03:21,153 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:03:21,189 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:03:21,189 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:03:48,782 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:03:48,814 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:03:48,816 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:03:52,161 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:03:52,197 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:03:52,198 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:09:15,212 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:09:15,245 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 23:09:15,246 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 23:09:26,452 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:09:26,531 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:09:26,536 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:09:26,923 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:09:26,958 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:09:26,960 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:09:35,626 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:09:35,657 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:09:35,658 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:09:39,888 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:09:39,930 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:09:39,931 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:09:42,835 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:09:42,898 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 23:09:42,899 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 23:09:45,020 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:09:45,061 - __main__ - INFO - Intentando cargar la página: Formulario (módulo: Formulario_pag)
+2024-11-30 23:09:45,063 - __main__ - INFO - Mostrando página: Formulario
+2024-11-30 23:11:45,566 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:11:45,606 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:11:45,612 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:11:45,950 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:11:46,001 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:11:46,002 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:21:46,174 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:21:46,208 - __main__ - INFO - Intentando cargar la página: Formulario (módulo: Formulario_pag)
+2024-11-30 23:21:46,209 - __main__ - INFO - Mostrando página: Formulario
+2024-11-30 23:21:46,989 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:21:47,041 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:21:47,049 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:21:47,554 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:21:47,587 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:21:47,587 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:22:22,654 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:22:22,712 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:22:22,714 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:22:22,746 - __main__ - ERROR - Error inesperado al cargar la página Citas: local variable 'cliente_seleccionado' referenced before assignment
+Traceback (most recent call last):
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/main.py", line 84, in <module>
+    module.show()
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages/Citas_pag.py", line 18, in show
+    show_nueva_cita()
+  File "/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages/Citas_pag.py", line 255, in show_nueva_cita
+    if (cliente_seleccionado == "-- Seleccionar Cliente --" or
+UnboundLocalError: local variable 'cliente_seleccionado' referenced before assignment
+2024-11-30 23:24:28,258 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:24:28,294 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 23:24:28,297 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 23:24:29,926 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:24:29,960 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:24:29,965 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:24:30,410 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:24:30,447 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:24:30,447 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:26:10,494 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:26:10,533 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 23:26:10,534 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 23:26:12,854 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:26:12,891 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:26:12,892 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:26:13,316 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:26:13,356 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:26:13,357 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:32:25,097 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:32:25,119 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 23:32:25,120 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 23:32:26,550 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:32:26,575 - __main__ - INFO - Intentando cargar la página: Clientes (módulo: Clientes_pag)
+2024-11-30 23:32:26,701 - __main__ - ERROR - Error de importación al cargar la página Clientes: cannot import name 'Cliente' from 'clinica.services.gestion_clientes' (/home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/clinica/services/gestion_clientes.py)
+2024-11-30 23:32:28,584 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:32:28,609 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:32:28,610 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:32:28,877 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:32:28,900 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:32:28,900 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:32:39,651 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:32:39,932 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 23:32:39,935 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 23:32:44,463 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:32:44,488 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:32:44,737 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:32:45,154 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:32:45,180 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:32:45,180 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:44:16,455 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:44:16,491 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 23:44:16,492 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 23:44:18,298 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:44:18,324 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:44:18,325 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:44:24,330 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:44:24,355 - __main__ - INFO - Intentando cargar la página: Formulario (módulo: Formulario_pag)
+2024-11-30 23:44:24,357 - __main__ - INFO - Mostrando página: Formulario
+2024-11-30 23:44:25,093 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:44:25,120 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:44:25,121 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:44:54,183 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:44:54,379 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 23:44:54,381 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 23:44:56,305 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:44:56,329 - __main__ - INFO - Intentando cargar la página: Formulario (módulo: Formulario_pag)
+2024-11-30 23:44:56,331 - __main__ - INFO - Mostrando página: Formulario
+2024-11-30 23:44:56,937 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:44:56,961 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:44:57,197 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:46:10,438 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:46:10,458 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:46:10,459 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:49:14,016 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:49:14,205 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 23:49:14,207 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 23:49:17,963 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:49:17,986 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:49:18,259 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:49:18,633 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:49:18,662 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:49:18,662 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:54:47,520 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:54:47,559 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 23:54:47,560 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 23:54:49,736 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:54:49,763 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:54:49,764 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:54:50,087 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:54:50,114 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:54:50,115 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:58:57,633 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:58:57,664 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-11-30 23:58:57,666 - __main__ - INFO - Mostrando página: Inicio
+2024-11-30 23:58:58,352 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:58:58,373 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:58:58,378 - __main__ - INFO - Mostrando página: Citas
+2024-11-30 23:58:58,715 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-11-30 23:58:58,740 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-11-30 23:58:58,741 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:01:39,570 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:01:39,596 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-12-01 00:01:39,597 - __main__ - INFO - Mostrando página: Inicio
+2024-12-01 00:01:41,038 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:01:41,062 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:01:41,062 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:01:41,372 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:01:41,398 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:01:41,398 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:17,201 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:17,228 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-12-01 00:12:17,230 - __main__ - INFO - Mostrando página: Inicio
+2024-12-01 00:12:18,861 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:18,885 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:18,890 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:19,236 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:19,264 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:19,265 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:34,650 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:34,673 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:34,674 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:36,484 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:36,505 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:36,505 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:38,220 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:38,245 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:38,246 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:38,952 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:38,974 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:38,974 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:39,699 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:39,722 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:39,723 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:40,741 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:40,768 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:40,769 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:41,234 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:41,254 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:41,254 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:41,660 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:41,682 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:41,683 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:42,234 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:42,259 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:42,259 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:42,958 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:42,983 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:42,983 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:43,513 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:43,534 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:43,534 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:44,300 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:44,323 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:44,324 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:45,994 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:46,018 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:46,020 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:47,240 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:47,262 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:47,263 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:12:55,763 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:12:55,785 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:12:55,786 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:13:03,309 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:13:03,332 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:13:03,333 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:13:03,417 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:13:03,510 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:13:03,511 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:13:05,945 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:13:05,965 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:13:05,966 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:15:20,475 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:15:20,505 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-12-01 00:15:20,507 - __main__ - INFO - Mostrando página: Inicio
+2024-12-01 00:15:21,582 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:15:21,605 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:15:21,610 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:15:21,909 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:15:21,933 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:15:21,934 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:16:27,818 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:16:27,847 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-12-01 00:16:27,848 - __main__ - INFO - Mostrando página: Inicio
+2024-12-01 00:16:29,294 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:16:29,361 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:16:29,372 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:16:29,707 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:16:29,731 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:16:29,731 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:17:28,945 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:17:28,972 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-12-01 00:17:28,974 - __main__ - INFO - Mostrando página: Inicio
+2024-12-01 00:17:30,393 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:17:30,416 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:17:30,421 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:17:30,782 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:17:30,807 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:17:30,807 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:17:53,861 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:17:53,887 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-12-01 00:17:53,887 - __main__ - INFO - Mostrando página: Inicio
+2024-12-01 00:17:55,498 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:17:55,523 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:17:55,529 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:17:56,066 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:17:56,089 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:17:56,090 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:18:21,882 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:18:21,912 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-12-01 00:18:21,913 - __main__ - INFO - Mostrando página: Inicio
+2024-12-01 00:18:22,698 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:18:22,719 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:18:22,725 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:18:22,997 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:18:23,020 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:18:23,021 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:18:39,910 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:18:39,934 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-12-01 00:18:39,935 - __main__ - INFO - Mostrando página: Inicio
+2024-12-01 00:18:41,238 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:18:41,262 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:18:41,269 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:18:41,556 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:18:41,580 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:18:41,580 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:19:03,269 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:19:03,300 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-12-01 00:19:03,301 - __main__ - INFO - Mostrando página: Inicio
+2024-12-01 00:19:04,341 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:19:04,364 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:19:04,369 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:19:04,619 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:19:04,641 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:19:04,641 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:19:20,841 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:19:20,870 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-12-01 00:19:20,872 - __main__ - INFO - Mostrando página: Inicio
+2024-12-01 00:19:21,540 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:19:21,567 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:19:21,572 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:19:21,937 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:19:21,966 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:19:21,967 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:19:38,137 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:19:38,168 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-12-01 00:19:38,169 - __main__ - INFO - Mostrando página: Inicio
+2024-12-01 00:19:39,089 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:19:39,114 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:19:39,119 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:19:39,430 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:19:39,455 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:19:39,456 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:19:50,352 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:19:50,379 - __main__ - INFO - Intentando cargar la página: Inicio (módulo: Inicio)
+2024-12-01 00:19:50,380 - __main__ - INFO - Mostrando página: Inicio
+2024-12-01 00:19:51,627 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:19:51,652 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:19:51,657 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:19:51,992 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:19:52,019 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:19:52,020 - __main__ - INFO - Mostrando página: Citas
+2024-12-01 00:21:17,900 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-01 00:21:17,928 - __main__ - INFO - Intentando cargar la página: Citas (módulo: Citas_pag)
+2024-12-01 00:21:17,929 - __main__ - INFO - Mostrando página: Citas

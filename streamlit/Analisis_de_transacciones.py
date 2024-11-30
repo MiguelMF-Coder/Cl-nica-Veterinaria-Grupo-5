@@ -9,7 +9,7 @@ placeholder = st.empty()
 with placeholder:
     #from PIL import Image
     #image = Image.open('mired.png')
-    #placeholder.image(image, caption='MiRed semantic engine',use_column_width = 'always') 
+    #placeholder.image(image, caption='MiRed semantic engine',use_container_width = 'always') 
     for seconds in range(5):
         placeholder.write(f"⏳ {seconds} Cargando sistema")
         time.sleep(1)

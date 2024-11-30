@@ -3,7 +3,7 @@ import streamlit as st
 def show():
         
     # Logo e imagen de bienvenida
-    st.image("streamlit/logo.jpg", use_column_width=True)
+    st.image("streamlit/logo.jpg", use_container_width=True)
     st.title("Bienvenidos a la Clínica Veterinaria UFVVet 🐾")
     st.write(
         """

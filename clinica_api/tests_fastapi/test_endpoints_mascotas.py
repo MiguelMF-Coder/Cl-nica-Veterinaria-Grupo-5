@@ -3,7 +3,7 @@ import httpx
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from httpx import AsyncClient, ASGITransport
-from clinica_api.server import app  
+from server import app  
 from clinica.dbconfig import Base, get_db
 from clinica_api.schemas import MascotaCreate, MascotaUpdate
 import os

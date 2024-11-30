@@ -1,217 +1,173 @@
-#database.py
-
-import json
+import os
+import logging
 from sqlalchemy import inspect
-from sqlalchemy.exc import OperationalError
 from clinica.dbconfig import engine, Base, SessionLocal
 from clinica.models import *
-from pathlib import Path
 from datetime import datetime
-import os
+from clinica.services.gestion_clientes import GestionClientes
+from clinica.services.gestion_de_citas import GestionCitas
+from clinica.services.gestion_mascotas import GestionMascotas
+from clinica.services.gestion_tratamiento import GestionTratamientos
+import json
 
-# Ruta a la carpeta 'data'
-RUTA_BASE = Path(__file__).resolve().parent
-RUTA_DATA = RUTA_BASE / 'data'
+# Configurar el logger
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
-#Ruta a la carpeta bdd
-DATABASE_PATH = os.path.join(RUTA_BASE, "clinica_db.sqlite")
+# Crear un manejador de consola y establecer el nivel
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.INFO)
 
+# Formateador
+formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(formatter)
+
+# Añadir el manejador al logger
+logger.addHandler(console_handler)
+
+# Ruta base del proyecto (raíz del proyecto)
+RUTA_BASE = os.path.dirname(os.path.abspath(__file__))  # Ruta de 'clinica'
+PROYECTO_BASE = os.path.dirname(RUTA_BASE)  # Ruta de la raíz del proyecto
+
+# Ruta a la carpeta 'data' para los JSON
+RUTA_DATA = os.path.join(RUTA_BASE, "data")
+
+# Ruta para la base de datos en la raíz del proyecto
+DATABASE_PATH = os.path.join(PROYECTO_BASE, "clinica_db.sqlite")
+
+# Verificar las rutas
+print(f"Base de datos: {DATABASE_PATH}")
+print(f"Carpeta de datos: {RUTA_DATA}")
+
+# Asegurarnos de que el directorio de la base de datos exista
+if not os.path.exists(PROYECTO_BASE):
+    print("Error: El directorio raíz del proyecto no existe.")
+else:
+    print("El directorio raíz del proyecto existe.")
+
+# Crear tablas si no existen
 def create_tables():
     try:
-        # Crear todas las tablas
         Base.metadata.create_all(bind=engine)
-        
-        # Inspeccionar las tablas creadas
         inspector = inspect(engine)
         tables = inspector.get_table_names()
-        
         if tables:
-            print("Tablas en la base de datos:", tables)
-            print("Tablas creadas exitosamente.")
+            print("Tablas creadas exitosamente:", tables)
         else:
             print("No se pudieron crear las tablas. Verifica la configuración.")
-    except OperationalError as e:
-        print("Error al conectar o crear la base de datos:", e)
     except Exception as e:
-        print("Error inesperado:", e)
+        print(f"Error al crear las tablas: {e}")
 
-# Funciones para cargar datos desde archivos JSON
-
-def cargar_clientes_desde_json(ruta_json):
+# Función para cargar JSON
+def cargar_json(ruta_json):
     if not os.path.exists(ruta_json):
         print(f"Error: el archivo {ruta_json} no existe.")
-        return
-    
-    session = SessionLocal()
+        return []
     try:
         with open(ruta_json, 'r', encoding='utf-8') as archivo:
-            datos = json.load(archivo)
-            for item in datos:
-                try:
-                    cliente_existente = session.query(Cliente).filter_by(id_cliente=item['id_cliente']).first()
-                    if cliente_existente:
-                        for key, value in item.items():
-                            setattr(cliente_existente, key, value)
-                        print(f"Cliente con id {item['id_cliente']} actualizado.")
-                    else:
-                        nuevo_cliente = Cliente(**item)
-                        session.add(nuevo_cliente)
-                        print(f"Cliente con id {item['id_cliente']} añadido.")
-                except Exception as e:
-                    print(f"Error al procesar cliente {item['id_cliente']}: {e}")
-        
-        session.commit()
-        print("Clientes cargados y actualizados exitosamente.")
-    except json.JSONDecodeError:
-        print("Error: El archivo JSON no está bien formado.")
+            return json.load(archivo)
+    except json.JSONDecodeError as e:
+        print(f"Error al decodificar JSON en {ruta_json}: {e}")
+        return []
+
+# Función genérica para cargar datos
+def cargar_datos(session, modelo, datos, clave_primaria):
+    for item in datos:
+        try:
+            # Manejo específico para fechas
+            if modelo == Cita and "fecha" in item:
+                item["fecha"] = datetime.strptime(item["fecha"], "%Y-%m-%d %H:%M:%S")
+            
+            filtro = {clave_primaria: item[clave_primaria]}
+            registro_existente = session.query(modelo).filter_by(**filtro).first()
+            if registro_existente:
+                for key, value in item.items():
+                    setattr(registro_existente, key, value)
+                print(f"Registro actualizado: {item[clave_primaria]}")
+            else:
+                nuevo_registro = modelo(**item)
+                session.add(nuevo_registro)
+                print(f"Registro añadido: {item[clave_primaria]}")
+        except Exception as e:
+            print(f"Error al procesar el registro {item}: {e}")
+    session.commit()
+
+
+# Función para cargar todos los datos
+def cargar_todos_los_datos():
+    session = SessionLocal()
+    try:
+        for modelo, archivo, clave in [
+            (Cliente, "datos_clientes.json", "id_cliente"),
+            (Mascota, "datos_mascotas.json", "id_mascota"),
+            (Tratamiento, "datos_tratamientos.json", "id_tratamiento"),
+            (Cita, "datos_citas.json", "id_cita"),
+        ]:
+            datos = cargar_json(os.path.join(RUTA_DATA, archivo))
+            cargar_datos(session, modelo, datos, clave)
     except Exception as e:
-        print(f"Error inesperado al cargar clientes: {e}")
-        session.rollback()
+        print(f"Error inesperado al cargar datos: {e}")
     finally:
         session.close()
 
-def cargar_mascotas_desde_json(ruta_json):
-    if not os.path.exists(ruta_json):
-        print(f"Error: el archivo {ruta_json} no existe.")
-        return
-    
-    session = SessionLocal()
-    try:
-        with open(ruta_json, 'r', encoding='utf-8') as archivo:
-            datos = json.load(archivo)
-            for item in datos:
-                try:
-                    mascota_existente = session.query(Mascota).filter_by(id_mascota=item['id_mascota']).first()
-                    if mascota_existente:
-                        for key, value in item.items():
-                            setattr(mascota_existente, key, value)
-                        print(f"Mascota con id {item['id_mascota']} actualizada.")
-                    else:
-                        nueva_mascota = Mascota(**item)
-                        session.add(nueva_mascota)
-                        print(f"Mascota con id {item['id_mascota']} añadida.")
-                except Exception as e:
-                    print(f"Error al procesar mascota {item['id_mascota']}: {e}")
-        
-        session.commit()
-        print("Mascotas cargadas y actualizadas exitosamente.")
-    except json.JSONDecodeError:
-        print("Error: El archivo JSON no está bien formado.")
-    except Exception as e:
-        print(f"Error inesperado al cargar mascotas: {e}")
-        session.rollback()
-    finally:
-        session.close()
 
-def cargar_citas_desde_json(ruta_json):
-    if not os.path.exists(ruta_json):
-        print(f"Error: el archivo {ruta_json} no existe.")
-        return
-    
-    session = SessionLocal()
-    try:
-        with open(ruta_json, 'r', encoding='utf-8') as archivo:
-            datos = json.load(archivo)
-            for item in datos:
-                try:
-                    if 'fecha' in item:
-                        item['fecha'] = datetime.strptime(item['fecha'], "%Y-%m-%d %H:%M:%S")
-                    cita_existente = session.query(Cita).filter_by(id_cita=item['id_cita']).first()
-                    if cita_existente:
-                        for key, value in item.items():
-                            setattr(cita_existente, key, value)
-                        print(f"Cita con id {item['id_cita']} actualizada.")
-                    else:
-                        nueva_cita = Cita(**item)
-                        session.add(nueva_cita)
-                        print(f"Cita con id {item['id_cita']} añadida.")
-                except Exception as e:
-                    print(f"Error al procesar cita {item['id_cita']}: {e}")
-        
-        session.commit()
-        print("Citas cargadas y actualizadas exitosamente.")
-    except json.JSONDecodeError:
-        print("Error: El archivo JSON no está bien formado.")
-    except Exception as e:
-        print(f"Error inesperado al cargar citas: {e}")
-        session.rollback()
-    finally:
-        session.close()
+import logging
 
-def cargar_tratamientos_desde_json(ruta_json):
-    if not os.path.exists(ruta_json):
-        print(f"Error: el archivo {ruta_json} no existe.")
-        return
-    
-    session = SessionLocal()
-    try:
-        with open(ruta_json, 'r', encoding='utf-8') as archivo:
-            datos = json.load(archivo)
-            for item in datos:
-                try:
-                    tratamiento_existente = session.query(Tratamiento).filter_by(id_tratamiento=item['id_tratamiento']).first()
-                    if tratamiento_existente:
-                        for key, value in item.items():
-                            setattr(tratamiento_existente, key, value)
-                        print(f"Tratamiento con id {item['id_tratamiento']} actualizado.")
-                    else:
-                        nuevo_tratamiento = Tratamiento(**item)
-                        session.add(nuevo_tratamiento)
-                        print(f"Tratamiento con id {item['id_tratamiento']} añadido.")
-                except Exception as e:
-                    print(f"Error al procesar tratamiento {item['id_tratamiento']}: {e}")
-        
-        session.commit()
-        print("Tratamientos cargados y actualizados exitosamente.")
-    except json.JSONDecodeError:
-        print("Error: El archivo JSON no está bien formado.")
-    except Exception as e:
-        print(f"Error inesperado al cargar tratamientos: {e}")
-        session.rollback()
-    finally:
-        session.close()
+# Configurar el logger
+logging.basicConfig(
+    filename="exportacion_datos.log",  # Archivo donde se almacenarán los logs
+    level=logging.INFO,                # Nivel de registro: INFO para registrar eventos generales
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
-def cargar_productos_desde_json(ruta_json):
-    if not os.path.exists(ruta_json):
-        print(f"Error: el archivo {ruta_json} no existe.")
-        return
-    
-    session = SessionLocal()
+def exportar_todos_json():
+    """Exporta todos los datos a archivos JSON individuales."""
     try:
-        with open(ruta_json, 'r', encoding='utf-8') as archivo:
-            datos = json.load(archivo)
-            for item in datos:
-                try:
-                    producto_existente = session.query(Producto).filter_by(id_producto=item['id_producto']).first()
-                    if producto_existente:
-                        for key, value in item.items():
-                            setattr(producto_existente, key, value)
-                        print(f"Producto con id {item['id_producto']} actualizado.")
-                    else:
-                        nuevo_producto = Producto(**item)
-                        session.add(nuevo_producto)
-                        print(f"Producto con id {item['id_producto']} añadido.")
-                except Exception as e:
-                    print(f"Error al procesar producto {item['id_producto']}: {e}")
-        
-        session.commit()
-        print("Productos cargados y actualizados exitosamente.")
-    except json.JSONDecodeError:
-        print("Error: El archivo JSON no está bien formado.")
+        # Crear una sesión de base de datos
+        db_session = SessionLocal()
+
+        # Instanciar las clases 
+        gestion_clientes = GestionClientes(db_session)
+        gestion_mascotas = GestionMascotas(db_session)
+        gestion_citas = GestionCitas(db_session)
+        gestion_tratamientos = GestionTratamientos(db_session)
+
+        # Llamar a los métodos de exportación de cada clase
+        logger.info("Iniciando exportación de clientes...")
+        gestion_clientes.exportar_clientes_a_json(os.path.join(RUTA_DATA, "datos_clientes.json"))
+        logger.info("Exportación de clientes completada exitosamente.")
+
+        logger.info("Iniciando exportación de mascotas...")
+        gestion_mascotas.exportar_mascotas_a_json(os.path.join(RUTA_DATA, "datos_mascotas.json"))
+        logger.info("Exportación de mascotas completada exitosamente.")
+
+        logger.info("Iniciando exportación de citas...")
+        gestion_citas.exportar_citas_a_json(os.path.join(RUTA_DATA, "datos_citas.json"))
+        logger.info("Exportación de citas completada exitosamente.")
+
+        logger.info("Iniciando exportación de tratamientos...")
+        gestion_tratamientos.exportar_tratamientos_a_json(os.path.join(RUTA_DATA, "datos_tratamientos.json"))
+        logger.info("Exportación de tratamientos completada exitosamente.")
+
+        # Cerrar la sesión de base de datos
+        db_session.close()
+
+        logger.info("Todas las exportaciones fueron completadas con éxito.")
+        return True
+
     except Exception as e:
-        print(f"Error inesperado al cargar productos: {e}")
-        session.rollback()
-    finally:
-        session.close()
+        logger.error(f"Error al exportar los datos: {str(e)}", exc_info=True)
+        return False
 
 
 
 if __name__ == "__main__":
+    # Verificar si la base de datos existe
     if not os.path.exists(DATABASE_PATH):
-        create_tables()  # Crear las tablas antes de cargar los datos
+        print("Base de datos no encontrada. Creando tablas...")
+        create_tables()
+    else:
+        print("Base de datos encontrada. Conectando...")
 
-cargar_clientes_desde_json(RUTA_DATA / 'datos_clientes.json')
-cargar_mascotas_desde_json(RUTA_DATA / 'datos_mascotas.json')
-cargar_tratamientos_desde_json(RUTA_DATA / 'datos_tratamientos.json')
-cargar_productos_desde_json(RUTA_DATA / 'datos_productos.json')
-cargar_citas_desde_json(RUTA_DATA / 'datos_citas.json')
+    # Cargar datos
+    cargar_todos_los_datos()

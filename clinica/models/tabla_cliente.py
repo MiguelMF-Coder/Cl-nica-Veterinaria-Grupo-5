@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, ForeignKey
 from sqlalchemy.orm import relationship
 from clinica.dbconfig import Base
 
@@ -10,7 +10,7 @@ class Cliente(Base):
     edad = Column(Integer)
     dni = Column(String)
     direccion = Column(String)
-    telefono = Column(Integer)
+    telefono = Column(String)
 
     # Relaciones
     mascotas = relationship("Mascota", back_populates="cliente")
@@ -18,12 +18,18 @@ class Cliente(Base):
     tratamientos = relationship("Tratamiento", back_populates="cliente")
     productos = relationship("Producto", back_populates="cliente")
 
+    @property
+    def telefono_str(self):
+        """Asegura que el teléfono siempre se devuelva como string."""
+        return str(self.telefono) if self.telefono is not None else None
+
     def to_dict(self):
+        """Asegura que el teléfono se serialice como string."""
         return {
             'id_cliente': self.id_cliente,
             'nombre_cliente': self.nombre_cliente,
             'edad': self.edad,
             'dni': self.dni,
             'direccion': self.direccion,
-            'telefono': self.telefono
+            'telefono': str(self.telefono) if self.telefono is not None else None
         }

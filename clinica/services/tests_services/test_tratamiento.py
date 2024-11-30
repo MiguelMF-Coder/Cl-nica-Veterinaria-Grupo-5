@@ -155,7 +155,7 @@ class TestGestionTratamientos(unittest.TestCase):
 
     def test_obtener_datos_factura_exitoso(self):
         # Mockea los datos para tratamiento, cita, cliente y mascota
-        tratamiento = Tratamiento(id_tratamiento=1, nombre_tratamiento="Vacunación", estado="Completado")
+        tratamiento = Tratamiento(id_tratamiento=1, nombre_tratamiento="Vacunación", estado="Finalizada")
         cita = Cita(id_cita=1, id_tratamiento=1, id_cliente=1, id_mascota=1, descripcion="Cita de vacunación")
         cliente = Cliente(id_cliente=1, nombre_cliente="Juan Perez", dni="12345678A")
         mascota = Mascota(id_mascota=1, nombre_mascota="Fido", raza="Labrador")
@@ -205,24 +205,24 @@ class TestGestionTratamientos(unittest.TestCase):
         # Verifica que se devuelve el error correspondiente
         self.assertEqual(resultado, {"error": "Cliente o mascota no encontrados"})
 
-    def test_validar_tratamiento_completado_true(self):
-        # Crea un tratamiento marcado como completado
-        tratamiento = Tratamiento(id_tratamiento=1, nombre_tratamiento="Vacunación", estado="Completado")
-        resultado = self.gestion_tratamientos.validar_tratamiento_completado(tratamiento)
+    def test_validar_tratamiento_Finalizada_true(self):
+        # Crea un tratamiento marcado como Finalizada
+        tratamiento = Tratamiento(id_tratamiento=1, nombre_tratamiento="Vacunación", estado="Finalizada")
+        resultado = self.gestion_tratamientos.validar_tratamiento_Finalizada(tratamiento)
         self.assertTrue(resultado)
 
-    def test_validar_tratamiento_completado_false(self):
-        # Crea un tratamiento no completado
+    def test_validar_tratamiento_Finalizada_false(self):
+        # Crea un tratamiento no Finalizada
         tratamiento = Tratamiento(id_tratamiento=1, nombre_tratamiento="Vacunación", estado="Pendiente")
-        resultado = self.gestion_tratamientos.validar_tratamiento_completado(tratamiento)
+        resultado = self.gestion_tratamientos.validar_tratamiento_Finalizada(tratamiento)
         self.assertFalse(resultado)
 
-    def test_validar_tratamiento_completado_sin_estado(self):
+    def test_validar_tratamiento_Finalizada_sin_estado(self):
         # Crea un tratamiento sin el atributo `estado`
         tratamiento = Tratamiento(id_tratamiento=1, nombre_tratamiento="Vacunación")
         tratamiento.estado = None  # Asigna None en lugar de eliminar el atributo
 
-        resultado = self.gestion_tratamientos.validar_tratamiento_completado(tratamiento)
+        resultado = self.gestion_tratamientos.validar_tratamiento_Finalizada(tratamiento)
         self.assertEqual(resultado, {"error": "El modelo Tratamiento no tiene el atributo 'estado'"})
 
 if __name__ == '__main__':

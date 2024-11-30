@@ -4,10 +4,7 @@ import sys
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 from sqlalchemy.exc import OperationalError
-from sqlalchemy.orm import Session
 from typing import Generator
-from sqlalchemy.orm import Session
-
 
 # Configurar logging para SQLAlchemy
 logging.basicConfig(
@@ -19,8 +16,11 @@ logging.basicConfig(
 # Configurar el logger específico de SQLAlchemy
 logging.getLogger('sqlalchemy.engine').setLevel(logging.DEBUG)
 
-# Configuración de la base de datos
-DATABASE_PATH = os.path.abspath("clinica_db.sqlite")
+# Ruta a la carpeta raíz del proyecto
+RUTA_BASE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Ruta al archivo de la base de datos en la raíz del proyecto
+DATABASE_PATH = os.path.join(RUTA_BASE, "clinica_db.sqlite")
 DATABASE_URL = f"sqlite:///{DATABASE_PATH}"
 
 # Imprimir la ruta completa para verificar
@@ -40,7 +40,7 @@ SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 # Función get_db para obtener la sesión de la base de datos
-def get_db() -> Generator[Session, None, None]:
+def get_db() -> Generator:
     db = SessionLocal()
     try:
         yield db

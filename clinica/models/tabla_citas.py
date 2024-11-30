@@ -8,6 +8,8 @@ class Cita(Base):
     id_cita = Column(Integer, primary_key=True, index=True)
     fecha = Column(DateTime)
     descripcion = Column(String)
+    metodo_pago = Column(String, nullable=True)
+    estado = Column(String)
     id_mascota = Column(Integer, ForeignKey("mascota.id_mascota"))
     id_cliente = Column(Integer, ForeignKey("cliente.id_cliente"))
     id_tratamiento = Column(Integer, ForeignKey("tratamiento.id_tratamiento"))
@@ -22,6 +24,8 @@ class Cita(Base):
             'id_cita': self.id_cita,
             'fecha': self.fecha.isoformat() if self.fecha else None,
             'descripcion': self.descripcion,
+            'metodo_pago': self.metodo_pago,
+            'estado' : self.estado,
             'id_mascota': self.id_mascota,
             'id_cliente': self.id_cliente,
             'id_tratamiento': self.id_tratamiento

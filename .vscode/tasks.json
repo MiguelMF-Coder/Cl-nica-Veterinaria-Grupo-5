@@ -1,0 +1,23 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Activar entorno virtual",
+            "type": "shell",
+            "command": "source env/bin/activate", // Cambia a "env\\Scripts\\activate" en Windows nativo
+            "problemMatcher": []
+        },
+        {
+            "label": "Desactivar entorno virtual",
+            "type": "shell",
+            "command": "deactivate",
+            "problemMatcher": []
+        },
+        {
+            "label": "Correr servidor",
+            "type": "shell",
+            "command": "python manage.py runserver",
+            "problemMatcher": []
+        }
+    ]
+}

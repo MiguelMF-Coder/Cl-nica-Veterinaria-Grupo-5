@@ -116,7 +116,22 @@ class GestionTratamientos:
             self.db_session.rollback()
             logging.critical("Error inesperado al modificar el tratamiento: %s", e)
             return f"Ocurrió un error inesperado al modificar el tratamiento: {e}"
-        
+            
+    def listar_tratamientos(self):
+        """Devuelve una lista de todos los tratamientos en la base de datos."""
+        try:
+            tratamientos = self.db_session.query(Tratamiento).all()
+            logging.info("Listado de tratamientos obtenido con éxito.")
+            return tratamientos
+
+        except SQLAlchemyError as sae:
+            logging.error("Error de SQLAlchemy al listar los tratamientos: %s", sae)
+            return []
+
+        except Exception as e:
+            logging.critical("Error inesperado al listar los tratamientos: %s", e)
+            return []
+
     def obtener_datos_factura(self, id_tratamiento: int):
         """
         Recupera la información completa para generar la factura de un tratamiento.
@@ -159,10 +174,10 @@ class GestionTratamientos:
             logging.critical(f"Error inesperado al obtener datos de factura: {e}")
             return {"error": "Ocurrió un error inesperado al obtener los datos de la factura"}
     
-    def validar_tratamiento_completado(self, tratamiento: Tratamiento):
+    def validar_tratamiento_Finalizada(self, tratamiento: Tratamiento):
         """
-        Valida si el tratamiento está marcado como completado.
-        Devuelve True si el tratamiento está completado, de lo contrario devuelve False.
+        Valida si el tratamiento está marcado como Finalizada.
+        Devuelve True si el tratamiento está Finalizada, de lo contrario devuelve False.
         """
         try:
             # Verifica si el atributo `estado` existe y tiene un valor
@@ -170,11 +185,11 @@ class GestionTratamientos:
                 logging.error("El modelo Tratamiento no tiene el atributo 'estado' o está configurado en None.")
                 return {"error": "El modelo Tratamiento no tiene el atributo 'estado'"}
             
-            # Aquí se asume que el tratamiento tiene un campo 'estado' que indica si está completado.
-            if tratamiento.estado == "Completado":
-                logging.info(f"Tratamiento con ID {tratamiento.id_tratamiento} está completado.")
+            # Aquí se asume que el tratamiento tiene un campo 'estado' que indica si está Finalizada.
+            if tratamiento.estado == "Finalizada":
+                logging.info(f"Tratamiento con ID {tratamiento.id_tratamiento} está Finalizada.")
                 return True
-            logging.warning(f"Tratamiento con ID {tratamiento.id_tratamiento} no está completado.")
+            logging.warning(f"Tratamiento con ID {tratamiento.id_tratamiento} no está Finalizada.")
             return False
 
         except AttributeError as e:

@@ -1,42 +1,42 @@
 [
     {
         "id_tratamiento": 1,
-        "nombre_tratamiento": "Desparasitación",
-        "descripcion": "Tratamiento antiparasitario",
-        "precio": 50,
-        "estado": "Completado",
+        "nombre_tratamiento": "Vacunación Anual",
+        "descripcion": "Vacunas de refuerzo anuales incluyendo rabia y polivalente",
+        "precio": 75,
+        "estado": "Activo",
         "id_cliente": 1
     },
     {
         "id_tratamiento": 2,
-        "nombre_tratamiento": "Vacuna anual",
-        "descripcion": "Vacuna contra la rabia",
-        "precio": 75,
-        "estado": "Completado",
+        "nombre_tratamiento": "Control Displasia",
+        "descripcion": "Tratamiento y seguimiento de displasia de cadera",
+        "precio": 150,
+        "estado": "Activo",
         "id_cliente": 2
     },
     {
         "id_tratamiento": 3,
-        "nombre_tratamiento": "Terapia para artritis",
-        "descripcion": "Tratamiento para dolor en articulaciones",
-        "precio": 120,
-        "estado": "En proceso",
-        "id_cliente": 3
-    },
-    {
-        "id_tratamiento": 4,
-        "nombre_tratamiento": "Chequeo de rutina",
-        "descripcion": "Revisión general de salud",
-        "precio": 40,
-        "estado": "Completado",
+        "nombre_tratamiento": "Limpieza Dental",
+        "descripcion": "Limpieza dental profunda bajo anestesia",
+        "precio": 200,
+        "estado": "Activo",
         "id_cliente": 4
     },
     {
+        "id_tratamiento": 4,
+        "nombre_tratamiento": "Control Alergias",
+        "descripcion": "Tratamiento y control de alergias alimentarias",
+        "precio": 90,
+        "estado": "Activo",
+        "id_cliente": 1
+    },
+    {
         "id_tratamiento": 5,
-        "nombre_tratamiento": "Tratamiento ocular",
-        "descripcion": "Tratamiento para infección en los ojos",
-        "precio": 60,
-        "estado": "En proceso",
-        "id_cliente": 5
+        "nombre_tratamiento": "Revisión General",
+        "descripcion": "Chequeo completo de salud y bienestar",
+        "precio": 50,
+        "estado": "Activo",
+        "id_cliente": 3
     }
 ]

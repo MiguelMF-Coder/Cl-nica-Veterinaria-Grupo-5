@@ -36,38 +36,121 @@ class GestionClientes:
 
 
     def registrar_cliente(self, cliente_data):
+        """
+        Registra un nuevo cliente en la base de datos con validaciones mejoradas.
+        
+        Args:
+            cliente_data (dict): Diccionario con los datos del cliente a registrar
+            
+        Returns:
+            ClienteModel o dict: Retorna el modelo del cliente si el registro es exitoso,
+                            o un diccionario con mensaje de error si falla
+        """
         try:
-            # Verificar cliente duplicado
+            # Aseguramos que el teléfono sea string antes de cualquier operación
+            # Esto evita problemas de tipo más adelante
+            if 'telefono' in cliente_data:
+                cliente_data['telefono'] = str(cliente_data['telefono'])
+
+            # Validaciones preliminares
+            if not self._validar_formato_dni(cliente_data.get('dni', '')):
+                return {"error": "El formato del DNI no es válido"}
+                
+            if not self._validar_formato_telefono(cliente_data['telefono']):
+                return {"error": "El formato del teléfono no es válido"}
+
+            # Verificar cliente duplicado con el teléfono ya convertido a string
             cliente_existente = self.db_session.query(ClienteModel).filter(
                 (ClienteModel.dni == cliente_data['dni']) |
                 (ClienteModel.telefono == cliente_data['telefono'])
             ).first()
             
             if cliente_existente:
-                mensaje_error = f"Cliente con DNI '{cliente_data['dni']}' o Teléfono '{cliente_data['telefono']}' ya registrado."
+                mensaje_error = (
+                    f"Cliente con DNI '{cliente_data['dni']}' o "
+                    f"Teléfono '{cliente_data['telefono']}' ya registrado."
+                )
                 logging.warning(mensaje_error)
                 return {"error": mensaje_error}
 
+            # Crear y guardar el nuevo cliente
             nuevo_cliente = ClienteModel(**cliente_data)
             self.db_session.add(nuevo_cliente)
             self.db_session.commit()
+            
+            # Refrescar para asegurar que tenemos todos los datos actualizados
+            self.db_session.refresh(nuevo_cliente)
+            
+            # Log de éxito
+            logging.info(
+                f"Cliente registrado exitosamente - DNI: {cliente_data['dni']}, "
+                f"Teléfono: {cliente_data['telefono']}"
+            )
+            
             return nuevo_cliente
         
         except IntegrityError as ie:
             self.db_session.rollback()
             mensaje_error = "Error: No se pudo registrar el cliente debido a un problema de integridad."
-            logging.error(mensaje_error)
+            logging.error(f"{mensaje_error} Detalle: {str(ie)}")
             return {"error": mensaje_error}
+            
         except SQLAlchemyError as sae:
             self.db_session.rollback()
-            mensaje_error = f"Error: Ocurrió un problema con la base de datos: {sae}"
+            mensaje_error = f"Error: Ocurrió un problema con la base de datos: {str(sae)}"
             logging.error(mensaje_error)
             return {"error": mensaje_error}
+            
         except Exception as e:
             self.db_session.rollback()
-            mensaje_error = f"Ocurrió un error inesperado al registrar el cliente: {e}"
+            mensaje_error = f"Ocurrió un error inesperado al registrar el cliente: {str(e)}"
             logging.critical(mensaje_error)
             return {"error": mensaje_error}
+
+    def _validar_formato_dni(self, dni: str) -> bool:
+        """
+        Valida que el formato del DNI sea correcto.
+        
+        Args:
+            dni (str): DNI a validar
+            
+        Returns:
+            bool: True si el formato es válido, False en caso contrario
+        """
+        if not dni:
+            return False
+        
+        # El DNI debe tener 8 números seguidos de una letra
+        if len(dni) != 9:
+            return False
+            
+        numeros = dni[:-1]
+        letra = dni[-1]
+        
+        return numeros.isdigit() and letra.isalpha()
+
+    def _validar_formato_telefono(self, telefono: str) -> bool:
+        """
+        Valida que el formato del teléfono sea correcto.
+        
+        Args:
+            telefono (str): Teléfono a validar
+            
+        Returns:
+            bool: True si el formato es válido, False en caso contrario
+        """
+        if not telefono:
+            return False
+            
+        # Convertir a string si no lo es
+        telefono = str(telefono)
+        
+        # Debe tener 9 dígitos y empezar por 6, 7 o 9
+        return (
+            len(telefono) == 9 and
+            telefono.isdigit() and
+            telefono[0] in ('6', '7', '9')
+        )
 
 
         
@@ -195,18 +278,16 @@ class GestionClientes:
             logging.critical("Error inesperado al buscar el cliente por nombre: %s", e)
             return None
 
-        
+            
     def listar_clientes(self):
         """Devuelve una lista de todos los clientes en la base de datos."""
         try:
             clientes = self.db_session.query(ClienteModel).all()
             logging.info("Listado de clientes obtenido con éxito.")
             return clientes
-
         except SQLAlchemyError as sae:
             logging.error("Error de SQLAlchemy al listar los clientes: %s", sae)
             return []
-
         except Exception as e:
             logging.critical("Error inesperado al listar los clientes: %s", e)
             return []

@@ -48,7 +48,6 @@ except Exception as e:
 pages = {
     "Inicio": "Inicio",
     "Dashboard": "Dashboard_pag",
-    "Formulario": "Formulario_pag",
     "Citas": "Citas_pag",
     "Clientes": "Clientes_pag",
     "Tratamientos": "Tratamientos_pag",

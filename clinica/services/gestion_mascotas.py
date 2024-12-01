@@ -140,6 +140,18 @@ class GestionMascotas(GestionClientes):
             logging.critical("Error inesperado al listar las mascotas: %s", e)
             return []
 
+    def listar_mascotas_por_cliente(self, id_cliente):
+        """Devuelve una lista de mascotas pertenecientes a un cliente específico."""
+        try:
+            mascotas = self.db_session.query(MascotaModel).filter_by(id_cliente=id_cliente).all()
+            return mascotas
+        except SQLAlchemyError as sae:
+            logging.error("Error de SQLAlchemy al listar las mascotas por cliente: %s", sae)
+            return []
+        except Exception as e:
+            logging.critical("Error inesperado al listar las mascotas por cliente: %s", e)
+            return []
+            
     def buscar_mascota_por_nombre(self, nombre_mascota):
         """Busca mascotas por nombre y muestra el nombre del cliente asociado si hay múltiples coincidencias."""
         try:

@@ -1,12 +1,17 @@
 import streamlit as st
 from clinica.services.gestion_tratamiento import GestionTratamientos, Tratamiento
+from clinica.dbconfig import get_db
+from sqlalchemy.orm import Session
 
 def show():
     # Título de la página
     st.title("Gestión de Tratamientos")
 
+    # Get the database session
+    db: Session = next(get_db())
+
     # Instancia de la gestión de tratamientos
-    gestion_tratamientos = GestionTratamientos()
+    gestion_tratamientos = GestionTratamientos(db)
 
     # Formulario para registrar un nuevo tratamiento
     st.header("Registrar Nuevo Tratamiento")
@@ -32,10 +37,9 @@ def show():
     # Visualización de tratamientos registrados
     st.header("Tratamientos Registrados")
     if st.button("Ver Tratamientos"):
-        tratamientos = gestion_tratamientos.obtener_tratamientos()  # Supongo que tienes esta función
+        tratamientos = gestion_tratamientos.listar_tratamientos()  # Supongo que tienes esta función
         if tratamientos:
             for tratamiento in tratamientos:
-                st.write(f"Nombre: {tratamiento.nombre}, Precio: {tratamiento.precio}€, Descripción: {tratamiento.descripcion}")
+                st.write(f"Nombre: {tratamiento.nombre_tratamiento}, Precio: {tratamiento.precio}€, Descripción: {tratamiento.descripcion}")
         else:
             st.info("No hay tratamientos registrados.")
-    pass

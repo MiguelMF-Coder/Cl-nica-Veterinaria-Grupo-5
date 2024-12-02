@@ -1,7 +1,8 @@
-# Usa una imagen base de Python para mayor flexibilidad
+# Usa una imagen base de Python 3.10-slim para mayor flexibilidad y menor tamaño
 FROM python:3.10-slim
 
-RUN apt-get update && apt-get install -y \
+# Actualiza y instala las dependencias necesarias del sistema
+RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc \
     g++ \
     libjpeg-dev \
@@ -19,26 +20,26 @@ RUN apt-get update && apt-get install -y \
     libatlas-base-dev \
     libssl-dev \
     libffi-dev \
-    && apt-get clean
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Establece una variable de entorno para evitar crear archivos .pyc
+# Establece variables de entorno para evitar archivos .pyc y para la salida sin buffer
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Crea y establece el directorio de trabajo
 WORKDIR /app
 
-RUN pip install --no-cache-dir uvicorn
+# Copia primero el archivo requirements.txt para aprovechar la cache de Docker
+COPY requirements.txt /app/
 
-# Instala las dependencias
+# Instala las dependencias de Python
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia el resto de los archivos de la aplicación
 COPY . .
 
-
 # Expone el puerto 8000 para la aplicación
 EXPOSE 8000
 
-# Comando de inicio
+# Comando de inicio para correr la aplicación con Uvicorn
 CMD ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8000"]

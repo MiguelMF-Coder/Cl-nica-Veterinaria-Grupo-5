@@ -37,4 +37,4 @@ ENV PYTHONPATH="/app"
 EXPOSE 8501
 
 # Comando de inicio que ejecuta database.py antes de iniciar Streamlit
-CMD ["sh", "-c", "python clinica/database.py && streamlit run main.py"]
+CMD ["sh", "-c", "streamlit run main.py"]

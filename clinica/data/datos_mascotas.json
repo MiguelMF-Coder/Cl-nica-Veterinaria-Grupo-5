@@ -5,7 +5,7 @@
         "raza": "Golden Retriever",
         "edad": 4,
         "afeccion": "Alergia alimentaria",
-        "estado": "Vivo",
+        "estado": "Fallecido",
         "id_cliente": 1
     },
     {
@@ -33,24 +33,24 @@
         "edad": 2,
         "afeccion": "Problemas respiratorios",
         "estado": "Vivo",
-        "id_cliente": 1
-    },
-    {
-        "id_mascota": 5,
-        "nombre_mascota": "Nina",
-        "raza": "Yorkshire Terrier",
-        "edad": 8,
-        "afeccion": "Problemas dentales",
-        "estado": "Vivo",
         "id_cliente": 4
     },
     {
-        "id_mascota": 6,
+        "id_mascota": 5,
         "nombre_mascota": "Thor",
         "raza": "Husky Siberiano",
         "edad": 5,
         "afeccion": "Ninguna",
         "estado": "Vivo",
         "id_cliente": 5
+    },
+    {
+        "id_mascota": 6,
+        "nombre_mascota": "Alex",
+        "raza": "Retriever",
+        "edad": 5,
+        "afeccion": "",
+        "estado": "Vivo",
+        "id_cliente": 2
     }
 ]

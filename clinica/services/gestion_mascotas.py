@@ -1,10 +1,16 @@
 import logging
 import os
 import json
+import logging
+from typing import List, Optional
 from sqlalchemy.exc import IntegrityError, SQLAlchemyError
 from clinica.services.gestion_clientes import GestionClientes
 from clinica.models.tabla_cliente import Cliente as ClienteModel
 from clinica.models.tabla_mascota import Mascota as MascotaModel
+
+# Configuración del logger
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 class GestionMascotas(GestionClientes):
 
@@ -140,16 +146,34 @@ class GestionMascotas(GestionClientes):
             logging.critical("Error inesperado al listar las mascotas: %s", e)
             return []
 
-    def listar_mascotas_por_cliente(self, id_cliente):
-        """Devuelve una lista de mascotas pertenecientes a un cliente específico."""
+    def listar_mascotas_por_cliente(self, id_cliente: int):
+        """
+        Devuelve una lista de mascotas pertenecientes a un cliente específico.
+        
+        Args:
+            id_cliente (int): ID del cliente
+            
+        Returns:
+            List[MascotaModel]: Lista de mascotas del cliente
+        """
         try:
+            # Primero verificamos que el cliente existe
+            cliente = self.db_session.query(ClienteModel).filter_by(id_cliente=id_cliente).first()
+            if not cliente:
+                logger.warning(f"Cliente con ID {id_cliente} no encontrado")
+                return []
+
+            # Obtenemos las mascotas del cliente
             mascotas = self.db_session.query(MascotaModel).filter_by(id_cliente=id_cliente).all()
+            logger.info(f"Se encontraron {len(mascotas)} mascotas para el cliente {id_cliente}")
             return mascotas
+
         except SQLAlchemyError as sae:
-            logging.error("Error de SQLAlchemy al listar las mascotas por cliente: %s", sae)
+            logger.error(f"Error de SQLAlchemy al listar las mascotas por cliente: {sae}")
             return []
+        
         except Exception as e:
-            logging.critical("Error inesperado al listar las mascotas por cliente: %s", e)
+            logger.error(f"Error inesperado al listar las mascotas por cliente: {e}")
             return []
             
     def buscar_mascota_por_nombre(self, nombre_mascota):
@@ -234,3 +258,30 @@ class GestionMascotas(GestionClientes):
             self.db_session.rollback()
             logging.critical("Error inesperado al marcar la mascota como fallecida: %s", e)
             return f"Ocurrió un error inesperado al marcar la mascota como fallecida: {e}"
+            
+    def buscar_mascotas(self, nombre: Optional[str] = None, raza: Optional[str] = None) -> List[MascotaModel]:
+        """
+        Busca mascotas por nombre y/o raza
+        
+        Args:
+            nombre (str, optional): Nombre de la mascota a buscar
+            raza (str, optional): Raza de la mascota a buscar
+            
+        Returns:
+            List[MascotaModel]: Lista de mascotas que coinciden con los criterios
+        """
+        try:
+            query = self.db_session.query(MascotaModel)
+            
+            if nombre:
+                query = query.filter(MascotaModel.nombre_mascota.ilike(f"%{nombre}%"))
+            if raza:
+                query = query.filter(MascotaModel.raza.ilike(f"%{raza}%"))
+                
+            mascotas = query.all()
+            logging.info(f"Se encontraron {len(mascotas)} mascotas con los filtros: nombre='{nombre}', raza='{raza}'")
+            return mascotas
+            
+        except SQLAlchemyError as e:
+            logging.error(f"Error al buscar mascotas: {str(e)}")
+            return []

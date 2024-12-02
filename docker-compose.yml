@@ -1,47 +1,51 @@
+version: '3.9'
+
 services:
   fastapi:
-    build: ./fastapi
+    build:
+      context: .  # Contexto ajustado a la raíz del proyecto
+      dockerfile: ./clinica_api/Dockerfile  # Dockerfile dentro de clinica_api
     container_name: fastapi
     ports:
       - "8000:8000"
     networks:
       - deploy_network
     volumes:
-      - ./clinica/clinica_db.sqlite:/app/clinica/clinica_db.sqlite  # Volumen compartido correcto
+      - ./clinica/clinica_db.sqlite:/app/clinica/clinica_db.sqlite
       - ./clinica/data:/app/clinica/data
     environment:
       - PYTHONPATH=/app
 
   streamlit:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: .  # Contexto ajustado a la raíz del proyecto
+      dockerfile: Dockerfile  # Dockerfile en la raíz del proyecto
     container_name: streamlit
     ports:
       - "8501:8501"
     networks:
       - deploy_network
     volumes:
-      - ./clinica/clinica_db.sqlite:/app/clinica/clinica_db.sqlite  # Volumen compartido correcto
+      - ./clinica/clinica_db.sqlite:/app/clinica/clinica_db.sqlite
       - ./clinica/data:/app/clinica/data
     environment:
       - PYTHONPATH=/app
-    command: >
-      /bin/sh -c "python clinica/database.py && streamlit run main.py"
+    command: streamlit run main.py --server.port=8501 --server.address=0.0.0.0
+ 
 
   web:
     build:
-      context: .
-      dockerfile: Dockerfile
+      context: .  # Contexto ajustado a la raíz del proyecto
+      dockerfile: Dockerfile  # Dockerfile en la raíz del proyecto
     container_name: clinica_web
     ports:
       - "8001:8001"
     volumes:
-      - ./clinica/clinica_db.sqlite:/app/clinica/clinica_db.sqlite  # Volumen compartido correcto
+      - ./clinica/clinica_db.sqlite:/app/clinica/clinica_db.sqlite
       - ./clinica/data:/app/clinica/data
     environment:
       - PYTHONPATH=/app
-    command: ["python3", "clinica/database.py"]
+    command: ["python3", "clinica/server.py"] 
 
 networks:
   deploy_network:

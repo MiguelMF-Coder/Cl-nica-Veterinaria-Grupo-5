@@ -189,10 +189,10 @@ async def buscar_mascota_por_nombre(
    except Exception as e:
        logger.error(f"Error inesperado al buscar mascota: {str(e)}")
        raise HTTPException(status_code=500, detail=str(e))
-   
+ 
 @router.get("/cliente/{id_cliente}", 
            response_model=List[MascotaResponse],
-           summary="Listar mascotas de un cliente",
+           summary="Listar mascotas por cliente",
            description="Obtiene la lista de mascotas pertenecientes a un cliente específico")
 async def listar_mascotas_por_cliente(
     id_cliente: int,
@@ -242,3 +242,21 @@ async def marcar_mascota_como_fallecido(
    except Exception as e:
        logger.error(f"Error inesperado al marcar mascota como fallecida: {str(e)}")
        raise HTTPException(status_code=500, detail=str(e))
+   
+@router.get("/buscar", 
+        response_model=List[MascotaResponse],
+        summary="Buscar mascotas",
+        description="Busca mascotas por nombre y/o raza")
+async def buscar_mascotas(
+    nombre: Optional[str] = Query(None, description="Nombre de la mascota"),
+    raza: Optional[str] = Query(None, description="Raza de la mascota"),
+    db: Session = Depends(get_db)
+):
+    """Busca mascotas por nombre y/o raza"""
+    gestion_mascotas = GestionMascotas(db)
+    try:
+        mascotas = gestion_mascotas.buscar_mascotas(nombre=nombre, raza=raza)
+        return [MascotaResponse.model_validate(mascota) for mascota in mascotas]
+    except SQLAlchemyError as e:
+        logger.error(f"Error de base de datos al buscar mascotas: {str(e)}")
+        raise HTTPException(status_code=500, detail="Error al buscar mascotas")

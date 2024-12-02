@@ -1,7 +1,7 @@
 [
     {
         "id_cita": 1,
-        "fecha": "2024-12-01 10:00:00",
+        "fecha": "2024-12-01T10:00:00",
         "descripcion": "Vacunación anual de Luna",
         "metodo_pago": "Tarjeta",
         "estado": "Pendiente",
@@ -11,7 +11,7 @@
     },
     {
         "id_cita": 2,
-        "fecha": "2024-12-01 11:30:00",
+        "fecha": "2024-12-01T11:30:00",
         "descripcion": "Control de displasia de Max",
         "metodo_pago": "Efectivo",
         "estado": "Pendiente",
@@ -21,17 +21,17 @@
     },
     {
         "id_cita": 3,
-        "fecha": "2024-12-02 09:00:00",
+        "fecha": "2024-12-02T00:00:00",
         "descripcion": "Limpieza dental de Nina",
         "metodo_pago": "Bizum",
-        "estado": "Pendiente",
+        "estado": "Cancelada",
         "id_mascota": 5,
         "id_cliente": 4,
         "id_tratamiento": 3
     },
     {
         "id_cita": 4,
-        "fecha": "2024-12-02 16:00:00",
+        "fecha": "2024-12-02T16:00:00",
         "descripcion": "Control de alergias de Luna",
         "metodo_pago": "Tarjeta",
         "estado": "Pendiente",

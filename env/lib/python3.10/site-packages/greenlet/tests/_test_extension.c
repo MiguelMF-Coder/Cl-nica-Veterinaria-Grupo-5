@@ -107,7 +107,6 @@ test_new_greenlet(PyObject* self, PyObject* callable)
     }
 
     result = PyGreenlet_Switch(greenlet, NULL, NULL);
-    Py_CLEAR(greenlet);
     if (result == NULL) {
         return NULL;
     }
@@ -137,28 +136,6 @@ test_throw(PyObject* self, PyGreenlet* g)
     PyObject* msg_obj = Py_BuildValue("s", msg);
     PyGreenlet_Throw(g, PyExc_ValueError, msg_obj, NULL);
     Py_DECREF(msg_obj);
-    if (PyErr_Occurred()) {
-        return NULL;
-    }
-    Py_RETURN_NONE;
-}
-
-static PyObject*
-test_throw_exact(PyObject* self, PyObject* args)
-{
-    PyGreenlet* g = NULL;
-    PyObject* typ = NULL;
-    PyObject* val = NULL;
-    PyObject* tb = NULL;
-
-    if (!PyArg_ParseTuple(args, "OOOO:throw", &g, &typ, &val, &tb)) {
-        return NULL;
-    }
-
-    PyGreenlet_Throw(g, typ, val, tb);
-    if (PyErr_Occurred()) {
-        return NULL;
-    }
     Py_RETURN_NONE;
 }
 
@@ -196,15 +173,10 @@ static PyMethodDef test_methods[] = {
      (PyCFunction)test_throw,
      METH_O,
      "Throw a ValueError at the provided greenlet"},
-    {"test_throw_exact",
-     (PyCFunction)test_throw_exact,
-     METH_VARARGS,
-     "Throw exactly the arguments given at the provided greenlet"},
-    {NULL, NULL, 0, NULL}
-};
+    {NULL, NULL, 0, NULL}};
 
-
-#define INITERROR return NULL
+#if PY_MAJOR_VERSION >= 3
+#    define INITERROR return NULL
 
 static struct PyModuleDef moduledef = {PyModuleDef_HEAD_INIT,
                                        TEST_MODULE_NAME,
@@ -218,14 +190,27 @@ static struct PyModuleDef moduledef = {PyModuleDef_HEAD_INIT,
 
 PyMODINIT_FUNC
 PyInit__test_extension(void)
+#else
+#    define INITERROR return
+PyMODINIT_FUNC
+init_test_extension(void)
+#endif
 {
     PyObject* module = NULL;
+
+#if PY_MAJOR_VERSION >= 3
     module = PyModule_Create(&moduledef);
+#else
+    module = Py_InitModule(TEST_MODULE_NAME, test_methods);
+#endif
 
     if (module == NULL) {
-        return NULL;
+        INITERROR;
     }
 
     PyGreenlet_Import();
+
+#if PY_MAJOR_VERSION >= 3
     return module;
+#endif
 }

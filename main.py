@@ -166,7 +166,8 @@ pages = {
     "📊 Dashboard": "Dashboard_pag",
     "📅 Citas": "Citas_pag",
     "👥 Clientes": "Clientes_pag",
-    "💉 Tratamientos": "Tratamientos_pag",
+    "🐕 Mascotas": "Mascotas_pag",
+    "💉 Tratamientos": "Tratamientos_pag"
 }
 
 # Logo

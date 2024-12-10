@@ -260,3 +260,21 @@ async def buscar_mascotas(
     except SQLAlchemyError as e:
         logger.error(f"Error de base de datos al buscar mascotas: {str(e)}")
         raise HTTPException(status_code=500, detail="Error al buscar mascotas")
+    
+@router.get("/{id_mascota}", 
+           response_model=MascotaResponse,
+           summary="Obtener mascota por ID",
+           description="Obtiene los datos de una mascota específica por su ID.")
+async def obtener_mascota_por_id(
+    id_mascota: int, 
+    db: Session = Depends(get_db)
+):
+    gestion_mascotas = GestionMascotas(db)
+    try:
+        mascota = gestion_mascotas.buscar_mascota_por_id(id_mascota)
+        if not mascota:
+            raise HTTPException(status_code=404, detail="Mascota no encontrada")
+        return MascotaResponse.model_validate(mascota)
+    except Exception as e:
+        logger.error(f"Error al obtener mascota por ID {id_mascota}: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))

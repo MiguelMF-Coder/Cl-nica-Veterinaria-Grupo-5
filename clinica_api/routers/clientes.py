@@ -173,3 +173,21 @@ async def eliminar_cliente(id_cliente: int, db: Session = Depends(get_db)):
             status_code=500, 
             detail=f"Error al eliminar cliente: {str(e)}"
         )
+    
+@router.get("/{id_cliente}", 
+           response_model=ClienteResponse,
+           summary="Obtener cliente por ID",
+           description="Obtiene los datos de un cliente específico por su ID.")
+async def obtener_cliente_por_id(
+    id_cliente: int, 
+    db: Session = Depends(get_db)
+):
+    gestion_clientes = GestionClientes(db)
+    try:
+        cliente = gestion_clientes.buscar_cliente_por_id(id_cliente)
+        if not cliente:
+            raise HTTPException(status_code=404, detail="Cliente no encontrado")
+        return ClienteResponse.model_validate(cliente)
+    except Exception as e:
+        logger.error(f"Error al obtener cliente por ID {id_cliente}: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))

@@ -291,3 +291,12 @@ class GestionClientes:
         except Exception as e:
             logging.critical("Error inesperado al listar los clientes: %s", e)
             return []
+        
+    def buscar_cliente_por_id(self, id_cliente: int):
+        """Busca un cliente por su ID."""
+        try:
+            cliente = self.db_session.query(ClienteModel).filter_by(id_cliente=id_cliente).first()
+            return cliente
+        except Exception as e:
+            logging.error(f"Error al buscar cliente por ID: {e}")
+            return None

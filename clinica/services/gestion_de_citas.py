@@ -210,3 +210,11 @@ class GestionCitas:
             self.db_session.rollback()
             raise RuntimeError(f"Error al finalizar la cita: {sae}")
 
+    def buscar_cita_por_id(self, id_cita: int):
+        """Busca una cita por su ID."""
+        try:
+            cita = self.db_session.query(Cita).filter_by(id_cita=id_cita).first()
+            return cita
+        except Exception as e:
+            logging.error(f"Error al buscar cita por ID: {e}")
+            return None

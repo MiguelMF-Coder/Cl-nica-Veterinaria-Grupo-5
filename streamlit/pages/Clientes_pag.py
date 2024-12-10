@@ -17,6 +17,126 @@ logger = logging.getLogger(__name__)
 
 def show():
 
+    st.markdown("""
+    <style>
+        /* Estilo para las pestañas */
+        .stTabs [data-baseweb="tab-list"] {
+            gap: 8px;
+            background-color: #f8fafc;
+            padding: 0.5rem;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+        }
+        
+        .stTabs [data-baseweb="tab"] {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            color: #4b5563;
+            font-weight: 500;
+        }
+        
+        .stTabs [aria-selected="true"] {
+            background-color: #2563eb !important;
+            color: white !important;
+        }
+        
+        /* Estilos para las cards de citas */
+        .cita-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 1rem;
+        }
+        
+        /* Estilos para los formularios */
+        .form-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e5e7eb;
+        }
+        
+        /* Estilos para los botones */
+        .stButton > button {
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            font-weight: 500;
+            transition: all 0.2s;
+        }
+        
+        /* Estado de las citas */
+        .estado-pendiente {
+            background-color: #fef3c7;
+            color: #92400e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        
+        .estado-confirmada {
+            background-color: #d1fae5;
+            color: #065f46;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        
+        .estado-finalizada {
+            background-color: #dbeafe;
+            color: #1e40af;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        
+        .estado-cancelada {
+            background-color: #fee2e2;
+            color: #991b1b;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+        
+        /* Estilos para los filtros */
+        .filtros-container {
+            background-color: #f8fafc;
+            padding: 1rem;
+            border-radius: 10px;
+            border: 1px solid #e5e7eb;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Estilos para inputs y selects */
+        .stSelectbox > div > div {
+            border-radius: 8px !important;
+        }
+        
+        .stTextInput > div > div {
+            border-radius: 8px !important;
+        }
+
+        /* Estilos para el calendario */
+        .fc {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .fc-toolbar-title {
+            color: #1f2937 !important;
+        }
+    </style>
+    """, unsafe_allow_html=True)
+
+
     # Inicializar st.session_state.mostrar_mascotas si no existe
     if 'mostrar_mascotas' not in st.session_state:
         st.session_state.mostrar_mascotas = {}
@@ -24,7 +144,7 @@ def show():
     st.title("Gestión de Clientes 👥")
 
     # Crear las pestañas para la navegación
-    tabs = st.tabs(["Nuevo Cliente", "Lista de Clientes"])
+    tabs = st.tabs(["📝Nuevo Cliente", "📋Lista de Clientes"])
 
     with tabs[0]:
         show_nuevo_cliente()
@@ -60,31 +180,9 @@ def show_nuevo_cliente():
     """
     st.subheader("📝 Registrar Nuevo Cliente")
 
-    # Estilo personalizado con un borde para el formulario
-    st.markdown("""
-        <style>
-        .form-container {
-            border: 2px solid #ddd;
-            border-radius: 15px;
-            padding: 20px;
-            margin-top: 20px;
-            background-color: #f8f9fa;
-        }
-        .form-title {
-            color: #FF6F61;
-            font-weight: bold;
-            font-size: 22px;
-        }
-        .btn-center {
-            display: flex;
-            justify-content: center;
-        }
-        </style>
-    """, unsafe_allow_html=True)
 
     # Mostrar el formulario dentro de un contenedor con estilo
     with st.container():
-        st.markdown('<div class="form-container">', unsafe_allow_html=True)
 
         # Título del formulario
         st.markdown('<div class="form-title">📝 Complete la Información del Cliente</div>', unsafe_allow_html=True)

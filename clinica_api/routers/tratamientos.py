@@ -254,3 +254,21 @@ async def generar_factura(id_tratamiento: int, db: Session = Depends(get_db)):
    except Exception as e:
        logger.error(f"Error al generar factura: {str(e)}")
        raise HTTPException(status_code=500, detail=str(e))
+   
+@router.get("/{id_tratamiento}", 
+           response_model=TratamientoResponse,
+           summary="Obtener tratamiento por ID",
+           description="Obtiene los datos de un tratamiento específico por su ID.")
+async def obtener_tratamiento_por_id(
+    id_tratamiento: int, 
+    db: Session = Depends(get_db)
+):
+    gestion_tratamientos = GestionTratamientos(db)
+    try:
+        tratamiento = gestion_tratamientos.buscar_tratamiento_por_id(id_tratamiento)
+        if not tratamiento:
+            raise HTTPException(status_code=404, detail="Tratamiento no encontrado")
+        return TratamientoResponse.model_validate(tratamiento)
+    except Exception as e:
+        logger.error(f"Error al obtener tratamiento por ID {id_tratamiento}: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))

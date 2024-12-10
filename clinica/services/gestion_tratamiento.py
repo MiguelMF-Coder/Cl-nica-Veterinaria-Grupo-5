@@ -199,3 +199,12 @@ class GestionTratamientos:
         except Exception as e:
             logging.critical(f"Error inesperado al validar el estado del tratamiento: {e}")
             return {"error": "Ocurrió un error inesperado al validar el estado del tratamiento"}
+
+    def buscar_tratamiento_por_id(self, id_tratamiento: int):
+        """Busca un tratamiento por su ID."""
+        try:
+            tratamiento = self.db_session.query(Tratamiento).filter_by(id_tratamiento=id_tratamiento).first()
+            return tratamiento
+        except Exception as e:
+            logging.error(f"Error al buscar tratamiento por ID: {e}")
+            return None

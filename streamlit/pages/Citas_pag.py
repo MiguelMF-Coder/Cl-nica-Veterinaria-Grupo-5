@@ -354,197 +354,84 @@ def show_calendar():
     st.markdown('</div>', unsafe_allow_html=True)
 
 def show_nueva_cita():
-    """
-    Formulario de nueva cita
-    """
-    st.markdown("""
-    <style>
-        /* Contenedor general del formulario */
-        div.form-group {
-            background-color: white !important;
-            padding: 2rem !important;
-            border-radius: 12px !important;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
-            margin: 1rem auto !important;
-            width: 80% !important;
-        }
-
-        /* Títulos */
-        div.form-group h1, 
-        div.form-group h2, 
-        div.form-group h3 {
-            color: #1E293B !important;
-            font-family: 'Arial', sans-serif !important;
-            font-weight: bold !important;
-            margin-bottom: 1rem !important;
-        }
-
-        /* Inputs */
-        div.form-group .stDateInput > div, 
-        div.form-group .stTimeInput > div, 
-        div.form-group .stSelectbox > div {
-            margin-bottom: 1rem !important;
-            font-size: 1rem !important;
-        }
-
-        /* Botón Guardar */
-        div.form-group .stButton > button {
-            background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%) !important;
-            color: white !important;
-            font-weight: bold !important;
-            font-size: 1rem !important;
-            padding: 0.5rem 1rem !important;
-            border: none !important;
-            border-radius: 8px !important;
-            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2) !important;
-            transition: all 0.2s ease !important;
-        }
-
-        div.form-group .stButton > button:hover {
-            background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%) !important;
-            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3) !important;
-            transform: translateY(-1px) !important;
-        }
-
-        /* Columnas */
-        div.stColumn {
-            padding: 1rem !important;
-        }
-
-        /* Inputs generales */
-        .stDateInput > div, 
-        .stTimeInput > div, 
-        .stSelectbox > div {
-            margin-bottom: 1rem !important;
-            font-size: 1rem !important;
-        }
-
-        /* Botón general de Streamlit */
-        .stButton > button {
-            background: linear-gradient(180deg, #3b82f6 0%, #2563eb 100%) !important;
-            color: white !important;
-            font-weight: bold !important;
-            font-size: 1rem !important;
-            padding: 0.5rem 1rem !important;
-            border: none !important;
-            border-radius: 8px !important;
-            box-shadow: 0 2px 4px rgba(59, 130, 246, 0.2) !important;
-            transition: all 0.2s ease !important;
-        }
-
-        .stButton > button:hover {
-            background: linear-gradient(180deg, #2563eb 0%, #1d4ed8 100%) !important;
-            box-shadow: 0 4px 6px rgba(59, 130, 246, 0.3) !important;
-            transform: translateY(-1px) !important;
-        }
-
-        /* Centrado de botones */
-        .stButton {
-            display: flex !important;
-            justify-content: center !important;
-            align-items: center !important;
-        }
-    </style>
-    """, unsafe_allow_html=True)
-
-
-    # Abre el contenedor estilizado
-    st.markdown('<div class="form-group">', unsafe_allow_html=True)
-
     st.title("Nueva Cita 📝")
 
     with st.form("form_nueva_cita", clear_on_submit=True):
         col1, col2 = st.columns(2)
-        
+
         with col1:
             st.markdown("### 📅 Detalles de la Cita")
-            
+
             # Fecha
             fecha = st.date_input(
                 "Fecha",
                 min_value=datetime.today(),
                 format="DD/MM/YYYY"
             )
-            
+
             # Hora
             hora = st.time_input(
                 "Hora",
                 datetime.now().time()
             )
-                        
-            # Cliente
+
+            # Cliente - Celda independiente
             try:
                 response = requests.get("http://localhost:8000/clientes/")
                 if response.status_code == 200:
                     clientes = response.json()
                     cliente_nombres = ["Seleccione un cliente"] + [
-                        f"{c['nombre_cliente']} (DNI: {c['dni']})" 
-                        for c in clientes
+                        f"{c['nombre_cliente']} (DNI: {c['dni']})" for c in clientes
                     ]
                     cliente_seleccionado = st.selectbox(
-                        "Cliente",
+                        "Seleccione un cliente",
                         options=cliente_nombres,
                         key="cliente_select"
                     )
-
-                    # Mascota
-                    if cliente_seleccionado != "Seleccione un cliente":
-                        dni_seleccionado = cliente_seleccionado.split("DNI: ")[1].strip(")")
-                        client_id = next(c['id_cliente'] for c in clientes if c['dni'] == dni_seleccionado)
-                        
-                        response = requests.get(f"http://localhost:8000/mascotas/cliente/{client_id}")
-                        if response.status_code == 200:
-                            mascotas_cliente = response.json()
-                            if mascotas_cliente:
-                                mascota_nombres = ["Seleccione una mascota"] + [
-                                    f"{m['nombre_mascota']} ({m['raza']})" 
-                                    for m in mascotas_cliente
-                                ]
-                                mascota_seleccionada = st.selectbox(
-                                    "Mascota",
-                                    options=mascota_nombres,
-                                    key="mascota_select"
-                                )
-                                if mascota_seleccionada != "Seleccione una mascota":
-                                    mascota_id = next(
-                                        m['id_mascota'] for m in mascotas_cliente 
-                                        if f"{m['nombre_mascota']} ({m['raza']})" == mascota_seleccionada
-                                    )
-                            else:
-                                st.warning("Este cliente no tiene mascotas registradas")
-                                mascota_seleccionada = st.selectbox(
-                                    "Mascota",
-                                    options=["No hay mascotas disponibles"],
-                                    key="mascota_select_none"
-                                )
-                                mascota_id = None
-                    else:
-                        mascota_seleccionada = st.selectbox(
-                            "Mascota",
-                            options=["Seleccione un cliente primero"],
-                            disabled=True,
-                            key="mascota_select_disabled"
-                        )
-                        mascota_id = None
                 else:
-                    st.error("Error al cargar los clientes")
-                    client_id = None
-                    mascota_id = None
+                    st.error("Error al cargar los clientes.")
             except Exception as e:
-                st.error(f"Error al cargar datos: {str(e)}")
-                client_id = None
-                mascota_id = None
-        
+                st.error(f"Error al cargar los clientes: {str(e)}")
+
+            # Mascota - Celda independiente
+            try:
+                mascota_response = requests.get("http://localhost:8000/mascotas/")
+                if mascota_response.status_code == 200:
+                    mascotas = mascota_response.json()
+
+                    # Combinar datos de mascotas y clientes
+                    mascota_opciones = ["Seleccione una mascota"]
+                    for mascota in mascotas:
+                        # Buscar cliente asociado a la mascota
+                        cliente = next(
+                            (c for c in clientes if c['id_cliente'] == mascota['id_cliente']),
+                            None
+                        )
+                        if cliente:
+                            cliente_nombre = f"{cliente['nombre_cliente']} (DNI: {cliente['dni']})"
+                            mascota_opciones.append(f"{mascota['nombre_mascota']} ({mascota['raza']}) - Cliente: {cliente_nombre}")
+                        else:
+                            mascota_opciones.append(f"{mascota['nombre_mascota']} ({mascota['raza']}) - Cliente: Desconocido")
+
+                    mascota_seleccionada = st.selectbox(
+                        "Seleccione una mascota",
+                        options=mascota_opciones,
+                        key="mascota_select"
+                    )
+                else:
+                    st.error("Error al cargar las mascotas.")
+            except Exception as e:
+                st.error(f"Error al cargar las mascotas: {str(e)}")
+
             # Método de Pago
             metodo_pago = st.selectbox(
                 "Método de Pago (Opcional)",
                 options=["Sin Especificar", "Efectivo", "Tarjeta", "Bizum", "Transferencia"]
             )
 
-
         with col2:
             st.markdown("### 💉 Detalles del Tratamiento")
-            
+
             # Tratamiento
             try:
                 response = requests.get("http://localhost:8000/tratamientos/")
@@ -557,28 +444,25 @@ def show_nueva_cita():
                         "Tratamiento",
                         options=tratamiento_nombres
                     )
-                    
+
                     if tratamiento_seleccionado != "Seleccione un tratamiento":
                         tratamiento = next(t for t in tratamientos 
-                                        if t['nombre_tratamiento'] == tratamiento_seleccionado)
-                        descripcion = tratamiento['descripcion']
+                                            if t['nombre_tratamiento'] == tratamiento_seleccionado)
                         tratamiento_id = tratamiento['id_tratamiento']
                     else:
-                        descripcion = ""
                         tratamiento_id = None
-                    
-                    st.text_area(
-                        "Descripción",
-                        value=descripcion,
-                        disabled=True,
+
+                    # Campo de texto para una descripción personalizada
+                    descripcion = st.text_area(
+                        "Descripción (Ingrese los detalles de la cita)",
+                        placeholder="Escriba aquí los detalles de la cita...",
                         height=206
                     )
                 else:
-                    st.error("Error al cargar tratamientos")
-                    tratamiento_id = None
+                    st.error("Error al cargar tratamientos.")
             except Exception as e:
                 st.error(f"Error al cargar tratamientos: {str(e)}")
-                tratamiento_id = None
+
 
             # Estado
             estado = st.selectbox(
@@ -589,24 +473,26 @@ def show_nueva_cita():
         # Botón centrado
         col1, col2, col3 = st.columns([4.7, 2, 4])
         with col2:
-             submitted = st.form_submit_button("💾 Guardar Cita")
-        
+            submitted = st.form_submit_button("💾 Guardar Cita")
+
         if submitted:
-            if not all([client_id, mascota_id, tratamiento_id]):
-                st.error("Por favor, complete todos los campos obligatorios")
+            if cliente_seleccionado == "Seleccione un cliente" or mascota_seleccionada == "Seleccione una mascota" or tratamiento_seleccionado == "Seleccione un tratamiento":
+                st.error("Por favor, complete todos los campos obligatorios.")
                 return
 
             try:
+                # Preparar datos de la cita
                 cita_data = {
                     "fecha": datetime.combine(fecha, hora).isoformat(),
-                    "descripcion": descripcion,
+                    "descripcion": "",
                     "estado": estado,
-                    "id_mascota": mascota_id,
-                    "id_cliente": client_id,
+                    "id_mascota": next(m['id_mascota'] for m in mascotas if f"{m['nombre_mascota']} ({m['raza']})" in mascota_seleccionada),
+                    "id_cliente": next(c['id_cliente'] for c in clientes if f"{c['nombre_cliente']} (DNI: {c['dni']})" == cliente_seleccionado),
                     "id_tratamiento": tratamiento_id,
                     "metodo_pago": None if metodo_pago == "Sin Especificar" else metodo_pago
                 }
 
+                # Enviar datos al backend
                 response = requests.post("http://localhost:8000/citas/", json=cita_data)
                 if response.status_code == 201:
                     st.success("¡Cita registrada exitosamente!")
@@ -615,180 +501,142 @@ def show_nueva_cita():
             except Exception as e:
                 st.error(f"Error al procesar la cita: {str(e)}")
 
-    # Cierra el contenedor del formulario
-    st.markdown('</div>', unsafe_allow_html=True)
-
 
 def show_citas_list():
     """
     Muestra la interfaz de búsqueda y lista de citas
     """
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.markdown("### 🔍 Buscar Citas")
+    st.title("📋 Lista de Citas")
 
-    # Almacenar valores de búsqueda en st.session_state para mantener el estado
-    col1, col2, col3 = st.columns(3)
-    with col1:
-        if 'dni_cliente' not in st.session_state:
-            st.session_state.dni_cliente = ''
-        st.session_state.dni_cliente = st.text_input("DNI del Cliente", value=st.session_state.dni_cliente)
-        
-    with col2:
-        if 'nombre_cliente' not in st.session_state:
-            st.session_state.nombre_cliente = ''
-        st.session_state.nombre_cliente = st.text_input("Nombre del Cliente", value=st.session_state.nombre_cliente)
-
-    with col3:
-        if 'nombre_tratamiento' not in st.session_state:
-            st.session_state.nombre_tratamiento = ''
-        st.session_state.nombre_tratamiento = st.text_input("Nombre del Tratamiento", value=st.session_state.nombre_tratamiento)
-
-    # Fecha de la Cita
-    if 'fecha_cita_str' not in st.session_state:
-        st.session_state.fecha_cita_str = ''
-    st.session_state.fecha_cita_str = st.text_input("Fecha de la Cita (Opcional, formato: YYYY-MM-DD)", value=st.session_state.fecha_cita_str)
-
-    # Botón de búsqueda
-    buscar_clicked = st.button("Buscar")
-
-    st.markdown("---")  # Separador
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    st.markdown("### 📋 Lista de Citas")
-
-    # Filtros para la lista
+    # Filtros en dos filas
     col1, col2 = st.columns(2)
     with col1:
-        estado_filtro = st.multiselect("Estado", ["Pendiente", "Confirmada", "Finalizada", "Cancelada"])
+        nombre_filtro = st.text_input(
+            label="Filtrar por Cliente",
+            key="nombre_filtro",
+            placeholder="Nombre del Cliente",
+            label_visibility="hidden"
+        )
     with col2:
-        fecha_filtro = st.date_input("Fecha")
+        dni_filtro = st.text_input(
+            label="Filtrar por DNI",
+            key="dni_filtro",
+            placeholder="DNI del Cliente",
+            label_visibility="hidden"
+        )
 
-    # Mantener el estado de búsqueda al presionar el botón
-    if buscar_clicked:
-        st.session_state.buscar = True
+    col3, col4 = st.columns(2)
+    with col3:
+        fecha_filtro = st.text_input(
+            label="Filtrar por Fecha (YYYY-MM-DD)",
+            key="fecha_filtro",
+            placeholder="Fecha (YYYY-MM-DD)",
+            label_visibility="hidden"
+        )
+    with col4:
+        estado_filtro = st.selectbox(
+            "Estado",
+            ["Todos", "Pendiente", "Confirmada", "En Proceso", "Finalizada", "Cancelada"],
+            key="estado_filtro"
+        )
 
     try:
-        if st.session_state.get('buscar', False):
-            # Parámetros de búsqueda
-            params = {
-                "dni_cliente": st.session_state.dni_cliente,
-                "nombre_cliente": st.session_state.nombre_cliente,
-                "nombre_tratamiento": st.session_state.nombre_tratamiento,
-                "q": st.session_state.fecha_cita_str
-            }
+        # Obtener todas las citas
+        response = requests.get("http://localhost:8000/citas/")
+        if response.status_code == 200:
+            citas = response.json()
+            if citas:
+                citas_filtradas = []
+                for cita in citas:
+                    # Obtener datos relacionados usando los endpoints específicos
+                    cliente_response = requests.get(f"http://localhost:8000/clientes/{cita['id_cliente']}")
+                    mascota_response = requests.get(f"http://localhost:8000/mascotas/{cita['id_mascota']}")
+                    tratamiento_response = requests.get(f"http://localhost:8000/tratamientos/{cita['id_tratamiento']}")
 
-            if st.session_state.fecha_cita_str:
-                try:
-                    fecha_cita = datetime.strptime(st.session_state.fecha_cita_str, "%Y-%m-%d")
-                    params["fecha_cita"] = fecha_cita.strftime("%Y-%m-%d")
-                except ValueError:
-                    st.error("El formato de la fecha debe ser YYYY-MM-DD")
+                    if cliente_response.status_code == 200 and mascota_response.status_code == 200 and tratamiento_response.status_code == 200:
+                        cliente = cliente_response.json()
+                        mascota = mascota_response.json()
+                        tratamiento = tratamiento_response.json()
+                    else:
+                        st.error("Error al cargar los datos relacionados para una cita.")
+                        continue
 
-            # Solicitud al servidor con los filtros
-            response = requests.get(f"http://localhost:8000/citas/", params=params)
-            if response.status_code == 200:
-                citas = response.json()
-                if citas:
-                    for cita in citas:
-                        with st.container():
-                            col1, col2, col3 = st.columns([3, 2, 1])
+                    # Aplicar filtros
+                    if nombre_filtro and nombre_filtro.lower() not in cliente['nombre_cliente'].lower():
+                        continue
+                    if dni_filtro and dni_filtro.lower() not in cliente['dni'].lower():
+                        continue
+                    if fecha_filtro and fecha_filtro not in cita['fecha']:
+                        continue
+                    if estado_filtro != "Todos" and estado_filtro != cita['estado']:
+                        continue
+                    
+                    citas_filtradas.append({**cita, 'cliente': cliente, 'mascota': mascota, 'tratamiento': tratamiento})
 
-                            with col1:
-                                st.markdown(f"### 📅 {cita['fecha']}")
-                                st.write(f"📝 **Descripción:** {cita.get('descripcion', 'No disponible')}")
+                if not citas_filtradas:
+                    st.info("No se encontraron citas con los filtros especificados")
+                    return
 
-                            with col2:
-                                # Obtener datos del cliente
-                                cliente_response = requests.get(f"http://localhost:8000/clientes/{cita['id_cliente']}")
-                                if cliente_response.status_code == 200:
-                                    cliente = cliente_response.json()
-                                    st.write(f"👤 **Cliente:** {cliente.get('nombre_cliente', 'No disponible')}")
-                                else:
-                                    st.write("👤 **Cliente:** Error al cargar datos")
+                for cita in citas_filtradas:
+                    st.markdown("""
+                        <style>
+                            .cita-card {
+                                border: 1px solid #ddd;
+                                border-radius: 10px;
+                                padding: 15px;
+                                margin-bottom: 20px;
+                                background-color: #f8f9fa;
+                                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+                            }
+                        </style>
+                    """, unsafe_allow_html=True)
 
-                                # Obtener datos de la mascota
-                                mascota_response = requests.get(f"http://localhost:8000/mascotas/{cita['id_mascota']}")
-                                if mascota_response.status_code == 200:
-                                    mascota = mascota_response.json()
-                                    st.write(f"🐾 **Mascota:** {mascota.get('nombre_mascota', 'No disponible')}")
-                                else:
-                                    st.write("🐾 **Mascota:** Error al cargar datos")
-
-                                # Obtener datos del tratamiento
-                                tratamiento_response = requests.get(f"http://localhost:8000/tratamientos/{cita['id_tratamiento']}")
-                                if tratamiento_response.status_code == 200:
-                                    tratamiento = tratamiento_response.json()
-                                    st.write(f"💉 **Tratamiento:** {tratamiento.get('nombre_tratamiento', 'No disponible')}")
-                                else:
-                                    st.write("💉 **Tratamiento:** Error al cargar datos")
-
-                            with col3:
-                                estado_color = {
-                                    "Pendiente": "🟡",
-                                    "Confirmada": "🟢",
-                                    "Finalizada": "🔵",
-                                    "Cancelada": "🔴"
-                                }
-                                st.write(f"Estado: {estado_color.get(cita['estado'], '⚪')} {cita['estado']}")
-
-                            if cita['estado'] in ['Pendiente', 'Confirmada']:
-                                if st.button("✏️ Editar", key=f"edit_{cita['id_cita']}"):
-                                    show_edit_form(cita)
-                                if st.button("❌ Cancelar", key=f"cancel_{cita['id_cita']}"):
-                                    cancel_cita(cita['id_cita'])
-
-                            st.markdown("---")
-                else:
-                    st.info("No se encontraron citas que coincidan con los filtros")
-
-    
-        # Mostrar lista completa con filtros
-        if not st.session_state.get('buscar', False):
-            response = requests.get("http://localhost:8000/citas/")
-            if response.status_code == 200:
-                citas = response.json()
-                df = pd.DataFrame(citas)
-
-                # Aplicar filtros
-                if estado_filtro:
-                    df = df[df['estado'].isin(estado_filtro)]
-                if fecha_filtro:
-                    df['fecha'] = pd.to_datetime(df['fecha'])
-                    df = df[df['fecha'].dt.date == fecha_filtro]
-
-                # Mostrar citas
-                for _, cita in df.iterrows():
                     with st.container():
-                        col1, col2, col3 = st.columns([3, 2, 1])
+                        st.markdown('<div class="cita-card">', unsafe_allow_html=True)
+                        col1, col2, col3, col4 = st.columns([3, 2, 1, 1])
 
                         with col1:
                             st.markdown(f"### 📅 {cita['fecha']}")
-                            st.write(f"📝 **Descripción:** {cita['descripcion']}")
+                            st.write(f"👤 **Cliente:** {cita['cliente']['nombre_cliente']}")
+                            st.write(f"🐾 **Mascota:** {cita['mascota']['nombre_mascota']}")
 
                         with col2:
-                            st.write(f"👤 **Cliente ID:** {cita['id_cliente']}")
-                            st.write(f"🐾 **Mascota ID:** {cita['id_mascota']}")
-                            st.write(f"💉 **Tratamiento ID:** {cita['id_tratamiento']}")
+                            st.write(f"💉 **Tratamiento:** {cita['tratamiento']['nombre_tratamiento']}")
+                            st.write(f"📝 **Descripción:** {cita['descripcion']}")
+                            if cita['metodo_pago']:
+                                st.write(f"💰 **Método de Pago:** {cita['metodo_pago']}")
 
                         with col3:
                             estado_color = {
                                 "Pendiente": "🟡",
                                 "Confirmada": "🟢",
+                                "En Proceso": "🟣",
                                 "Finalizada": "🔵",
                                 "Cancelada": "🔴"
                             }
                             st.write(f"Estado: {estado_color.get(cita['estado'], '⚪')} {cita['estado']}")
 
-                            if cita['estado'] in ['Pendiente', 'Confirmada']:
-                                if st.button("✏️ Editar", key=f"edit_{cita['id_cita']}"):
+                        with col4:
+                            col_edit, col_delete = st.columns(2)
+                            with col_edit:
+                                if st.button("✏️", key=f"edit_{cita['id_cita']}"):
                                     show_edit_form(cita)
-                                if st.button("❌ Cancelar", key=f"cancel_{cita['id_cita']}"):
-                                    cancel_cita(cita['id_cita'])
-                        st.markdown("---")
+                            with col_delete:
+                                if st.button("❌", key=f"delete_{cita['id_cita']}"):
+                                    if cita['estado'] not in ['Finalizada', 'Cancelada']:
+                                        cancel_cita(cita['id_cita'])
+                                    else:
+                                        st.warning("No se pueden cancelar citas finalizadas o canceladas")
+
+                        st.markdown('</div>', unsafe_allow_html=True)
             else:
-                st.error("Error al cargar las citas")
+                st.info("No hay citas registradas")
+        else:
+            st.error("Error al cargar la lista de citas")
     except Exception as e:
         st.error(f"Error: {str(e)}")
+
+
 
 def obtener_datos_cliente(id_cliente):
     """

@@ -1,96 +1,197 @@
-import pandas as pd
-
 import streamlit as st
 import plotly.express as px
-
-import matplotlib
-from matplotlib.backends.backend_agg import RendererAgg
-
+import plotly.graph_objects as go
+import pandas as pd
 import requests
-import seaborn as sns
-@st.cache_data
-def load_data(url: str):
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    mijson = r.json()
-    listado = mijson['contratos']
-    df = pd.DataFrame.from_records(listado)
-    df['importe_adj_con_iva'] = df['importe_adj_con_iva'].str.replace('€', '')
-    df['importe_adj_con_iva'] = df['importe_adj_con_iva'].str.replace('.', '')
-    df['importe_adj_con_iva'] = df['importe_adj_con_iva'].str.replace(',', '.')
-    df['presupuesto_con_iva'] = df['presupuesto_con_iva'].str.replace('€', '')
-    df['presupuesto_con_iva'] = df['presupuesto_con_iva'].str.replace('.', '')
-    df['presupuesto_con_iva'] = df['presupuesto_con_iva'].str.replace(',', '.')
+from datetime import datetime, timedelta
 
-    df['presupuesto_con_iva'] = df['presupuesto_con_iva'].astype(float)
-    df['importe_adj_con_iva'] = df['importe_adj_con_iva'].astype(float)
+def show():
+    st.title("Dashboard Analítico 📊")
+    
+    # Navegación
+    tabs = st.tabs([
+        "📈 Resumen General",
+        "👥 Análisis de Clientes",
+        "🐾 Análisis de Mascotas",
+        "🏥 Análisis de Tratamientos",
+        "📅 Análisis de Citas"
+    ])
 
-    return df
+    with tabs[0]:
+        show_resumen_general()
+    with tabs[1]:
+        show_analisis_clientes()
+    with tabs[2]:
+        show_analisis_mascotas()
+    with tabs[3]:
+        show_analisis_tratamientos()
+    with tabs[4]:
+        show_analisis_citas()
 
+def show_resumen_general():
+    st.header("Resumen General")
+    
+    try:
+        col1, col2, col3, col4 = st.columns(4)
+        
+        # KPIs
+        clientes = requests.get("http://localhost:8000/clientes/").json()
+        mascotas = requests.get("http://localhost:8000/mascotas/").json()
+        tratamientos = requests.get("http://localhost:8000/tratamientos/").json()
+        citas = requests.get("http://localhost:8000/citas/").json()
+        
+        with col1:
+            st.metric("Total Clientes", len(clientes))
+        with col2:
+            st.metric("Total Mascotas", len(mascotas))
+        with col3:
+            st.metric("Tratamientos Activos", len([t for t in tratamientos if t['estado'] == 'Activo']))
+        with col4:
+            citas_pendientes = len([c for c in citas if c['estado'] == 'Pendiente'])
+            st.metric("Citas Pendientes", citas_pendientes)
+        
+        # Gráficos de resumen
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            # Distribución de mascotas por estado
+            df_mascotas = pd.DataFrame(mascotas)
+            fig = px.pie(df_mascotas, names='estado', title='Estado de Mascotas')
+            st.plotly_chart(fig, use_container_width=True)
+        
+        with col2:
+            # Evolución de citas en el tiempo
+            df_citas = pd.DataFrame(citas)
+            df_citas['fecha'] = pd.to_datetime(df_citas['fecha'])
+            fig = px.line(df_citas.groupby('fecha').size().reset_index(), 
+                         x='fecha', y=0, title='Evolución de Citas')
+            st.plotly_chart(fig, use_container_width=True)
+            
+    except Exception as e:
+        st.error(f"Error al cargar datos: {str(e)}")
 
+def show_analisis_clientes():
+    st.header("Análisis de Clientes")
+    
+    try:
+        clientes = requests.get("http://localhost:8000/clientes/").json()
+        mascotas = requests.get("http://localhost:8000/mascotas/").json()
+        
+        # Distribución de edad de clientes
+        df_clientes = pd.DataFrame(clientes)
+        fig = px.histogram(df_clientes, x='edad', title='Distribución de Edad de Clientes',
+                          nbins=20)
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Clientes con más mascotas
+        df_mascotas = pd.DataFrame(mascotas)
+        mascotas_por_cliente = df_mascotas.groupby('id_cliente').size().reset_index()
+        mascotas_por_cliente.columns = ['id_cliente', 'cantidad_mascotas']
+        
+        # Unir con datos de clientes
+        df_clientes_mascotas = pd.merge(mascotas_por_cliente, df_clientes, on='id_cliente')
+        fig = px.bar(df_clientes_mascotas.nlargest(10, 'cantidad_mascotas'),
+                     x='nombre_cliente', y='cantidad_mascotas',
+                     title='Top 10 Clientes por Número de Mascotas')
+        fig.update_xaxes(tickangle=45)
+        st.plotly_chart(fig, use_container_width=True)
+        
+    except Exception as e:
+        st.error(f"Error al cargar datos: {str(e)}")
 
-def info_box (texto, color=None):
-    st.markdown(f'<div style = "background-color:#4EBAE1;opacity:70%"><p style="text-align:center;color:white;font-size:30px;">{texto}</p></div>', unsafe_allow_html=True)
+def show_analisis_mascotas():
+    st.header("Análisis de Mascotas")
+    
+    try:
+        mascotas = requests.get("http://localhost:8000/mascotas/").json()
+        df_mascotas = pd.DataFrame(mascotas)
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            # Distribución de razas
+            fig = px.pie(df_mascotas, names='raza', title='Distribución de Razas')
+            st.plotly_chart(fig, use_container_width=True)
+        
+        with col2:
+            # Distribución de edades
+            fig = px.histogram(df_mascotas, x='edad', title='Distribución de Edad de Mascotas')
+            st.plotly_chart(fig, use_container_width=True)
+        
+        # Condiciones médicas más comunes
+        if 'afeccion' in df_mascotas.columns:
+            afecciones = df_mascotas['afeccion'].value_counts()
+            fig = px.bar(afecciones, title='Condiciones Médicas Más Comunes')
+            st.plotly_chart(fig, use_container_width=True)
+            
+    except Exception as e:
+        st.error(f"Error al cargar datos: {str(e)}")
 
+def show_analisis_tratamientos():
+    st.header("Análisis de Tratamientos")
+    
+    try:
+        tratamientos = requests.get("http://localhost:8000/tratamientos/").json()
+        df_tratamientos = pd.DataFrame(tratamientos)
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            # Distribución de estados de tratamientos
+            fig = px.pie(df_tratamientos, names='estado', 
+                        title='Estado de Tratamientos')
+            st.plotly_chart(fig, use_container_width=True)
+        
+        with col2:
+            # Distribución de precios
+            fig = px.box(df_tratamientos, y='precio', 
+                        title='Distribución de Precios de Tratamientos')
+            st.plotly_chart(fig, use_container_width=True)
+        
+        # Tratamientos más comunes
+        tratamientos_comunes = df_tratamientos['nombre_tratamiento'].value_counts()
+        fig = px.bar(tratamientos_comunes.head(10), 
+                    title='Tratamientos Más Comunes')
+        st.plotly_chart(fig, use_container_width=True)
+        
+    except Exception as e:
+        st.error(f"Error al cargar datos: {str(e)}")
 
-
-#matplotlib.use("agg")
-#lock = RendererAgg.lock
-
-df_merged = load_data('http://fastapi:8000/retrieve_data')
-
-
-registros = str(df_merged.shape[0])
-adjudicatarios = str(len(df_merged.adjuducatario.unique()))
-centro = str(len(df_merged.centro_seccion.unique()))
-tipologia = str(len(df_merged.tipo.unique()))
-presupuesto_medio = str(round(df_merged.presupuesto_con_iva.mean(),2))
-adjudicado_medio = str(round(df_merged.importe_adj_con_iva.mean(),2))
-
-sns.set_palette("pastel")
-
-st.title("Dashboard de seguimiento ∭∭∭∭∭")
-
-st.header("Información general")
-
-col1, col2, col3 = st.columns(3)
-
-col4, col5, col6 = st.columns(3)
-with col1:
-    col1.subheader('# contratos')
-    info_box(registros)
-with col2:
-    col2.subheader('# adjudicatarios')
-    info_box(adjudicatarios)
-with col3:
-    col3.subheader('# centros')
-    info_box(centro)
-
-with col4:
-    col4.subheader('# tipologias')
-    info_box(tipologia)
-
-## Clases de medios digitales de publicacion
-with col5:
-    col5.subheader('# presupuesto medio')
-    info_box(presupuesto_medio, col5)
-with col6:
-    ## publicaciones
-    col6.subheader('# importe medio adjud')
-    info_box(adjudicado_medio, col6)
-
-# with st.beta_container('Información general sobre obras')
-#        datos = df_merged[['id', 'agno_i', 'clasemicro1']]
-tab1, tab2 = st.tabs(["Procedimientos negociados sin publicidad", "Distribución de importe en procedimiento Negociado sin publicidad"])
-
-fig1 = px.scatter(df_merged,x='importe_adj_con_iva',y='presupuesto_con_iva',size='numlicit',color='procedimiento')
-
-fig2 = px.box(df_merged.query("procedimiento == 'Negociado sin publicidad'"),x='importe_adj_con_iva')
-with tab1:
-    # Use the Streamlit theme.
-    # This is the default. So you can also omit the theme argument.
-    st.plotly_chart(fig1, theme="streamlit", use_container_width)
-with tab2:
-    # Use the native Plotly theme.
-    st.plotly_chart(fig2, theme=None, use_container_width)
+def show_analisis_citas():
+    st.header("Análisis de Citas")
+    
+    try:
+        citas = requests.get("http://localhost:8000/citas/").json()
+        df_citas = pd.DataFrame(citas)
+        df_citas['fecha'] = pd.to_datetime(df_citas['fecha'])
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            # Estado de citas
+            fig = px.pie(df_citas, names='estado', 
+                        title='Estado de Citas')
+            st.plotly_chart(fig, use_container_width=True)
+        
+        with col2:
+            # Citas por día de la semana
+            df_citas['dia_semana'] = df_citas['fecha'].dt.day_name()
+            citas_por_dia = df_citas['dia_semana'].value_counts()
+            fig = px.bar(citas_por_dia, title='Citas por Día de la Semana')
+            st.plotly_chart(fig, use_container_width=True)
+            
+        # Tendencia de citas en el tiempo
+        citas_por_fecha = df_citas.groupby('fecha').size().reset_index()
+        fig = px.line(citas_por_fecha, x='fecha', y=0, 
+                     title='Evolución de Citas en el Tiempo')
+        st.plotly_chart(fig, use_container_width=True)
+        
+        # Métodos de pago más utilizados
+        if 'metodo_pago' in df_citas.columns:
+            pagos = df_citas['metodo_pago'].value_counts()
+            fig = px.pie(values=pagos.values, names=pagos.index, 
+                        title='Métodos de Pago Utilizados')
+            st.plotly_chart(fig, use_container_width=True)
+            
+    except Exception as e:
+        st.error(f"Error al cargar datos: {str(e)}")

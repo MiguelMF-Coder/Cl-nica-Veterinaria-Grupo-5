@@ -285,3 +285,12 @@ class GestionMascotas(GestionClientes):
         except SQLAlchemyError as e:
             logging.error(f"Error al buscar mascotas: {str(e)}")
             return []
+        
+    def buscar_mascota_por_id(self, id_mascota: int):
+        """Busca una mascota por su ID."""
+        try:
+            mascota = self.db_session.query(MascotaModel).filter_by(id_mascota=id_mascota).first()
+            return mascota
+        except Exception as e:
+            logging.error(f"Error al buscar mascota por ID: {e}")
+            return None

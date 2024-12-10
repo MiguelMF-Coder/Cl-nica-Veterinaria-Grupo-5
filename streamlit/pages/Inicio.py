@@ -71,6 +71,7 @@ def show():
     # Encabezado principal con imagen
     col1, col2 = st.columns([1, 2])
     with col1:
+        st.markdown("")
         st.image("streamlit/logo.jpg", use_container_width=True)
     with col2:
         st.title("Bienvenidos a la Clínica Veterinaria UFVVet 🐾")
@@ -86,7 +87,7 @@ def show():
     cols = st.columns(3)
     servicios = [
         ("🏥 Consultas generales", "Ofrecemos atención primaria y seguimiento personalizado de la salud de tus mascotas, garantizando su bienestar integral."),
-        ("💉 Vacunación y desparasitación", "Protege a tu mascota con nuestro programa completo de vacunación y control de parásitos, siguiendo los más altos estándares veterinarios."),
+        ("💉 Vacunación y desparasitación", "Protege a tu mascota con nuestro programa completo de vacunación y control de parásitos, siguiendo los más altos estándares."),
         ("⚕️ Cirugías especializadas", "Nuestro equipo quirúrgico experto y tecnología de vanguardia garantizan la mejor atención en intervenciones quirúrgicas."),
     ]
 

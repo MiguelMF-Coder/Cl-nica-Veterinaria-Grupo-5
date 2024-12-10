@@ -7295,3 +7295,23 @@ SyntaxError: positional argument follows keyword argument
 2024-12-10 13:19:57,718 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
 2024-12-10 13:19:57,767 - __main__ - INFO - Intentando cargar la página: 🏠 Inicio (módulo: Inicio)
 2024-12-10 13:19:57,768 - __main__ - INFO - Mostrando página: 🏠 Inicio
+2024-12-10 13:20:34,886 - __main__ - INFO - Iniciando la aplicación...
+2024-12-10 13:20:34,888 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-10 13:20:34,939 - __main__ - INFO - Intentando cargar la página: 💉 Tratamientos (módulo: Tratamientos_pag)
+2024-12-10 13:20:34,959 - __main__ - INFO - Mostrando página: 💉 Tratamientos
+2024-12-10 13:20:35,902 - __main__ - INFO - Iniciando la aplicación...
+2024-12-10 13:20:35,903 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-10 13:20:35,966 - __main__ - INFO - Intentando cargar la página: 🐕 Mascotas (módulo: Mascotas_pag)
+2024-12-10 13:20:35,970 - __main__ - INFO - Mostrando página: 🐕 Mascotas
+2024-12-10 13:20:36,749 - __main__ - INFO - Iniciando la aplicación...
+2024-12-10 13:20:36,751 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-10 13:20:36,803 - __main__ - INFO - Intentando cargar la página: 👥 Clientes (módulo: Clientes_pag)
+2024-12-10 13:20:36,806 - __main__ - INFO - Mostrando página: 👥 Clientes
+2024-12-10 13:20:37,887 - __main__ - INFO - Iniciando la aplicación...
+2024-12-10 13:20:37,890 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-10 13:20:37,957 - __main__ - INFO - Intentando cargar la página: 📊 Dashboard (módulo: Dashboard_pag)
+2024-12-10 13:20:37,958 - __main__ - INFO - Mostrando página: 📊 Dashboard
+2024-12-10 13:20:41,927 - __main__ - INFO - Iniciando la aplicación...
+2024-12-10 13:20:41,928 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-10 13:20:41,966 - __main__ - INFO - Intentando cargar la página: 🏠 Inicio (módulo: Inicio)
+2024-12-10 13:20:41,968 - __main__ - INFO - Mostrando página: 🏠 Inicio

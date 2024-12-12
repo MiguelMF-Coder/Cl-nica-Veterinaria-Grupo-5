@@ -5,6 +5,8 @@ from streamlit_calendar import calendar
 from datetime import datetime, timedelta
 import requests
 import json
+import tempfile
+import os
 
 
 # Configuración del logger
@@ -451,24 +453,24 @@ def show_nueva_cita():
                         tratamiento_id = tratamiento['id_tratamiento']
                     else:
                         tratamiento_id = None
-
-                    # Campo de texto para una descripción personalizada
-                    descripcion = st.text_area(
-                        "Descripción (Ingrese los detalles de la cita)",
-                        placeholder="Escriba aquí los detalles de la cita...",
-                        height=206
-                    )
                 else:
                     st.error("Error al cargar tratamientos.")
             except Exception as e:
                 st.error(f"Error al cargar tratamientos: {str(e)}")
 
+            # Campo de texto para una descripción personalizada de la cita
+            descripcion = st.text_area(
+                "Descripción de la Cita",
+                placeholder="Ingrese aquí los detalles de la cita...",
+                height=150
+            )
 
             # Estado
             estado = st.selectbox(
                 "Estado",
                 options=["Pendiente", "Confirmada", "En Proceso", "Finalizada", "Cancelada"]
             )
+
 
         # Botón centrado
         col1, col2, col3 = st.columns([4.7, 2, 4])
@@ -484,7 +486,7 @@ def show_nueva_cita():
                 # Preparar datos de la cita
                 cita_data = {
                     "fecha": datetime.combine(fecha, hora).isoformat(),
-                    "descripcion": "",
+                    "descripcion": descripcion,
                     "estado": estado,
                     "id_mascota": next(m['id_mascota'] for m in mascotas if f"{m['nombre_mascota']} ({m['raza']})" in mascota_seleccionada),
                     "id_cliente": next(c['id_cliente'] for c in clientes if f"{c['nombre_cliente']} (DNI: {c['dni']})" == cliente_seleccionado),
@@ -501,6 +503,86 @@ def show_nueva_cita():
             except Exception as e:
                 st.error(f"Error al procesar la cita: {str(e)}")
 
+
+
+
+def show_finalize_form(cita):
+    """Muestra el formulario para finalizar una cita y generar factura"""
+    with st.container():
+        st.markdown("""
+            <style>
+            .finalize-form {
+                background-color: white;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                margin: 20px 0;
+            }
+            .stSelectbox > div {
+                min-height: 45px;
+            }
+            </style>
+        """, unsafe_allow_html=True)
+
+        st.markdown('<div class="finalize-form">', unsafe_allow_html=True)
+        st.subheader("🏁 Finalizar Cita")
+        
+        metodo_pago = st.selectbox(
+            "💰 Método de pago",
+            ["Efectivo", "Tarjeta", "Bizum", "Transferencia"],
+            key=f"pago_{cita['id_cita']}"
+        )
+
+        cols = st.columns(2)
+        
+        with cols[0]:
+            if st.button("✅ Confirmar y Generar Factura", key=f"confirm_{cita['id_cita']}"):
+                try:
+                    # Finalizar la cita
+                    response = requests.put(
+                        f"http://localhost:8000/citas/finalizar/{cita['id_cita']}",
+                        params={"metodo_pago": metodo_pago}
+                    )
+                    
+                    if response.status_code == 200:
+                        # Generar y descargar factura
+                        factura_response = requests.get(
+                            f"http://localhost:8000/tratamientos/factura/generar/{cita['id_tratamiento']}"
+                        )
+                        if factura_response.status_code == 200:
+                            st.success("✅ Cita finalizada exitosamente")
+
+                            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
+                                tmp_file.write(factura_response.content)
+                                tmp_file.flush()
+
+                            # Descargar el archivo temporal
+                            with open(tmp_file.name, "rb") as file:
+                                st.download_button(
+                                    label="📥 Descargar Factura",
+                                    data=file,
+                                    file_name=f"factura_cita_{cita['id_cita']}.pdf",
+                                    mime="application/pdf"
+                                )
+
+                            # Eliminar el archivo temporal
+                            os.unlink(tmp_file.name)
+                        else:
+                            st.error("❌ Error al generar la factura")
+
+                        st.rerun()
+                    else:
+                        st.error("❌ Error al finalizar la cita")
+                except Exception as e:
+                    st.error(f"❌ Error: {str(e)}")
+
+                
+
+        with cols[1]:
+            if st.button("❌ Cancelar", key=f"cancel_{cita['id_cita']}"):
+                st.rerun()
+
+        st.markdown('</div>', unsafe_allow_html=True)
 
 def show_citas_list():
     """
@@ -578,59 +660,60 @@ def show_citas_list():
                     return
 
                 for cita in citas_filtradas:
-                    st.markdown("""
-                        <style>
-                            .cita-card {
-                                border: 1px solid #ddd;
-                                border-radius: 10px;
-                                padding: 15px;
-                                margin-bottom: 20px;
-                                background-color: #f8f9fa;
-                                box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
-                            }
-                        </style>
-                    """, unsafe_allow_html=True)
-
                     with st.container():
-                        st.markdown('<div class="cita-card">', unsafe_allow_html=True)
-                        col1, col2, col3, col4 = st.columns([3, 2, 1, 1])
-
-                        with col1:
+                        st.markdown("""
+                            <div style="border:1px solid #ddd; border-radius:10px; padding:15px; 
+                            margin-bottom:20px; background-color:#f8f9fa;">
+                        """, unsafe_allow_html=True)
+                        
+                        cols = st.columns([3, 2, 2])
+                        
+                        with cols[0]:
                             st.markdown(f"### 📅 {cita['fecha']}")
                             st.write(f"👤 **Cliente:** {cita['cliente']['nombre_cliente']}")
                             st.write(f"🐾 **Mascota:** {cita['mascota']['nombre_mascota']}")
 
-                        with col2:
-                            st.write(f"💉 **Tratamiento:** {cita['tratamiento']['nombre_tratamiento']}")
+                        with cols[1]:
+                            st.write(f"🏥 **Tratamiento:** {cita['tratamiento']['nombre_tratamiento']}")
                             st.write(f"📝 **Descripción:** {cita['descripcion']}")
                             if cita['metodo_pago']:
                                 st.write(f"💰 **Método de Pago:** {cita['metodo_pago']}")
 
-                        with col3:
+                        with cols[2]:
+                            # Botones de acción
+                            st.markdown("""
+                                <style>
+                                .action-button {
+                                    width: 100%;
+                                    margin: 5px 0;
+                                    padding: 10px;
+                                    border-radius: 5px;
+                                    text-align: center;
+                                }
+                                </style>
+                            """, unsafe_allow_html=True)
+
+                            # Estado de la cita
                             estado_color = {
                                 "Pendiente": "🟡",
                                 "Confirmada": "🟢",
-                                "En Proceso": "🟣",
                                 "Finalizada": "🔵",
                                 "Cancelada": "🔴"
                             }
                             st.write(f"Estado: {estado_color.get(cita['estado'], '⚪')} {cita['estado']}")
 
-                        with col4:
-                            col_edit, col_delete = st.columns(2)
-                            with col_edit:
-                                if st.button("✏️", key=f"edit_{cita['id_cita']}"):
-                                    show_edit_form(cita)
-                            with col_delete:
-                                if st.button("❌", key=f"delete_{cita['id_cita']}"):
-                                    if cita['estado'] not in ['Finalizada', 'Cancelada']:
-                                        cancel_cita(cita['id_cita'])
-                                    else:
-                                        st.warning("No se pueden cancelar citas finalizadas o canceladas")
+                            # Botones
+                            if st.button("✏️ Editar", key=f"edit_{cita['id_cita']}", use_container_width=True):
+                                show_edit_form(cita)
 
-                        st.markdown('</div>', unsafe_allow_html=True)
-            else:
-                st.info("No hay citas registradas")
+                            if cita['estado'] not in ['Finalizada', 'Cancelada']:
+                                if st.button("❌ Cancelar", key=f"delete_{cita['id_cita']}", use_container_width=True):
+                                    cancel_cita(cita['id_cita'])
+                                
+                                if st.button("✅ Finalizar", key=f"finish_{cita['id_cita']}", use_container_width=True):
+                                    show_finalize_form(cita)
+                        st.markdown("</div>", unsafe_allow_html=True)
+
         else:
             st.error("Error al cargar la lista de citas")
     except Exception as e:
@@ -676,7 +759,7 @@ def show_edit_form(cita):
             response = requests.put(f"http://localhost:8000/citas/{cita['id_cita']}", json=updated_cita)
             if response.status_code == 200:
                 st.success("Cita actualizada exitosamente")
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.error("Error al actualizar la cita")
 
@@ -689,7 +772,7 @@ def cancel_cita(id_cita):
     response = requests.delete(f"http://localhost:8000/citas/{id_cita}")
     if response.status_code == 200:
         st.success("Cita cancelada exitosamente")
-        st.experimental_rerun()
+        st.rerun()
     else:
         st.error("Error al cancelar la cita")
 

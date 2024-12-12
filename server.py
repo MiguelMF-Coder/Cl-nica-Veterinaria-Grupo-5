@@ -108,7 +108,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# [Resto del código se mantiene igual...]
+
 
 def get_db():
     """Proporciona una sesión de base de datos para las operaciones."""

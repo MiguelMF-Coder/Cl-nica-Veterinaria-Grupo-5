@@ -3,7 +3,7 @@
         "id_cita": 1,
         "fecha": "2024-12-01T00:00:00",
         "descripcion": "Vacunación anual de Luna",
-        "metodo_pago": "Tarjeta",
+        "metodo_pago": "Efectivo",
         "estado": "Confirmada",
         "id_mascota": 1,
         "id_cliente": 1,
@@ -11,10 +11,10 @@
     },
     {
         "id_cita": 2,
-        "fecha": "2024-12-01T11:30:00",
+        "fecha": "2024-12-01T00:00:00",
         "descripcion": "Control de displasia de Max",
         "metodo_pago": "Efectivo",
-        "estado": "Pendiente",
+        "estado": "Confirmada",
         "id_mascota": 2,
         "id_cliente": 2,
         "id_tratamiento": 2
@@ -24,7 +24,7 @@
         "fecha": "2024-12-02T00:00:00",
         "descripcion": "Limpieza dental de Nina",
         "metodo_pago": "Bizum",
-        "estado": "Cancelada",
+        "estado": "Pendiente",
         "id_mascota": 5,
         "id_cliente": 4,
         "id_tratamiento": 3
@@ -38,5 +38,25 @@
         "id_mascota": 1,
         "id_cliente": 1,
         "id_tratamiento": 4
+    },
+    {
+        "id_cita": 5,
+        "fecha": "2024-12-13T10:00:00",
+        "descripcion": "Vacunación anual",
+        "metodo_pago": null,
+        "estado": "Pendiente",
+        "id_mascota": 1,
+        "id_cliente": 1,
+        "id_tratamiento": 1
+    },
+    {
+        "id_cita": 6,
+        "fecha": "2024-12-12T00:51:52.547594",
+        "descripcion": "descripcion",
+        "metodo_pago": "Efectivo",
+        "estado": "Pendiente",
+        "id_mascota": 4,
+        "id_cliente": 4,
+        "id_tratamiento": 5
     }
 ]

@@ -11,7 +11,12 @@ from clinica.models import Cliente, Mascota, Tratamiento, Cita
 from clinica.services.gestion_tratamiento import GestionTratamientos
 from clinica_api.schemas import TratamientoResponse, TratamientoCreate, TratamientoUpdate
 from typing import List, Optional
+import tempfile
+import shutil
+from starlette.background import BackgroundTask
 import logging
+from datetime import datetime
+import time
 
 # Configuración del logger
 logger = logging.getLogger(__name__)
@@ -154,28 +159,6 @@ async def dar_baja_tratamiento(
        logger.error(f"Error al dar de baja tratamiento: {str(e)}")
        raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/factura/{id_tratamiento}",
-          response_model=dict,
-          summary="Obtener datos de factura",
-          description="Obtiene los datos necesarios para generar una factura")
-async def obtener_datos_factura(
-   id_tratamiento: int,
-   db: Session = Depends(get_db)
-):
-   try:
-       logger.info(f"Obteniendo datos de factura para tratamiento ID: {id_tratamiento}")
-       gestion_tratamientos = GestionTratamientos(db)
-       datos_factura = gestion_tratamientos.obtener_datos_factura(id_tratamiento)
-       
-       if "error" in datos_factura:
-           logger.warning(f"Error al obtener datos de factura: {datos_factura['error']}")
-           raise HTTPException(status_code=404, detail=datos_factura["error"])
-           
-       logger.info(f"Datos de factura obtenidos exitosamente para tratamiento ID: {id_tratamiento}")
-       return datos_factura
-   except Exception as e:
-       logger.error(f"Error al obtener datos de factura: {str(e)}")
-       raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/validar/{id_tratamiento}",
           response_model=dict,
@@ -205,55 +188,7 @@ async def validar_tratamiento_Finalizada(
        logger.error(f"Error al validar tratamiento: {str(e)}")
        raise HTTPException(status_code=500, detail=str(e))
 
-@router.get("/factura/generar/{id_tratamiento}",
-          response_class=FileResponse,
-          summary="Generar factura PDF",
-          description="Genera una factura en formato PDF para un tratamiento")
-async def generar_factura(id_tratamiento: int, db: Session = Depends(get_db)):
-   try:
-       logger.info(f"Generando factura PDF para tratamiento ID: {id_tratamiento}")
-       
-       # Obtener datos necesarios
-       tratamiento = db.query(Tratamiento).filter_by(id_tratamiento=id_tratamiento).first()
-       if not tratamiento:
-           logger.warning(f"Tratamiento no encontrado ID: {id_tratamiento}")
-           raise HTTPException(status_code=404, detail="Tratamiento no encontrado")
 
-       cita = db.query(Cita).filter_by(id_tratamiento=id_tratamiento).first()
-       if not cita:
-           logger.warning(f"Cita no encontrada para tratamiento ID: {id_tratamiento}")
-           raise HTTPException(
-               status_code=404,
-               detail="Cita no encontrada para el tratamiento especificado"
-           )
-
-       cliente = db.query(Cliente).filter_by(id_cliente=cita.id_cliente).first()
-       mascota = db.query(Mascota).filter_by(id_mascota=cita.id_mascota).first()
-       
-       if not cliente or not mascota:
-           logger.warning("Cliente o mascota no encontrados")
-           raise HTTPException(status_code=404, detail="Cliente o mascota no encontrados")
-
-       # Generar PDF
-       pdf_path = Path("factura.pdf")
-       c = canvas.Canvas(str(pdf_path), pagesize=letter)
-       width, height = letter
-
-       # Generar contenido del PDF...
-       # [Código de generación del PDF]
-
-       logger.info(f"Factura generada exitosamente para tratamiento ID: {id_tratamiento}")
-       return FileResponse(
-           path=pdf_path,
-           filename="factura.pdf",
-           media_type="application/pdf"
-       )
-
-   except HTTPException:
-       raise
-   except Exception as e:
-       logger.error(f"Error al generar factura: {str(e)}")
-       raise HTTPException(status_code=500, detail=str(e))
    
 @router.get("/{id_tratamiento}", 
            response_model=TratamientoResponse,
@@ -271,4 +206,145 @@ async def obtener_tratamiento_por_id(
         return TratamientoResponse.model_validate(tratamiento)
     except Exception as e:
         logger.error(f"Error al obtener tratamiento por ID {id_tratamiento}: {str(e)}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@router.get("/factura/generar/{id_tratamiento}",
+            response_class=FileResponse,
+            summary="Generar factura PDF",
+            description="Genera una factura en formato PDF para un tratamiento")
+async def generar_factura(id_tratamiento: int, db: Session = Depends(get_db)):
+    try:
+        logger.info(f"Generando factura PDF para tratamiento ID: {id_tratamiento}")
+        
+        # Obtener los datos necesarios
+        tratamiento = db.query(Tratamiento).filter_by(id_tratamiento=id_tratamiento).first()
+        if not tratamiento:
+            raise HTTPException(status_code=404, detail="Tratamiento no encontrado")
+
+        cita = db.query(Cita).filter_by(id_tratamiento=id_tratamiento).first()
+        if not cita:
+            raise HTTPException(status_code=404, detail="Cita no encontrada")
+
+        cliente = db.query(Cliente).filter_by(id_cliente=cita.id_cliente).first()
+        mascota = db.query(Mascota).filter_by(id_mascota=cita.id_mascota).first()
+        
+        if not cliente or not mascota:
+            raise HTTPException(status_code=404, detail="Cliente o mascota no encontrados")
+
+        # Crear directorio temporal
+        temp_dir = tempfile.gettempdir()
+        pdf_filename = f"factura_{id_tratamiento}_{int(time.time())}.pdf"
+        pdf_path = os.path.join(temp_dir, pdf_filename)
+        
+        logger.info(f"Generando PDF en: {pdf_path}")
+
+        # Generar PDF
+        c = canvas.Canvas(pdf_path, pagesize=letter)
+        width, height = letter
+
+        # Encabezado
+        c.setFont("Helvetica-Bold", 24)
+        c.drawString(50, height - 50, "UFVVet Clínica Veterinaria")
+        
+        c.setFont("Helvetica", 12)
+        c.drawString(50, height - 70, "Calle de la Mascota Feliz, 123")
+        c.drawString(50, height - 85, "28223 Madrid")
+        c.drawString(50, height - 100, "Tel: +34 123 456 789")
+
+        # Información de la factura
+        c.setFont("Helvetica-Bold", 16)
+        c.drawString(400, height - 50, "FACTURA")
+        
+        c.setFont("Helvetica", 12)
+        fecha_actual = datetime.now().strftime("%d/%m/%Y")
+        c.drawString(400, height - 70, f"Fecha: {fecha_actual}")
+        c.drawString(400, height - 85, f"Nº Factura: {cita.id_cita}")
+
+        # Información del cliente
+        c.line(50, height - 120, width - 50, height - 120)
+        
+        c.setFont("Helvetica-Bold", 14)
+        c.drawString(50, height - 150, "Datos del Cliente")
+        
+        c.setFont("Helvetica", 12)
+        c.drawString(50, height - 170, f"Nombre: {cliente.nombre_cliente}")
+        c.drawString(50, height - 185, f"DNI: {cliente.dni}")
+        c.drawString(50, height - 200, f"Dirección: {cliente.direccion}")
+        c.drawString(50, height - 215, f"Teléfono: {cliente.telefono}")
+
+        # Información de la mascota
+        c.setFont("Helvetica-Bold", 14)
+        c.drawString(50, height - 245, "Datos de la Mascota")
+        
+        c.setFont("Helvetica", 12)
+        c.drawString(50, height - 265, f"Nombre: {mascota.nombre_mascota}")
+        c.drawString(50, height - 280, f"Raza: {mascota.raza}")
+        c.drawString(50, height - 295, f"Edad: {mascota.edad} años")
+
+        # Detalles del tratamiento
+        c.setFont("Helvetica-Bold", 14)
+        c.drawString(50, height - 325, "Detalles del Tratamiento")
+        
+        # Cabecera de la tabla
+        c.setFont("Helvetica-Bold", 12)
+        c.drawString(50, height - 345, "Descripción")
+        c.drawString(400, height - 345, "Precio")
+        
+        c.line(50, height - 350, width - 50, height - 350)
+        
+        # Contenido del tratamiento
+        c.setFont("Helvetica", 12)
+        c.drawString(50, height - 370, tratamiento.nombre_tratamiento)
+        c.drawString(50, height - 385, tratamiento.descripcion[:50] + "..." if len(tratamiento.descripcion) > 50 else tratamiento.descripcion)
+        c.drawRightString(500, height - 370, f"{tratamiento.precio:.2f} €")
+
+        # Línea total
+        c.line(50, height - 410, width - 50, height - 410)
+        
+        # Total
+        c.setFont("Helvetica-Bold", 14)
+        c.drawString(350, height - 430, "Total:")
+        c.drawRightString(500, height - 430, f"{tratamiento.precio:.2f} €")
+
+        # Método de pago
+        c.setFont("Helvetica", 12)
+        c.drawString(50, height - 460, f"Método de pago: {cita.metodo_pago}")
+
+        # Pie de página
+        c.setFont("Helvetica-Oblique", 10)
+        c.drawString(50, 50, "Gracias por confiar en UFVVet Clínica Veterinaria")
+        c.drawString(50, 35, "Este documento sirve como comprobante de pago")
+
+        logger.info(f"Intentando guardar archivo PDF en: {pdf_path}")
+        c.save()
+     # Verificar que el archivo se creó correctamente
+        if not os.path.exists(pdf_path):
+            logger.error(f"No se pudo generar el archivo PDF en {pdf_path}")
+            raise HTTPException(status_code=500, detail="Error al generar el PDF")
+
+        file_size = os.path.getsize(pdf_path)
+        logger.info(f"PDF generado correctamente. Tamaño: {file_size} bytes")
+
+        def cleanup():
+            try:
+                os.unlink(pdf_path)
+                logger.info(f"Archivo temporal eliminado: {pdf_path}")
+            except Exception as e:
+                logger.error(f"Error al eliminar archivo temporal: {str(e)}")
+
+        return FileResponse(
+            path=pdf_path,
+            filename=f"factura_{id_tratamiento}.pdf",
+            media_type="application/pdf",
+            background=BackgroundTask(cleanup)
+        )
+
+    except Exception as e:
+        logger.error(f"Error al generar factura: {str(e)}")
+        # Intentar limpiar el archivo si existe
+        if 'pdf_path' in locals() and os.path.exists(pdf_path):
+            try:
+                os.unlink(pdf_path)
+            except:
+                pass
         raise HTTPException(status_code=500, detail=str(e))

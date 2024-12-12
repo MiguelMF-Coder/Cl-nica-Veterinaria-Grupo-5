@@ -322,7 +322,7 @@ def show_edit_form(mascota):
                 )
                 if response.status_code == 200:
                     st.success("Mascota actualizada exitosamente")
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.error("Error al actualizar la mascota")
             except Exception as e:
@@ -333,7 +333,7 @@ def delete_mascota(id_mascota):
         response = requests.delete(f"http://localhost:8000/mascotas/{id_mascota}")
         if response.status_code == 200:
             st.success("Mascota eliminada exitosamente")
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.error("Error al eliminar la mascota")
     except Exception as e:

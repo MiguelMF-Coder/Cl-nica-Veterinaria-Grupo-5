@@ -390,7 +390,7 @@ def show_edit_form(tratamiento):
                 
                 if response.status_code == 200:
                     st.success("Tratamiento actualizado exitosamente")
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.error("Error al actualizar el tratamiento")
             except Exception as e:
@@ -401,7 +401,7 @@ def delete_treatment(id_tratamiento):
         response = requests.delete(f"http://localhost:8000/tratamientos/{id_tratamiento}")
         if response.status_code == 200:
             st.success("Tratamiento eliminado exitosamente")
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.error("Error al eliminar el tratamiento")
     except Exception as e:
@@ -435,7 +435,7 @@ def show_edit_form(tratamiento):
                 
                 if response.status_code == 200:
                     st.success("Tratamiento actualizado exitosamente")
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.error("Error al actualizar el tratamiento")
             except Exception as e:
@@ -485,7 +485,7 @@ def show_edit_form(tratamiento):
                 
                 if response.status_code == 200:
                     st.success("Tratamiento actualizado exitosamente")
-                    st.experimental_rerun()
+                    st.rerun()
                 else:
                     st.error("Error al actualizar el tratamiento")
             except Exception as e:
@@ -501,7 +501,7 @@ def delete_treatment(id_tratamiento):
         )
         if response.status_code == 200:
             st.success("Tratamiento eliminado exitosamente")
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.error("Error al eliminar el tratamiento")
     except Exception as e:

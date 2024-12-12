@@ -38,5 +38,21 @@
         "dni": "67891234F",
         "direccion": "Avenida Principal 56, 5ºA",
         "telefono": "678123456"
+    },
+    {
+        "id_cliente": 6,
+        "nombre_cliente": "Juan Perez",
+        "edad": 30,
+        "dni": "12345348A",
+        "direccion": "Calle Falsa 12345",
+        "telefono": "612345676"
+    },
+    {
+        "id_cliente": 7,
+        "nombre_cliente": "Alejandro Martínez",
+        "edad": 18,
+        "dni": "02567556P",
+        "direccion": "Calle de las rosas felices",
+        "telefono": "664480095"
     }
 ]

@@ -634,7 +634,7 @@ def show_edit_form(cliente):
             
             if response.status_code == 200:
                 st.success("Cliente actualizado exitosamente")
-                st.experimental_rerun()
+                st.rerun()
             else:
                 st.error("Error al actualizar el cliente")
 
@@ -646,7 +646,7 @@ def delete_cliente(id_cliente):
         response = requests.delete(f"http://localhost:8000/clientes/{id_cliente}")
         if response.status_code == 200:
             st.success("Cliente eliminado exitosamente")
-            st.experimental_rerun()
+            st.rerun()
         else:
             st.error("Error al eliminar el cliente")
     except Exception as e:

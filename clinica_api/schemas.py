@@ -98,7 +98,7 @@ class MascotaResponse(MascotaBase):
 
 class CitaBase(BaseModel):
     fecha: datetime = Field(..., description="Fecha y hora de la cita")
-    descripcion: str = Field(..., min_length=10, max_length=500, description="Descripción de la cita")
+    descripcion: str = Field(..., min_length=0, max_length=500, description="Descripción de la cita")
     estado: str = Field("Pendiente", description="Estado de la cita")
     id_mascota: int = Field(..., gt=0, description="ID de la mascota")
     id_cliente: int = Field(..., gt=0, description="ID del cliente")

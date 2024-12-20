@@ -257,7 +257,7 @@ def show_nuevo_cliente():
                 "telefono": telefono
             }
 
-            response = requests.post("http://localhost:8000/clientes/", json=cliente_data)
+            response = requests.post("http://fastapi:8000/clientes/", json=cliente_data)
             if response.status_code == 201:
                 st.success("¡Cliente registrado exitosamente! 🥳")
             else:
@@ -318,7 +318,7 @@ def show_lista_clientes():
 
     try:
         # Obtener todos los clientes
-        response = requests.get("http://localhost:8000/clientes/")
+        response = requests.get("http://fastapi:8000/clientes/")
         if response.status_code == 200:
             clientes = response.json()
             if clientes:
@@ -330,7 +330,7 @@ def show_lista_clientes():
                     for cliente in clientes:
                         try:
                             mascotas_response = requests.get(
-                                f"http://localhost:8000/mascotas/cliente/{cliente['id_cliente']}"
+                                f"http://fastapi:8000/mascotas/cliente/{cliente['id_cliente']}"
                             )
                             if mascotas_response.status_code == 200:
                                 mascotas = mascotas_response.json()
@@ -413,7 +413,7 @@ def show_lista_clientes():
 
                                 try:
                                     mascotas_response = requests.get(
-                                        f"http://localhost:8000/mascotas/cliente/{cliente['id_cliente']}"
+                                        f"http://fastapi:8000/mascotas/cliente/{cliente['id_cliente']}"
                                     )
                                     if mascotas_response.status_code == 200:
                                         mascotas = mascotas_response.json()
@@ -436,7 +436,7 @@ def show_lista_clientes():
                                 if st.button("Sí", key=f"confirm_yes_{cliente['id_cliente']}"):
                                     try:
                                         response = requests.delete(
-                                            f"http://localhost:8000/clientes/{cliente['id_cliente']}"
+                                            f"http://fastapi:8000/clientes/{cliente['id_cliente']}"
                                         )
                                         if response.status_code == 200:
                                             st.success("Cliente eliminado exitosamente")
@@ -462,7 +462,7 @@ def mostrar_mascotas(cliente_id):
     Muestra las mascotas de un cliente.
     """
     try:
-        mascotas_response = requests.get(f"http://localhost:8000/mascotas/cliente/{cliente_id}")
+        mascotas_response = requests.get(f"http://fastapi:8000/mascotas/cliente/{cliente_id}")
         if mascotas_response.status_code == 200:
             mascotas = mascotas_response.json()
             if mascotas:
@@ -534,7 +534,7 @@ def show_add_mascota_form(id_cliente):
 
             try:
                 response = requests.post(
-                    "http://localhost:8000/mascotas/",
+                    "http://fastapi:8000/mascotas/",
                     json=mascota_data
                 )
                 if response.status_code == 201:
@@ -569,7 +569,7 @@ def show_edit_mascota_form(mascota):
             
             try:
                 response = requests.put(
-                    f"http://localhost:8000/mascotas/{mascota['id_mascota']}",
+                    f"http://fastapi:8000/mascotas/{mascota['id_mascota']}",
                     json=mascota_actualizada
                 )
                 if response.status_code == 200:
@@ -585,7 +585,7 @@ def delete_mascota(id_mascota):
     Elimina una mascota
     """
     try:
-        response = requests.delete(f"http://localhost:8000/mascotas/{id_mascota}")
+        response = requests.delete(f"http://fastapi:8000/mascotas/{id_mascota}")
         if response.status_code == 200:
             st.success("Mascota eliminada exitosamente")
             st.rerun()
@@ -628,7 +628,7 @@ def show_edit_form(cliente):
             }
             
             response = requests.put(
-                f"http://localhost:8000/clientes/{cliente['id_cliente']}", 
+                f"http://fastapi:8000/clientes/{cliente['id_cliente']}", 
                 json=cliente_actualizado
             )
             
@@ -643,7 +643,7 @@ def delete_cliente(id_cliente):
     Elimina un cliente
     """
     try:
-        response = requests.delete(f"http://localhost:8000/clientes/{id_cliente}")
+        response = requests.delete(f"http://fastapi:8000/clientes/{id_cliente}")
         if response.status_code == 200:
             st.success("Cliente eliminado exitosamente")
             st.rerun()
@@ -668,9 +668,9 @@ def show_buscar_cliente():
     if st.button("Buscar"):
         try:
             if dni_buscar:
-                response = requests.get(f"http://localhost:8000/clientes/buscar", params={"dni": dni_buscar})
+                response = requests.get(f"http://fastapi:8000/clientes/buscar", params={"dni": dni_buscar})
             elif nombre_buscar:
-                response = requests.get(f"http://localhost:8000/clientes/buscar", params={"nombre": nombre_buscar})
+                response = requests.get(f"http://fastapi:8000/clientes/buscar", params={"nombre": nombre_buscar})
             else:
                 st.warning("Por favor, ingrese un DNI o nombre para buscar")
                 return
@@ -702,7 +702,7 @@ def cargar_y_filtrar_clientes(nombre_filtro="", dni_filtro="", mascota_filtro=""
     """
     try:
         # Obtener todos los clientes
-        response = requests.get("http://localhost:8000/clientes/")
+        response = requests.get("http://fastapi:8000/clientes/")
         if response.status_code != 200:
             st.error("Error al cargar la lista de clientes")
             return []
@@ -715,7 +715,7 @@ def cargar_y_filtrar_clientes(nombre_filtro="", dni_filtro="", mascota_filtro=""
         clientes_filtrados_ids = set()
         if mascota_filtro or raza_filtro:
             mascotas_response = requests.get(
-                "http://localhost:8000/mascotas/buscar",
+                "http://fastapi:8000/mascotas/buscar",
                 params={
                     "nombre": mascota_filtro if mascota_filtro else None,
                     "raza": raza_filtro if raza_filtro else None

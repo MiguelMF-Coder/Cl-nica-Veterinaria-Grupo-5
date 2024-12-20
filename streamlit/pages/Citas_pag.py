@@ -167,7 +167,7 @@ def show_calendar():
 
     def cargar_citas():
         try:
-            response = requests.get("http://localhost:8000/citas/")
+            response = requests.get("http://fastapi:8000/citas/")
             if response.status_code == 200:
                 citas = response.json()
                 eventos = []
@@ -379,7 +379,7 @@ def show_nueva_cita():
 
             # Cliente - Celda independiente
             try:
-                response = requests.get("http://localhost:8000/clientes/")
+                response = requests.get("http://fastapi:8000/clientes/")
                 if response.status_code == 200:
                     clientes = response.json()
                     cliente_nombres = ["Seleccione un cliente"] + [
@@ -397,7 +397,7 @@ def show_nueva_cita():
 
             # Mascota - Celda independiente
             try:
-                mascota_response = requests.get("http://localhost:8000/mascotas/")
+                mascota_response = requests.get("http://fastapi:8000/mascotas/")
                 if mascota_response.status_code == 200:
                     mascotas = mascota_response.json()
 
@@ -436,7 +436,7 @@ def show_nueva_cita():
 
             # Tratamiento
             try:
-                response = requests.get("http://localhost:8000/tratamientos/")
+                response = requests.get("http://fastapi:8000/tratamientos/")
                 if response.status_code == 200:
                     tratamientos = response.json()
                     tratamiento_nombres = ["Seleccione un tratamiento"] + [
@@ -495,7 +495,7 @@ def show_nueva_cita():
                 }
 
                 # Enviar datos al backend
-                response = requests.post("http://localhost:8000/citas/", json=cita_data)
+                response = requests.post("http://fastapi:8000/citas/", json=cita_data)
                 if response.status_code == 201:
                     st.success("¡Cita registrada exitosamente!")
                 else:
@@ -540,14 +540,14 @@ def show_finalize_form(cita):
                 try:
                     # Finalizar la cita
                     response = requests.put(
-                        f"http://localhost:8000/citas/finalizar/{cita['id_cita']}",
+                        f"http://fastapi:8000/citas/finalizar/{cita['id_cita']}",
                         params={"metodo_pago": metodo_pago}
                     )
                     
                     if response.status_code == 200:
                         # Generar y descargar factura
                         factura_response = requests.get(
-                            f"http://localhost:8000/tratamientos/factura/generar/{cita['id_tratamiento']}"
+                            f"http://fastapi:8000/tratamientos/factura/generar/{cita['id_tratamiento']}"
                         )
                         if factura_response.status_code == 200:
                             st.success("✅ Cita finalizada exitosamente")
@@ -624,16 +624,16 @@ def show_citas_list():
 
     try:
         # Obtener todas las citas
-        response = requests.get("http://localhost:8000/citas/")
+        response = requests.get("http://fastapi:8000/citas/")
         if response.status_code == 200:
             citas = response.json()
             if citas:
                 citas_filtradas = []
                 for cita in citas:
                     # Obtener datos relacionados usando los endpoints específicos
-                    cliente_response = requests.get(f"http://localhost:8000/clientes/{cita['id_cliente']}")
-                    mascota_response = requests.get(f"http://localhost:8000/mascotas/{cita['id_mascota']}")
-                    tratamiento_response = requests.get(f"http://localhost:8000/tratamientos/{cita['id_tratamiento']}")
+                    cliente_response = requests.get(f"http://fastapi:8000/clientes/{cita['id_cliente']}")
+                    mascota_response = requests.get(f"http://fastapi:8000/mascotas/{cita['id_mascota']}")
+                    tratamiento_response = requests.get(f"http://fastapi:8000/tratamientos/{cita['id_tratamiento']}")
 
                     if cliente_response.status_code == 200 and mascota_response.status_code == 200 and tratamiento_response.status_code == 200:
                         cliente = cliente_response.json()
@@ -726,7 +726,7 @@ def obtener_datos_cliente(id_cliente):
     Obtiene los datos de un cliente específico de la lista de clientes
     """
     try:
-        response = requests.get("http://localhost:8000/clientes/")
+        response = requests.get("http://fastapi:8000/clientes/")
         if response.status_code == 200:
             clientes = response.json()
             cliente = next((c for c in clientes if c['id_cliente'] == id_cliente), None)
@@ -756,7 +756,7 @@ def show_edit_form(cita):
                 "descripcion": descripcion,
                 "estado": estado
             }
-            response = requests.put(f"http://localhost:8000/citas/{cita['id_cita']}", json=updated_cita)
+            response = requests.put(f"http://fastapi:8000/citas/{cita['id_cita']}", json=updated_cita)
             if response.status_code == 200:
                 st.success("Cita actualizada exitosamente")
                 st.rerun()
@@ -769,7 +769,7 @@ def cancel_cita(id_cita):
     """
     Cancela una cita existente
     """
-    response = requests.delete(f"http://localhost:8000/citas/{id_cita}")
+    response = requests.delete(f"http://fastapi:8000/citas/{id_cita}")
     if response.status_code == 200:
         st.success("Cita cancelada exitosamente")
         st.rerun()

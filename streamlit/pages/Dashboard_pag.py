@@ -35,10 +35,10 @@ def show_resumen_general():
         col1, col2, col3, col4 = st.columns(4)
         
         # KPIs
-        clientes = requests.get("http://localhost:8000/clientes/").json()
-        mascotas = requests.get("http://localhost:8000/mascotas/").json()
-        tratamientos = requests.get("http://localhost:8000/tratamientos/").json()
-        citas = requests.get("http://localhost:8000/citas/").json()
+        clientes = requests.get("http://fastapi:8000/clientes/").json()
+        mascotas = requests.get("http://fastapi:8000/mascotas/").json()
+        tratamientos = requests.get("http://fastapi:8000/tratamientos/").json()
+        citas = requests.get("http://fastapi:8000/citas/").json()
         
         with col1:
             st.metric("Total Clientes", len(clientes))
@@ -74,8 +74,8 @@ def show_analisis_clientes():
     st.header("Análisis de Clientes")
     
     try:
-        clientes = requests.get("http://localhost:8000/clientes/").json()
-        mascotas = requests.get("http://localhost:8000/mascotas/").json()
+        clientes = requests.get("http://fastapi:8000/clientes/").json()
+        mascotas = requests.get("http://fastapi:8000/mascotas/").json()
         
         # Distribución de edad de clientes
         df_clientes = pd.DataFrame(clientes)
@@ -103,7 +103,7 @@ def show_analisis_mascotas():
     st.header("Análisis de Mascotas")
     
     try:
-        mascotas = requests.get("http://localhost:8000/mascotas/").json()
+        mascotas = requests.get("http://fastapi:8000/mascotas/").json()
         df_mascotas = pd.DataFrame(mascotas)
         
         col1, col2 = st.columns(2)
@@ -131,7 +131,7 @@ def show_analisis_tratamientos():
     st.header("Análisis de Tratamientos")
     
     try:
-        tratamientos = requests.get("http://localhost:8000/tratamientos/").json()
+        tratamientos = requests.get("http://fastapi:8000/tratamientos/").json()
         df_tratamientos = pd.DataFrame(tratamientos)
         
         col1, col2 = st.columns(2)
@@ -161,7 +161,7 @@ def show_analisis_citas():
     st.header("Análisis de Citas")
     
     try:
-        citas = requests.get("http://localhost:8000/citas/").json()
+        citas = requests.get("http://fastapi:8000/citas/").json()
         df_citas = pd.DataFrame(citas)
         df_citas['fecha'] = pd.to_datetime(df_citas['fecha'])
         

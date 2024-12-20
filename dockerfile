@@ -36,6 +36,7 @@ RUN pip install --upgrade pip setuptools wheel
 
 # Instala las dependencias del archivo requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir streamlit==1.40.2
 
 # Expone el puerto que usará tu aplicación
 EXPOSE 8000

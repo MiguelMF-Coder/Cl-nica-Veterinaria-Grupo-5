@@ -219,7 +219,7 @@ def show_new_treatment():
 
         # Cliente
         try:
-            response = requests.get("http://localhost:8000/clientes/")
+            response = requests.get("http://fastapi:8000/clientes/")
             if response.status_code == 200:
                 clientes = response.json()
                 cliente_opciones = ["Seleccione un cliente"] + [
@@ -266,7 +266,7 @@ def show_new_treatment():
                 }
 
                 response = requests.post(
-                    "http://localhost:8000/tratamientos/", json=tratamiento_data
+                    "http://fastapi:8000/tratamientos/", json=tratamiento_data
                 )
 
                 if response.status_code == 201:
@@ -308,7 +308,7 @@ def show_tratamientos_list():
     )
 
     try:
-        response = requests.get("http://localhost:8000/tratamientos/")
+        response = requests.get("http://fastapi:8000/tratamientos/")
         if response.status_code == 200:
             tratamientos = response.json()
             if tratamientos:
@@ -379,7 +379,7 @@ def show_edit_form(tratamiento):
         if submitted:
             try:
                 response = requests.put(
-                    f"http://localhost:8000/tratamientos/{tratamiento['id_tratamiento']}",
+                    f"http://fastapi:8000/tratamientos/{tratamiento['id_tratamiento']}",
                     json={
                         "nombre_tratamiento": nombre,
                         "descripcion": descripcion,
@@ -398,7 +398,7 @@ def show_edit_form(tratamiento):
 
 def delete_treatment(id_tratamiento):
     try:
-        response = requests.delete(f"http://localhost:8000/tratamientos/{id_tratamiento}")
+        response = requests.delete(f"http://fastapi:8000/tratamientos/{id_tratamiento}")
         if response.status_code == 200:
             st.success("Tratamiento eliminado exitosamente")
             st.rerun()
@@ -429,7 +429,7 @@ def show_edit_form(tratamiento):
                 }
                 
                 response = requests.put(
-                    f"http://localhost:8000/tratamientos/{tratamiento['id_tratamiento']}",
+                    f"http://fastapi:8000/tratamientos/{tratamiento['id_tratamiento']}",
                     json=datos_actualizados
                 )
                 
@@ -479,7 +479,7 @@ def show_edit_form(tratamiento):
                 }
                 
                 response = requests.put(
-                    f"http://localhost:8000/tratamientos/{tratamiento['id_tratamiento']}",
+                    f"http://fastapi:8000/tratamientos/{tratamiento['id_tratamiento']}",
                     json=datos_actualizados
                 )
                 
@@ -497,7 +497,7 @@ def delete_treatment(id_tratamiento):
     """
     try:
         response = requests.delete(
-            f"http://localhost:8000/tratamientos/{id_tratamiento}"
+            f"http://fastapi:8000/tratamientos/{id_tratamiento}"
         )
         if response.status_code == 200:
             st.success("Tratamiento eliminado exitosamente")

@@ -8192,3 +8192,117 @@ SyntaxError: '(' was never closed
 2024-12-12 01:08:13,752 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
 2024-12-12 01:08:13,772 - __main__ - INFO - Intentando cargar la página: 📅 Citas (módulo: Citas_pag)
 2024-12-12 01:08:13,772 - __main__ - INFO - Mostrando página: 📅 Citas
+2024-12-12 08:57:08,343 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 08:57:08,343 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 08:57:08,599 - __main__ - INFO - Intentando cargar la página: 🏠 Inicio (módulo: Inicio)
+2024-12-12 08:57:08,604 - __main__ - INFO - Mostrando página: 🏠 Inicio
+2024-12-12 08:57:44,240 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 08:57:44,241 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 08:57:44,304 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 08:57:44,306 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 08:57:44,567 - __main__ - INFO - Intentando cargar la página: 🏠 Inicio (módulo: Inicio)
+2024-12-12 08:57:44,570 - __main__ - INFO - Mostrando página: 🏠 Inicio
+2024-12-12 08:57:44,575 - __main__ - INFO - Intentando cargar la página: 🏠 Inicio (módulo: Inicio)
+2024-12-12 08:57:44,577 - __main__ - INFO - Mostrando página: 🏠 Inicio
+2024-12-12 08:57:48,086 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 08:57:48,086 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 08:57:48,155 - __main__ - INFO - Intentando cargar la página: 📅 Citas (módulo: Citas_pag)
+2024-12-12 08:57:49,319 - __main__ - INFO - Mostrando página: 📅 Citas
+2024-12-12 08:57:49,934 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 08:57:49,935 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 08:57:50,000 - __main__ - INFO - Intentando cargar la página: 📅 Citas (módulo: Citas_pag)
+2024-12-12 08:57:50,003 - __main__ - INFO - Mostrando página: 📅 Citas
+2024-12-12 08:59:28,725 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 08:59:28,725 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 08:59:28,767 - __main__ - INFO - Intentando cargar la página: 📅 Citas (módulo: Citas_pag)
+2024-12-12 08:59:28,768 - __main__ - INFO - Mostrando página: 📅 Citas
+2024-12-12 09:03:51,870 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:03:51,881 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:03:51,959 - __main__ - INFO - Intentando cargar la página: 🏠 Inicio (módulo: Inicio)
+2024-12-12 09:03:51,961 - __main__ - INFO - Mostrando página: 🏠 Inicio
+2024-12-12 09:06:44,326 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:06:44,327 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:06:44,364 - __main__ - INFO - Intentando cargar la página: 📊 Dashboard (módulo: Dashboard_pag)
+2024-12-12 09:06:44,464 - __main__ - INFO - Mostrando página: 📊 Dashboard
+2024-12-12 09:06:53,572 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:06:53,572 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:06:53,650 - __main__ - INFO - Intentando cargar la página: 📅 Citas (módulo: Citas_pag)
+2024-12-12 09:06:53,652 - __main__ - INFO - Mostrando página: 📅 Citas
+2024-12-12 09:06:54,314 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:06:54,315 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:06:54,348 - __main__ - INFO - Intentando cargar la página: 📅 Citas (módulo: Citas_pag)
+2024-12-12 09:06:54,349 - __main__ - INFO - Mostrando página: 📅 Citas
+2024-12-12 09:08:22,864 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:08:22,865 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:08:22,871 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:08:22,872 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:08:22,952 - __main__ - INFO - Intentando cargar la página: 📅 Citas (módulo: Citas_pag)
+2024-12-12 09:08:22,954 - __main__ - INFO - Mostrando página: 📅 Citas
+2024-12-12 09:08:56,794 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:08:56,802 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:08:56,802 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:08:56,803 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:08:56,944 - __main__ - INFO - Intentando cargar la página: 📅 Citas (módulo: Citas_pag)
+2024-12-12 09:08:56,946 - __main__ - INFO - Mostrando página: 📅 Citas
+2024-12-12 09:09:18,686 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:09:18,686 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:09:18,687 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:09:18,688 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:09:18,755 - __main__ - INFO - Intentando cargar la página: 📅 Citas (módulo: Citas_pag)
+2024-12-12 09:09:18,756 - __main__ - INFO - Mostrando página: 📅 Citas
+2024-12-12 09:09:32,062 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:09:32,064 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:09:32,105 - __main__ - INFO - Intentando cargar la página: 👥 Clientes (módulo: Clientes_pag)
+2024-12-12 09:09:32,170 - __main__ - INFO - Mostrando página: 👥 Clientes
+2024-12-12 09:09:39,742 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:09:39,742 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:09:39,778 - __main__ - INFO - Intentando cargar la página: 👥 Clientes (módulo: Clientes_pag)
+2024-12-12 09:09:39,778 - __main__ - INFO - Mostrando página: 👥 Clientes
+2024-12-12 09:09:41,887 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:09:41,888 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:09:41,920 - __main__ - INFO - Intentando cargar la página: 👥 Clientes (módulo: Clientes_pag)
+2024-12-12 09:09:41,921 - __main__ - INFO - Mostrando página: 👥 Clientes
+2024-12-12 09:09:46,575 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:09:46,577 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:09:46,613 - __main__ - INFO - Intentando cargar la página: 👥 Clientes (módulo: Clientes_pag)
+2024-12-12 09:09:46,613 - __main__ - INFO - Mostrando página: 👥 Clientes
+2024-12-12 09:09:51,974 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:09:51,975 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:09:52,016 - __main__ - INFO - Intentando cargar la página: 👥 Clientes (módulo: Clientes_pag)
+2024-12-12 09:09:52,017 - __main__ - INFO - Mostrando página: 👥 Clientes
+2024-12-12 09:09:52,799 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:09:52,801 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:09:52,835 - __main__ - INFO - Intentando cargar la página: 👥 Clientes (módulo: Clientes_pag)
+2024-12-12 09:09:52,836 - __main__ - INFO - Mostrando página: 👥 Clientes
+2024-12-12 09:09:55,442 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:09:55,443 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:09:55,498 - __main__ - INFO - Intentando cargar la página: 👥 Clientes (módulo: Clientes_pag)
+2024-12-12 09:09:55,499 - __main__ - INFO - Mostrando página: 👥 Clientes
+2024-12-12 09:09:57,148 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:09:57,149 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:09:57,185 - __main__ - INFO - Intentando cargar la página: 👥 Clientes (módulo: Clientes_pag)
+2024-12-12 09:09:57,186 - __main__ - INFO - Mostrando página: 👥 Clientes
+2024-12-12 09:09:58,440 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:09:58,442 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:09:58,491 - __main__ - INFO - Intentando cargar la página: 🐕 Mascotas (módulo: Mascotas_pag)
+2024-12-12 09:09:58,499 - __main__ - INFO - Mostrando página: 🐕 Mascotas
+2024-12-12 09:10:06,332 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:10:06,333 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:10:06,425 - __main__ - INFO - Intentando cargar la página: 💉 Tratamientos (módulo: Tratamientos_pag)
+2024-12-12 09:10:06,743 - __main__ - INFO - Mostrando página: 💉 Tratamientos
+2024-12-12 09:10:10,710 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:10:10,710 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:10:10,747 - __main__ - INFO - Intentando cargar la página: 💉 Tratamientos (módulo: Tratamientos_pag)
+2024-12-12 09:10:10,747 - __main__ - INFO - Mostrando página: 💉 Tratamientos
+2024-12-12 09:10:12,288 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:10:12,290 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:10:12,341 - __main__ - INFO - Intentando cargar la página: 💉 Tratamientos (módulo: Tratamientos_pag)
+2024-12-12 09:10:12,342 - __main__ - INFO - Mostrando página: 💉 Tratamientos
+2024-12-12 09:10:18,630 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:10:18,632 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:10:18,704 - __main__ - INFO - Intentando cargar la página: 📅 Citas (módulo: Citas_pag)
+2024-12-12 09:10:18,704 - __main__ - INFO - Mostrando página: 📅 Citas
+2024-12-12 09:10:19,305 - __main__ - INFO - Iniciando la aplicación...
+2024-12-12 09:10:19,307 - __main__ - INFO - Ruta de páginas añadida a sys.path: /home/miguel_mf/projects/clinica/Cl-nica-Veterinaria-Grupo-5/streamlit/pages
+2024-12-12 09:10:19,376 - __main__ - INFO - Intentando cargar la página: 📅 Citas (módulo: Citas_pag)
+2024-12-12 09:10:19,377 - __main__ - INFO - Mostrando página: 📅 Citas

@@ -17,35 +17,35 @@ services:
       - PYTHONPATH=/app
 
   streamlit:
-    build:
-      context: .  # Contexto ajustado a la raíz del proyecto
-      dockerfile: Dockerfile  # Dockerfile en la raíz del proyecto
-    container_name: streamlit
-    ports:
-      - "8501:8501"
-    networks:
-      - deploy_network
-    volumes:
-      - ./clinica/clinica_db.sqlite:/app/clinica/clinica_db.sqlite
-      - ./clinica/data:/app/clinica/data
-    environment:
-      - PYTHONPATH=/app
-    command: streamlit run main.py --server.port=8501 --server.address=0.0.0.0
- 
+      build:
+        context: .
+        dockerfile: ./streamlit/Dockerfile.streamlit
+      container_name: streamlit
+      ports:
+        - "8501:8501"
+      networks:
+        - deploy_network
+      volumes:
+        - ./clinica:/app/clinica
+        - ./main.py:/app/main.py
+        - ./.streamlit:/app/.streamlit  # Añadir esta línea
+      environment:
+        - PYTHONPATH=/usr/local/lib/python3.10/site-packages
+        - STREAMLIT_THEME_BASE=light
+        - STREAMLIT_BROWSER_GATHER_USAGE_STATS=false
 
   web:
-    build:
-      context: .  # Contexto ajustado a la raíz del proyecto
-      dockerfile: Dockerfile  # Dockerfile en la raíz del proyecto
-    container_name: clinica_web
-    ports:
-      - "8001:8001"
-    volumes:
-      - ./clinica/clinica_db.sqlite:/app/clinica/clinica_db.sqlite
-      - ./clinica/data:/app/clinica/data
-    environment:
-      - PYTHONPATH=/app
-    command: ["python3", "clinica/server.py"] 
+      build:
+        context: .
+      container_name: clinica_web
+      ports:
+        - "8001:8001"
+      volumes:
+        - ./clinica:/app/clinica
+        - ./server.py:/app/server.py
+      environment:
+        - PYTHONPATH=/app
+      command: ["uvicorn", "server:app", "--host", "0.0.0.0", "--port", "8001", "--reload"] 
 
 networks:
   deploy_network:

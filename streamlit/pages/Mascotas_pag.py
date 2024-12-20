@@ -165,13 +165,13 @@ def show_mascotas_list():
         )
 
     try:
-        response = requests.get("http://localhost:8000/mascotas/")
+        response = requests.get("http://fastapi:8000/mascotas/")
         if response.status_code == 200:
             mascotas = response.json()
             if mascotas:
                 mascotas_filtradas = []
                 for mascota in mascotas:
-                    cliente_response = requests.get(f"http://localhost:8000/clientes/{mascota['id_cliente']}")
+                    cliente_response = requests.get(f"http://fastapi:8000/clientes/{mascota['id_cliente']}")
                     if cliente_response.status_code == 200:
                         cliente = cliente_response.json()
                         
@@ -227,7 +227,7 @@ def show_mascotas_list():
                             st.markdown("</div>", unsafe_allow_html=True)
                     
                     if st.button("📥 Exportar Mascotas"):
-                        response = requests.post("http://localhost:8000/mascotas/exportar")
+                        response = requests.post("http://fastapi:8000/mascotas/exportar")
                         if response.status_code == 200:
                             st.success("Mascotas exportadas exitosamente")
                         else:
@@ -256,7 +256,7 @@ def show_nueva_mascota():
             estado = st.selectbox("Estado", ["Vivo", "Fallecido"])
             
             try:
-                response = requests.get("http://localhost:8000/clientes/")
+                response = requests.get("http://fastapi:8000/clientes/")
                 if response.status_code == 200:
                     clientes = response.json()
                     cliente_opciones = ["Seleccione un cliente"] + [
@@ -288,7 +288,7 @@ def show_nueva_mascota():
                     "id_cliente": id_cliente
                 }
 
-                response = requests.post("http://localhost:8000/mascotas/", json=mascota_data)
+                response = requests.post("http://fastapi:8000/mascotas/", json=mascota_data)
                 if response.status_code == 201:
                     st.success("¡Mascota registrada exitosamente!")
                 else:
@@ -317,7 +317,7 @@ def show_edit_form(mascota):
             
             try:
                 response = requests.put(
-                    f"http://localhost:8000/mascotas/{mascota['id_mascota']}",
+                    f"http://fastapi:8000/mascotas/{mascota['id_mascota']}",
                     json=mascota_actualizada
                 )
                 if response.status_code == 200:
@@ -330,7 +330,7 @@ def show_edit_form(mascota):
 
 def delete_mascota(id_mascota):
     try:
-        response = requests.delete(f"http://localhost:8000/mascotas/{id_mascota}")
+        response = requests.delete(f"http://fastapi:8000/mascotas/{id_mascota}")
         if response.status_code == 200:
             st.success("Mascota eliminada exitosamente")
             st.rerun()

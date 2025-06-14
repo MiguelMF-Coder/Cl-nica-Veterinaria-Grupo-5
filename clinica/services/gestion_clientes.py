@@ -221,62 +221,31 @@ class GestionClientes:
             return None
 
     def buscar_cliente_por_nombre(self, nombre_cliente):
-        """Busca clientes por nombre y muestra los nombres de las mascotas asociadas si hay múltiples coincidencias."""
+        """Busca y devuelve una lista de clientes cuyo nombre coincide parcialmente."""
         try:
             clientes = self.db_session.query(ClienteModel).filter(
                 ClienteModel.nombre_cliente.ilike(f"%{nombre_cliente}%")
             ).all()
 
             if not clientes:
-                logging.warning(f"No se encontró ningún cliente con el nombre '{nombre_cliente}'.")
-                return None
+                logging.warning(
+                    f"No se encontró ningún cliente con el nombre '{nombre_cliente}'."
+                )
+                return []
 
-            # Si hay un solo cliente, se devuelve directamente junto con sus mascotas
-            if len(clientes) == 1:
-                mascotas = self.db_session.query(MascotaModel).filter_by(id_cliente=clientes[0].id_cliente).all()
-                nombres_mascotas = [mascota.nombre_mascota for mascota in mascotas]
-                logging.info(f"Cliente encontrado: {clientes[0].nombre_cliente} (ID: {clientes[0].id_cliente}), Mascotas: {', '.join(nombres_mascotas) if nombres_mascotas else 'Ninguna'}")
-                return {
-                    "cliente": clientes[0],
-                    "mascotas": nombres_mascotas
-                }
-
-            # Si hay múltiples clientes, se listan y se pide una selección
-            logging.info(f"Se encontraron múltiples clientes con el nombre '{nombre_cliente}'.")
-            for idx, cliente in enumerate(clientes, start=1):
-                mascotas = self.db_session.query(MascotaModel).filter_by(id_cliente=cliente.id_cliente).all()
-                nombres_mascotas = [mascota.nombre_mascota for mascota in mascotas]
-                print(f"{idx}. {cliente.nombre_cliente} - ID: {cliente.id_cliente} - DNI: {cliente.dni} - Teléfono: {cliente.telefono} - Mascotas: {', '.join(nombres_mascotas) if nombres_mascotas else 'Ninguna'}")
-
-            try:
-                seleccion = int(input("Seleccione el número del cliente deseado (0 para cancelar): "))
-                if seleccion == 0:
-                    print("Operación cancelada.")
-                    return None
-                elif 1 <= seleccion <= len(clientes):
-                    cliente_seleccionado = clientes[seleccion - 1]
-                    mascotas = self.db_session.query(MascotaModel).filter_by(id_cliente=cliente_seleccionado.id_cliente).all()
-                    nombres_mascotas = [mascota.nombre_mascota for mascota in mascotas]
-                    logging.info(f"Cliente seleccionado: {cliente_seleccionado.nombre_cliente} (ID: {cliente_seleccionado.id_cliente})")
-                    return {
-                        "cliente": cliente_seleccionado,
-                        "mascotas": nombres_mascotas
-                    }
-                else:
-                    print("Selección no válida. Operación cancelada.")
-                    return None
-
-            except ValueError:
-                print("Entrada no válida. Operación cancelada.")
-                return None
+            return clientes
 
         except SQLAlchemyError as sae:
-            logging.error("Error de SQLAlchemy al buscar el cliente por nombre: %s", sae)
-            return None
+            logging.error(
+                "Error de SQLAlchemy al buscar el cliente por nombre: %s", sae
+            )
+            return []
 
         except Exception as e:
-            logging.critical("Error inesperado al buscar el cliente por nombre: %s", e)
-            return None
+            logging.critical(
+                "Error inesperado al buscar el cliente por nombre: %s", e
+            )
+            return []
 
             
     def listar_clientes(self):

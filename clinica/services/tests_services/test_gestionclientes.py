@@ -300,9 +300,9 @@ class TestGestionClientes(unittest.TestCase):
         self.session.commit()
 
         resultado = self.gestion_clientes.buscar_cliente_por_nombre('Pablo')
-        self.assertIsNotNone(resultado)
-        self.assertEqual(resultado['cliente'].nombre_cliente, 'Pablo Gil')
-        self.assertEqual(resultado['cliente'].dni, self.dni_unico)
+        self.assertEqual(len(resultado), 1)
+        self.assertEqual(resultado[0].nombre_cliente, 'Pablo Gil')
+        self.assertEqual(resultado[0].dni, self.dni_unico)
 
     def test_buscar_cliente_por_nombre_multiples_coincidencias(self):
         cliente_data_1 = {
@@ -324,19 +324,19 @@ class TestGestionClientes(unittest.TestCase):
         self.gestion_clientes.registrar_cliente(cliente_data_2)
         self.session.commit()
         
-        with unittest.mock.patch('builtins.input', return_value='1'):
-            resultado = self.gestion_clientes.buscar_cliente_por_nombre('Luis')
-            self.assertIsNotNone(resultado)
-            self.assertEqual(resultado['cliente'].nombre_cliente, 'Luis Fernández')
+        resultado = self.gestion_clientes.buscar_cliente_por_nombre('Luis')
+        self.assertEqual(len(resultado), 2)
+        nombres = [c.nombre_cliente for c in resultado]
+        self.assertIn('Luis Fernández', nombres)
 
     def test_buscar_cliente_por_nombre_no_encontrado(self):
         resultado = self.gestion_clientes.buscar_cliente_por_nombre('NoExistente')
-        self.assertIsNone(resultado)
+        self.assertEqual(resultado, [])
 
     def test_buscar_cliente_por_nombre_error(self):
         with unittest.mock.patch('clinica.services.gestion_clientes.Session.query', side_effect=SQLAlchemyError("Error de SQLAlchemy")):
             resultado = self.gestion_clientes.buscar_cliente_por_nombre('ErrorCliente')
-            self.assertIsNone(resultado)
+            self.assertEqual(resultado, [])
 
     def test_listar_clientes_exitoso(self):
         cliente_data_1 = {

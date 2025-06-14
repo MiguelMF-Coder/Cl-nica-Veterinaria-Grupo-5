@@ -116,12 +116,13 @@ class TestClientes(unittest.IsolatedAsyncioTestCase):
 
     async def test_buscar_cliente_por_nombre(self):
         nombre_cliente = self.cliente_data["nombre_cliente"]
-        response = await self.client.get(f"/clientes/buscar_por_nombre/{nombre_cliente}")
+        response = await self.client.get(f"/clientes/buscar?nombre={nombre_cliente}")
         if response.status_code != 200:
             raise Exception(f"Error al buscar cliente por nombre: {response.text}")
-        
+
         data = response.json()
-        self.assertEqual(data["cliente"]["nombre_cliente"], nombre_cliente)
+        self.assertEqual(len(data), 1)
+        self.assertEqual(data[0]["nombre_cliente"], nombre_cliente)
 
 if __name__ == "__main__":
     asyncio.run(unittest.main())
